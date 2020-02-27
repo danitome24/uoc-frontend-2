@@ -24,6 +24,7 @@ import { ProfileService } from './services/profile.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from './services/notifications.service';
+import { ApiService } from './services/api.service';
 
 /* export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -31,7 +32,8 @@ import { NotificationsService } from './services/notifications.service';
 
 export const CORE_SERVICES: Provider[] = [
   ProfileService,
-  NotificationsService
+  NotificationsService,
+  ApiService
   /* {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,
