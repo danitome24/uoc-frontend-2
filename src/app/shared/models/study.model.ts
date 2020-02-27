@@ -2,7 +2,7 @@ export class Study {
   uid: number;
   level: LevelStudy;
   title: TitleStudy;
-  certificate: boolean; //Sera un fichero
+  certificate: boolean; // Sera un fichero
   date: string;
   bilingue: boolean;
 }
