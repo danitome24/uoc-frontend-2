@@ -24,6 +24,16 @@ export class SigninComponent implements OnInit {
     this.api.getUserById(1).subscribe(data => {
       console.log(data);
     });
+
+    this.api.getOffers().subscribe(data => {
+      data.forEach(a => {
+        console.log(a);
+      });
+    });
+
+    this.api.getOfferById(2).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
