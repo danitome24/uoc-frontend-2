@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../shared/services/api.service';
-import { filter } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -8,32 +7,34 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-  private api: ApiService;
+  public signInForm: FormGroup;
 
-  constructor(api: ApiService) {
-    this.api = api;
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
   }
 
   ngOnInit() {
-    /*this.api.getUsers().subscribe(data => {
-      data.forEach(a => {
-        console.log(a);
-      });
-    });*/
+  }
 
-    this.api.getUserById(1).subscribe(data => {
-      console.log(data);
-    });
-
-    this.api.getOffers().subscribe(data => {
-      data.forEach(a => {
-        console.log(a);
-      });
-    });
-
-    this.api.getOfferById(2).subscribe(data => {
-      console.log(data);
+  private createForm() {
+    this.signInForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 
+  public submitForm() {
+    if (this.signInForm.valid) {
+
+    } else {
+    }
+  }
+
+  public formIsEmpty() {
+    return this.signInForm.get('email').pristine || this.signInForm.get('password').pristine;
+  }
+
+  public emailIsValid() {
+    return this.signInForm.get('email').dirty && !this.signInForm.get('email').errors;
+  }
 }
