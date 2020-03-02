@@ -1,2 +1,4 @@
-<a routerLink="/logout">LOGOUT</a>
+<div>
+  <a routerLink="/logout" *ngIf="router.url != '/signin'">LOGOUT</a>
+</div>
 <router-outlet></router-outlet>

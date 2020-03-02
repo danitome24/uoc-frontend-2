@@ -10,6 +10,7 @@ import { UserApiService } from './shared/services/backend-api/user-api.service';
 import { DashboardRoutingModule } from './views/dashboard/dashboard-routing.module';
 import { ProfileRoutingModule } from './views/profile/profile-routing.module';
 import { LogoutComponent } from './views/logout/logout.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { LogoutComponent } from './views/logout/logout.component';
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     InMemoryWebApiModule.forRoot(FakeBackendService),
     DashboardRoutingModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    CommonModule
   ],
   declarations: [AppComponent, LogoutComponent, LogoutComponent],
   providers: [UserApiService],
