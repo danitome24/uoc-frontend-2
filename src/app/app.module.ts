@@ -9,6 +9,7 @@ import { FakeBackendService } from './shared/inmemory-db/inmemory-db.service';
 import { UserApiService } from './shared/services/backend-api/user-api.service';
 import { DashboardRoutingModule } from './views/dashboard/dashboard-routing.module';
 import { ProfileRoutingModule } from './views/profile/profile-routing.module';
+import { LogoutComponent } from './views/logout/logout.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { ProfileRoutingModule } from './views/profile/profile-routing.module';
     DashboardRoutingModule,
     ProfileRoutingModule
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, LogoutComponent, LogoutComponent],
   providers: [UserApiService],
   bootstrap: [AppComponent]
 })

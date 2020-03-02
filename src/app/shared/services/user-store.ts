@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,11 @@ export class UserStoreService {
     this.tokenString = localStorage.getItem('uoc-alumni');
 
     return this.tokenString;
+  }
+
+  public logout() {
+    this.token = '';
+    localStorage.clear();
   }
 
   isLoggedIn() {
