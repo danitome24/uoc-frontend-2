@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf, Provider } from '@angular/core';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 /* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
 /* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
 
@@ -24,7 +24,7 @@ import { ProfileService } from './services/profile.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from './services/notifications.service';
-import { ApiService } from './services/api.service';
+import { UserApiService } from './services/backend-api/user-api.service';
 
 /* export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -33,7 +33,7 @@ import { ApiService } from './services/api.service';
 export const CORE_SERVICES: Provider[] = [
   ProfileService,
   NotificationsService,
-  ApiService
+  UserApiService
   /* {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,

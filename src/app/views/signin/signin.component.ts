@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SigninService } from '../../shared/services/signin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -8,8 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SigninComponent implements OnInit {
   public signInForm: FormGroup;
+  public message = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private signinService: SigninService, private router: Router) {
     this.createForm();
   }
 
@@ -25,8 +28,14 @@ export class SigninComponent implements OnInit {
 
   public submitForm() {
     if (this.signInForm.valid) {
-
-    } else {
+      this.signinService.signIn(this.signInForm.value.email, this.signInForm.value.password)
+        .subscribe(user => {
+            console.log(user);
+            this.router.navigateByUrl('/admin/dashboard');
+          },
+          error => {
+            this.message = 'Usuario inválido';
+          });
     }
   }
 

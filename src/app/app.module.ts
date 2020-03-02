@@ -6,17 +6,21 @@ import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app-routing';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeBackendService } from './shared/inmemory-db/inmemory-db.service';
-import { ApiService } from './shared/services/api.service';
+import { UserApiService } from './shared/services/backend-api/user-api.service';
+import { DashboardRoutingModule } from './views/dashboard/dashboard-routing.module';
+import { ProfileRoutingModule } from './views/profile/profile-routing.module';
 
 @NgModule({
   imports: [
     SharedModule,
     CoreModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    InMemoryWebApiModule.forRoot(FakeBackendService)
+    InMemoryWebApiModule.forRoot(FakeBackendService),
+    DashboardRoutingModule,
+    ProfileRoutingModule
   ],
   declarations: [AppComponent],
-  providers: [ApiService],
+  providers: [UserApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
