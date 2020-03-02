@@ -67,7 +67,14 @@ export class FakeBackendService implements InMemoryDbService {
             certificate: false
           }
         ],
-        experiencies: [],
+        experiencies: [
+          {
+            uid: 1,
+            company: 'Suma',
+            position: 'Junior Software Developer',
+            date: '30/12/2016-20/01/2019'
+          }
+        ],
         languages: [
           {
             uid: 1,

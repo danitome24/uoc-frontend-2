@@ -5,20 +5,22 @@
       Nombre y apellidos
     </div>
     <div class="profile-column">
-      <p>Email: loquesea@uoc.edu</p>
-      <p>Fecha de nacimiento: 27/09/93</p>
-      <p>Teléfono: 666666666</p>
-      <p>NIF/NIE: 23423423-H</p>
-      <p>Permisos de conducir: B, A1, A2</p>
+      <p>Email: {{user.email}}</p>
+      <p>Fecha de nacimiento: {{user.birthdate}}</p>
+      <p>Teléfono: {{user.phone}}</p>
+      <p>NIF/NIE: {{user.documentNumber}}</p>
+      <p>Permisos de conducir: {{user.license}}</p>
     </div>
     <div class="profile-column">
       <label for="about-me">Acerca de mi</label>
       <textarea id="about-me">
+        {{user.aboutMe}}
       </textarea>
     </div>
     <div class="profile-column">
       <label for="other-competencies">Otras competencias</label>
       <textarea id="other-competencies">
+        {{user.otherCompetences}}
       </textarea>
     </div>
   </div>
@@ -36,19 +38,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Universidad</td>
-        <td>Ingeniero en informática</td>
-        <td>UOC</td>
-        <td>10/10/2020</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Ciclo formativo</td>
-        <td>Desarrollo de aplicaciones web</td>
-        <td>IES Pons D'icard</td>
-        <td>20/11/2010</td>
-        <td></td>
+      <tr *ngFor="let study of user.studies">
+        <td>{{study.level.name}}</td>
+        <td>{{study.title.name}}</td>
+        <td>{{study.institution.name}}</td>
+        <td>{{study.date}}</td>
+        <td>{{study.certificate}}</td>
       </tr>
       </tbody>
     </table>
@@ -65,15 +60,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Universidad</td>
-        <td>Ingeniero en informática</td>
-        <td>UOC</td>
-      </tr>
-      <tr>
-        <td>Ciclo formativo</td>
-        <td>Desarrollo de aplicaciones web</td>
-        <td>IES Pons D'icard</td>
+      <tr *ngFor="let experience of user.experiencies">
+        <td>{{experience.company}}</td>
+        <td>{{experience.position}}</td>
+        <td>{{experience.date}}</td>
       </tr>
       </tbody>
     </table>
@@ -90,10 +80,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>C1</td>
-        <td>Catalán</td>
-        <td>Ayer</td>
+      <tr *ngFor="let language of user.languages">
+        <td>{{language.level.name}}</td>
+        <td>{{language.name.name}}</td>
+        <td>{{language.date}}</td>
       </tr>
       </tbody>
     </table>
