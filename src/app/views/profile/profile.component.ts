@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../shared/models/user.model';
-import { UserApiService } from '../../shared/services/backend-api/user-api.service';
 import { UserStoreService } from '../../shared/services/user-store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,13 +12,13 @@ export class ProfileComponent implements OnInit {
 
   public user: User;
 
-  constructor(private userApi: UserApiService, private userStore: UserStoreService) {
+  constructor(private activedRoute: ActivatedRoute, public userStore: UserStoreService) {
   }
 
   ngOnInit(): void {
-    this.userApi.getUserById(+this.userStore.token).subscribe(user => {
-      this.user = user;
-    });
+    this.activedRoute.data.subscribe(((user: { user: User }) => {
+      this.user = user.user;
+    }));
   }
 
 }

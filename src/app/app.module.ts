@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
     ProfileRoutingModule,
     CommonModule
   ],
-  declarations: [AppComponent, LogoutComponent, LogoutComponent],
+  declarations: [AppComponent, LogoutComponent],
   providers: [UserApiService],
   bootstrap: [AppComponent]
 })

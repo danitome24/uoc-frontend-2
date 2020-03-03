@@ -1,13 +1,6 @@
-import { NgModule, Optional, SkipSelf, Provider } from '@angular/core';
+import { NgModule, Optional, Provider, SkipSelf } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
-/* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
-/* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
-
-/* import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'; */
-
 /* import { metaReducers, reducers } from './states/root.reducer';
 import { AuthEffects } from './states/auth/effects/auth.effects';
 
@@ -19,12 +12,18 @@ import { AppEffects } from './states/app/effects'; */
 /* import { UsersEffects } from './states/users/effects'; */
 /* import { UsersService } from '../views/users/shared/users.service'; */
 import { ProfileService } from './services/profile.service';
-
 /* import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from './services/notifications.service';
 import { UserApiService } from './services/backend-api/user-api.service';
+import { UserResolver } from './resolvers/user.resolver';
+/* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
+/* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
+
+/* import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'; */
 
 /* export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -33,7 +32,8 @@ import { UserApiService } from './services/backend-api/user-api.service';
 export const CORE_SERVICES: Provider[] = [
   ProfileService,
   NotificationsService,
-  UserApiService
+  UserApiService,
+  UserResolver,
   /* {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,
