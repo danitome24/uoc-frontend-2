@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../shared/models/user.model';
-import { UserStoreService } from '../../shared/services/user-store';
+import { User } from '../../../shared/models/user.model';
+import { UserStoreService } from '../../../shared/services/user-store';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './show-profile.component.html',
+  styleUrls: ['./show-profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ShowProfileComponent implements OnInit {
 
   public user: User;
 
