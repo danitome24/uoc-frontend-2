@@ -6,6 +6,7 @@
         {{user.username}}
       </div>
       <div>
+        <!-- Name -->
         <div>
           <label>Nombre: <input type="text" formControlName="name"></label>
           <div class="error" *ngIf="isInvalidByRequired('name')">
@@ -18,6 +19,7 @@
             No puede contener ni espacios ni caracteres especiales
           </div>
         </div>
+        <!-- Surname -->
         <div>
           <label>Apellidos: <input type="text" formControlName="surname"></label>
           <div class="error" *ngIf="isInvalidByRequired('surname')">
@@ -30,112 +32,84 @@
             No puede contener ni espacios ni caracteres especiales
           </div>
         </div>
+        <!-- Birthdate -->
         <label>Fecha de nacimiento: <input type="date" formControlName="birthdate"></label>
+        <!-- Phone -->
         <div>
           <label>Teléfono: <input type="text" formControlName="phone"></label>
           <div class="error" *ngIf="onlyNumbers('phone')">
             Solamente números
           </div>
         </div>
-
+        <!-- Phone2 -->
         <div>
           <label>Teléfono 2: <input type="text" formControlName="phone2"></label>
           <div class="error" *ngIf="onlyNumbers('phone2')">
             Solamente números
           </div>
         </div>
-        <label>NIF/NIE:
-          <select formControlName="nieType">
-            <option *ngFor="let nieType of nieTypes" [ngValue]="nieType.id">
-              {{ nieType.name }}
-            </option>
-          </select>
-        </label>
+        <!-- NIF/NIE -->
+        <div>
+          <label>NIF/NIE:
+            <select formControlName="nieType">
+              <option *ngFor="let nieType of nieTypes" [ngValue]="nieType.id">
+                {{ nieType.name }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <!-- Document number -->
         <label>Número de documento: <input type="text" formControlName="documentNumber"></label>
-        <label>Dirección: <input type="text" formControlName="address"></label>
-        <label>Provincia: <input type="text" formControlName="province"></label>
-
-
-        <label>Permisos de conducir: <input type="text" formControlName="license"></label>
+        <!-- Address -->
+        <div>
+          <label>Dirección: <input type="text" formControlName="address"></label>
+          <div class="error" *ngIf="isString('address')">
+            Usa carácteres.
+          </div>
+        </div>
+        <!-- Province -->
+        <div>
+          <label>Provincia:
+            <select formControlName="province">
+              <option *ngFor="let province of provinces" [ngValue]="province.name">
+                {{ province.name }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <!-- Municipe -->
+        <div>
+          <label>Municipio:
+            <select formControlName="province">
+              <!-- WIP -->
+              <option *ngFor="let province of provinces" [ngValue]="province.name">
+                {{ province.name }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <!-- License -->
+        <div>
+          <label>Permisos de conducir: <input type="text" formControlName="license"></label>
+        </div>
       </div>
     </div>
-
+    <!-- About me -->
     <div class="row">
       <label for="about-me">Acerca de mi</label>
-      <textarea id="about-me">
+      <textarea id="about-me" class="textarea-size">
         {{user.aboutMe}}
       </textarea>
     </div>
 
+    <!-- Other competencies -->
     <div class="row">
       <label for="other-competencies">Otras competencias</label>
-      <textarea id="other-competencies">
+      <textarea id="other-competencies" class="textarea-size">
         {{user.otherCompetences}}
       </textarea>
     </div>
 
-    <div class="row">
-      <h2>Formación academica</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Nivel</th>
-          <th>Título</th>
-          <th>Centro</th>
-          <th>Fecha</th>
-          <th>Certificado</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let study of user.studies">
-          <td>{{study.level.name}}</td>
-          <td>{{study.title.name}}</td>
-          <td>{{study.institution.name}}</td>
-          <td>{{study.date}}</td>
-          <td>{{study.certificate}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <h2>Experiencia laboral</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Empresa</th>
-          <th>Puesto</th>
-          <th>Fechas</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let experience of user.experiencies">
-          <td>{{experience.company}}</td>
-          <td>{{experience.position}}</td>
-          <td>{{experience.date}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <h2>Idiomas</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Nivel</th>
-          <th>Idioma</th>
-          <th>Fecha</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let language of user.languages">
-          <td>{{language.level.name}}</td>
-          <td>{{language.name.name}}</td>
-          <td>{{language.date}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <button>Guardar</button>
   </form>
 </div>

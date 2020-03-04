@@ -12,10 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 export class EditProfileComponent implements OnInit {
   public user: User;
   public editProfileForm: FormGroup;
-  nieTypes = [
+  public nieTypes = [
     { id: 0, name: 'Otro' },
     { id: 1, name: 'NIF/NIE' },
-    { id: 2, name: 'Pasaporte'}
+    { id: 2, name: 'Pasaporte' }
+  ];
+  public provinces = [
+    {name: 'Tarragona'},
+    {name: 'Barcelona'},
+    {name: 'León'}
+  ];
+  private nameValidators = [
+    Validators.minLength(3),
+    Validators.maxLength(55),
+    Validators.required,
+    Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
+  ];
+  private surnameValidators = [
+    Validators.minLength(3),
+    Validators.maxLength(55),
+    Validators.required,
+    Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
   ];
 
   constructor(private activedRoute: ActivatedRoute, private userStore: UserStoreService, private fb: FormBuilder) {
@@ -30,20 +47,20 @@ export class EditProfileComponent implements OnInit {
 
   private createForm() {
     this.editProfileForm = this.fb.group({
-      name: [this.user.name, [Validators.minLength(3), Validators.maxLength(55), Validators.required, Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')]],
-      surname: [this.user.surname, [Validators.minLength(3), Validators.maxLength(55), Validators.required, Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')]],
+      name: [this.user.name, this.nameValidators],
+      surname: [this.user.surname, this.surnameValidators],
       birthdate: [this.user.birthdate],
       phone: [this.user.phone, [Validators.pattern('^\\d+$')]],
       phone2: [this.user.phone2, [Validators.pattern('^\\d+$')]],
       nieType: [this.user.documentType.uid],
       documentNumber: [this.user.documentNumber],
-      address: [this.user.address.street],
+      address: [this.user.address.street, [Validators.pattern('^.+$')]],
       province: [this.user.address.province.name],
       license: [this.user.license]
     });
   }
 
-  public isInvalidByRequired(formControlName: string) {
+  public isInvalidByRequired(formControlName: string): boolean {
     const control = this.editProfileForm.get(formControlName);
     return control.dirty && control.hasError('required');
   }
@@ -59,6 +76,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   public onlyNumbers(formControlName: string) {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && (control.hasError('pattern'));
+  }
+
+  public isString(formControlName: string) {
     const control = this.editProfileForm.get(formControlName);
     return control.dirty && (control.hasError('pattern'));
   }
