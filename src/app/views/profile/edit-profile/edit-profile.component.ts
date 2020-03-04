@@ -18,9 +18,9 @@ export class EditProfileComponent implements OnInit {
     { id: 2, name: 'Pasaporte' }
   ];
   public provinces = [
-    {name: 'Tarragona'},
-    {name: 'Barcelona'},
-    {name: 'León'}
+    { name: 'Tarragona' },
+    { name: 'Barcelona' },
+    { name: 'León' }
   ];
   private nameValidators = [
     Validators.minLength(3),
@@ -83,5 +83,11 @@ export class EditProfileComponent implements OnInit {
   public isString(formControlName: string) {
     const control = this.editProfileForm.get(formControlName);
     return control.dirty && (control.hasError('pattern'));
+  }
+
+  submitForm() {
+    if (this.editProfileForm.valid) {
+
+    }
   }
 }
