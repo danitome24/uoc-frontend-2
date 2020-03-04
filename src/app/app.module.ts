@@ -11,6 +11,7 @@ import { DashboardRoutingModule } from './views/dashboard/dashboard-routing.modu
 import { ProfileRoutingModule } from './views/profile/profile-routing.module';
 import { LogoutComponent } from './views/logout/logout.component';
 import { CommonModule } from '@angular/common';
+import { SigninModule } from './views/signin/signin.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     CoreModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     InMemoryWebApiModule.forRoot(FakeBackendService),
+    SigninModule,
     DashboardRoutingModule,
     ProfileRoutingModule,
     CommonModule
