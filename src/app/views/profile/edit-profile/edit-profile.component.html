@@ -110,6 +110,50 @@
       </textarea>
     </div>
 
+    <!-- Studies -->
+    <div class="row">
+      <table>
+        <caption>Formación academica</caption>
+        <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Título</th>
+          <th>Centro</th>
+          <th>Fecha</th>
+          <th>Certificado</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let study of user.studies">
+          <td>{{study.level.name}}</td>
+          <td>{{study.title.name}}</td>
+          <td>{{study.institution.name}}</td>
+          <td>{{study.date}}</td>
+          <td>{{study.certificate}}</td>
+          <td>
+            <a href="#">Borrar</a>
+            <a href="#">Editar</a>
+          </td>
+        </tr>
+        <tr *ngIf="formNewStudy">
+          <form>
+            <td><input type="text"/></td>
+            <td><input type="text"/></td>
+            <td><input type="text"/></td>
+            <td><input type="text"/></td>
+            <td><input type="text"/></td>
+            <td>
+              <button>Guardar</button>
+              <button (click)="cancelNewStudy()">Cancelar</button>
+            </td>
+          </form>
+        </tr>
+        </tbody>
+      </table>
+      <button *ngIf="!formNewStudy" (click)="formNewItem('study')">Nueva</button>
+    </div>
+
     <button (click)="submitForm()">Guardar</button>
   </form>
 </div>

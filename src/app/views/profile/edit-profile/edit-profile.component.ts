@@ -12,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class EditProfileComponent implements OnInit {
   public user: User;
   public editProfileForm: FormGroup;
+  public newStudyForm: FormGroup;
+  public formNewStudy = false;
   public nieTypes = [
     { id: 0, name: 'Otro' },
     { id: 1, name: 'NIF/NIE' },
@@ -58,6 +60,11 @@ export class EditProfileComponent implements OnInit {
       province: [this.user.address.province.name],
       license: [this.user.license]
     });
+    this.newStudyForm = this.fb.group({
+      level: [''],
+      title: [''],
+
+    });
   }
 
   public isInvalidByRequired(formControlName: string): boolean {
@@ -89,5 +96,13 @@ export class EditProfileComponent implements OnInit {
     if (this.editProfileForm.valid) {
 
     }
+  }
+
+  formNewItem(study: string) {
+    this.formNewStudy = true;
+  }
+
+  cancelNewStudy() {
+    this.formNewStudy = false;
   }
 }
