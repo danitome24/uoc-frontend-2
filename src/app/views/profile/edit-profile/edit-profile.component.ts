@@ -135,4 +135,11 @@ export class EditProfileComponent implements OnInit {
   public sameUuid(optOne, optTwo) {
     return optOne.uid === optTwo.uid;
   }
+
+  public removeStudy(uid: number) {
+    this.userService.removeStudyFromUser(this.user, uid)
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
 }

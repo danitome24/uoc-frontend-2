@@ -133,23 +133,9 @@
           <td>{{study.date}}</td>
           <td>{{study.certificate}}</td>
           <td>
-            <a href="#">Borrar</a>
+            <button (click)="removeStudy(study.uid)">Borrar</button>
             <a href="#">Editar</a>
           </td>
-        </tr>
-        <form [formGroup]="newStudyForm">
-          <tr *ngIf="formNewCollegeStudy">
-            <td><input type="text"/></td>
-            <td><input type="text"/></td>
-            <td><input type="text"/></td>
-            <td><input type="text"/></td>
-            <td><input type="text"/></td>
-            <td>
-              <button>Guardar</button>
-              <button (click)="cancelNewStudy()">Cancelar</button>
-            </td>
-          </tr>
-        </form>
         </tbody>
       </table>
       <button *ngIf="!formNewCollegeStudy" (click)="formNewItem('study')">Nueva</button>
