@@ -60,33 +60,35 @@
         </div>
         <!-- Document number -->
         <label>Número de documento: <input type="text" formControlName="documentNumber"></label>
-        <!-- Address -->
-        <div>
-          <label>Dirección: <input type="text" formControlName="address"></label>
-          <div class="error" *ngIf="isString('address')">
-            Usa carácteres.
+        <div formGroupName="address">
+          <!-- Address -->
+          <div>
+            <label>Dirección: <input type="text" formControlName="street"></label>
+            <div class="error" *ngIf="isString('address.street')">
+              Usa carácteres.
+            </div>
           </div>
-        </div>
-        <!-- Province -->
-        <div>
-          <label>Provincia:
-            <select formControlName="province">
-              <option *ngFor="let province of provinces" [ngValue]="province.name">
-                {{ province.name }}
-              </option>
-            </select>
-          </label>
-        </div>
-        <!-- Municipe -->
-        <div>
-          <label>Municipio:
-            <select formControlName="province">
-              <!-- WIP -->
-              <option *ngFor="let province of provinces" [ngValue]="province.name">
-                {{ province.name }}
-              </option>
-            </select>
-          </label>
+          <!-- Province -->
+          <div>
+            <label>Provincia:
+              <select formControlName="province">
+                <option *ngFor="let province of provinces" [ngValue]="province.name">
+                  {{ province.name }}
+                </option>
+              </select>
+            </label>
+          </div>
+          <!-- Municipe -->
+          <div>
+            <label>Municipio:
+              <select formControlName="province">
+                <!-- WIP -->
+                <option *ngFor="let province of provinces" [ngValue]="province.name">
+                  {{ province.name }}
+                </option>
+              </select>
+            </label>
+          </div>
         </div>
         <!-- License -->
         <div>
@@ -136,8 +138,8 @@
             <a href="#">Editar</a>
           </td>
         </tr>
-        <tr *ngIf="formNewStudy">
-          <form>
+        <form [formGroup]="newStudyForm">
+          <tr *ngIf="formNewCollegeStudy">
             <td><input type="text"/></td>
             <td><input type="text"/></td>
             <td><input type="text"/></td>
@@ -147,13 +149,14 @@
               <button>Guardar</button>
               <button (click)="cancelNewStudy()">Cancelar</button>
             </td>
-          </form>
-        </tr>
+          </tr>
+        </form>
         </tbody>
       </table>
-      <button *ngIf="!formNewStudy" (click)="formNewItem('study')">Nueva</button>
+      <button *ngIf="!formNewCollegeStudy" (click)="formNewItem('study')">Nueva</button>
     </div>
 
     <button (click)="submitForm()">Guardar</button>
+    <button routerLink="/admin/profile/{{this.user.id}}">Torna al perfil</button>
   </form>
 </div>

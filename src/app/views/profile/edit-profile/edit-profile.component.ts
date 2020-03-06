@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../../shared/services/user-store';
 import { User } from '../../../shared/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileService } from '../../../shared/services/profile.service';
+import { UserApiService } from '../../../shared/services/backend-api/user-api.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,7 +15,7 @@ export class EditProfileComponent implements OnInit {
   public user: User;
   public editProfileForm: FormGroup;
   public newStudyForm: FormGroup;
-  public formNewStudy = false;
+  public formNewCollegeStudy = false;
   public nieTypes = [
     { id: 0, name: 'Otro' },
     { id: 1, name: 'NIF/NIE' },
@@ -37,7 +39,12 @@ export class EditProfileComponent implements OnInit {
     Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
   ];
 
-  constructor(private activedRoute: ActivatedRoute, private userStore: UserStoreService, private fb: FormBuilder) {
+  constructor(private activedRoute: ActivatedRoute,
+              private userService: UserApiService,
+              private userStore: UserStoreService,
+              private fb: FormBuilder,
+              private profileService: ProfileService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,6 +56,7 @@ export class EditProfileComponent implements OnInit {
 
   private createForm() {
     this.editProfileForm = this.fb.group({
+      id: [this.user.id],
       name: [this.user.name, this.nameValidators],
       surname: [this.user.surname, this.surnameValidators],
       birthdate: [this.user.birthdate],
@@ -56,13 +64,17 @@ export class EditProfileComponent implements OnInit {
       phone2: [this.user.phone2, [Validators.pattern('^\\d+$')]],
       nieType: [this.user.documentType.uid],
       documentNumber: [this.user.documentNumber],
-      address: [this.user.address.street, [Validators.pattern('^.+$')]],
+      address: this.fb.group({
+        street: [this.user.address.street, [Validators.pattern('^.+$')]],
+        province: [this.user.address.province, [Validators.pattern('^.+$')]],
+        municipe: [this.user.address.municipe, [Validators.pattern('^.+$')]]
+      }),
       province: [this.user.address.province.name],
       license: [this.user.license]
     });
     this.newStudyForm = this.fb.group({
       level: [''],
-      title: [''],
+      title: ['']
 
     });
   }
@@ -94,15 +106,25 @@ export class EditProfileComponent implements OnInit {
 
   submitForm() {
     if (this.editProfileForm.valid) {
-
+      const updatedProfile = {
+        ...this.user,
+        ...this.editProfileForm.value
+      };
+      this.profileService.updateProfile(updatedProfile)
+        .subscribe(data => {
+          this.userService.getUserById(1).subscribe(user => {
+            this.user = user;
+          });
+        });
+      this.router.navigate(['admin', 'profile', this.user.id]);
     }
   }
 
   formNewItem(study: string) {
-    this.formNewStudy = true;
+    this.formNewCollegeStudy = true;
   }
 
   cancelNewStudy() {
-    this.formNewStudy = false;
+    this.formNewCollegeStudy = false;
   }
 }
