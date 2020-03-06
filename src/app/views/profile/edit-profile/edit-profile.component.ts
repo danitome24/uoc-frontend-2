@@ -17,14 +17,18 @@ export class EditProfileComponent implements OnInit {
   public newStudyForm: FormGroup;
   public formNewCollegeStudy = false;
   public nieTypes = [
-    { id: 0, name: 'Otro' },
-    { id: 1, name: 'NIF/NIE' },
-    { id: 2, name: 'Pasaporte' }
+    { uid: 0, name: 'Otro' },
+    { uid: 1, name: 'NIF' },
+    { uid: 2, name: 'Pasaporte' }
   ];
   public provinces = [
-    { name: 'Tarragona' },
+    { name: 'Cádiz' },
     { name: 'Barcelona' },
     { name: 'León' }
+  ];
+  public municipes = [
+    { name: 'Chiclana de la Frontera' },
+    { name: 'Sabadell' }
   ];
   private nameValidators = [
     Validators.minLength(3),
@@ -49,6 +53,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.activedRoute.data.subscribe(((user: { user: User }) => {
+      console.log(user);
       this.user = user.user;
     }));
     this.createForm();
@@ -62,7 +67,11 @@ export class EditProfileComponent implements OnInit {
       birthdate: [this.user.birthdate],
       phone: [this.user.phone, [Validators.pattern('^\\d+$')]],
       phone2: [this.user.phone2, [Validators.pattern('^\\d+$')]],
-      nieType: [this.user.documentType.uid],
+      documentType: [this.user.documentType],
+      // documentType: this.fb.group({
+      //   uid: [this.user.documentType.uid, []],
+      //   name: [this.user.documentType.name, []]
+      // }),
       documentNumber: [this.user.documentNumber],
       address: this.fb.group({
         street: [this.user.address.street, [Validators.pattern('^.+$')]],
@@ -71,11 +80,28 @@ export class EditProfileComponent implements OnInit {
       }),
       province: [this.user.address.province.name],
       license: [this.user.license]
+
+      //   province: this.fb.group({
+      //     uid: [this.user.address.province.uid],
+      //     name: [this.user.address.province.name, [Validators.pattern('^.+$')]]
+      //   }),
+      //   municipe: this.fb.group({
+      //     uid: [this.user.address.municipe.uid],
+      //     name: [this.user.address.municipe.name, [Validators.pattern('^.+$')]]
+      //   }),
+      //   // municipe: [this.user.address.municipe.name, [Validators.pattern('^.+$')]]
+      // }),
+      //   license: [this.user.license],
+      //   aboutme: [this.user.aboutMe]
     });
+
+    // this.editProfileForm.controls.documentType.valueChanges.subscribe(nieType => {
+    //   this.editProfileForm.controls['documentType'].patchValue(nieType);
+    // });
+
     this.newStudyForm = this.fb.group({
       level: [''],
       title: ['']
-
     });
   }
 
@@ -110,13 +136,16 @@ export class EditProfileComponent implements OnInit {
         ...this.user,
         ...this.editProfileForm.value
       };
+
+      console.log('Form:');
+      console.log(this.editProfileForm.value);
+      console.log('Updated:');
+      console.log(updatedProfile);
       this.profileService.updateProfile(updatedProfile)
         .subscribe(data => {
-          this.userService.getUserById(1).subscribe(user => {
-            this.user = user;
-          });
+          this.editProfileForm.patchValue(updatedProfile);
         });
-      this.router.navigate(['admin', 'profile', this.user.id]);
+      // this.router.navigate(['admin', 'profile', this.user.id]);
     }
   }
 
@@ -126,5 +155,9 @@ export class EditProfileComponent implements OnInit {
 
   cancelNewStudy() {
     this.formNewCollegeStudy = false;
+  }
+
+  public documentTypeSelected(optOne, optTwo) {
+    return optOne.uid === optTwo.uid;
   }
 }

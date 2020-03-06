@@ -51,8 +51,8 @@
         <!-- NIF/NIE -->
         <div>
           <label>NIF/NIE:
-            <select formControlName="nieType">
-              <option *ngFor="let nieType of nieTypes" [ngValue]="nieType.id">
+            <select formControlName="documentType" [compareWith]="documentTypeSelected">
+              <option *ngFor="let nieType of nieTypes" [ngValue]="nieType">
                 {{ nieType.name }}
               </option>
             </select>
@@ -83,8 +83,8 @@
             <label>Municipio:
               <select formControlName="province">
                 <!-- WIP -->
-                <option *ngFor="let province of provinces" [ngValue]="province.name">
-                  {{ province.name }}
+                <option *ngFor="let municipe of municipes" [ngValue]="municipe.uid">
+                  {{ municipe.name }}
                 </option>
               </select>
             </label>
