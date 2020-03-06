@@ -51,7 +51,7 @@
         <!-- NIF/NIE -->
         <div>
           <label>NIF/NIE:
-            <select formControlName="documentType" [compareWith]="documentTypeSelected">
+            <select formControlName="documentType" [compareWith]="sameUuid">
               <option *ngFor="let nieType of nieTypes" [ngValue]="nieType">
                 {{ nieType.name }}
               </option>
@@ -60,6 +60,7 @@
         </div>
         <!-- Document number -->
         <label>Número de documento: <input type="text" formControlName="documentNumber"></label>
+        <!-- Address -->
         <div formGroupName="address">
           <!-- Address -->
           <div>
@@ -71,8 +72,8 @@
           <!-- Province -->
           <div>
             <label>Provincia:
-              <select formControlName="province">
-                <option *ngFor="let province of provinces" [ngValue]="province.name">
+              <select formControlName="province" [compareWith]="sameUuid">
+                <option *ngFor="let province of provinces" [ngValue]="province">
                   {{ province.name }}
                 </option>
               </select>
@@ -81,9 +82,9 @@
           <!-- Municipe -->
           <div>
             <label>Municipio:
-              <select formControlName="province">
+              <select formControlName="municipe" [compareWith]="sameUuid">
                 <!-- WIP -->
-                <option *ngFor="let municipe of municipes" [ngValue]="municipe.uid">
+                <option *ngFor="let municipe of municipes" [ngValue]="municipe">
                   {{ municipe.name }}
                 </option>
               </select>
@@ -99,16 +100,14 @@
     <!-- About me -->
     <div class="row">
       <label for="about-me">Acerca de mi</label>
-      <textarea id="about-me" class="textarea-size">
-        {{user.aboutMe}}
+      <textarea id="about-me" class="textarea-size" formControlName="aboutMe">
       </textarea>
     </div>
 
     <!-- Other competencies -->
     <div class="row">
       <label for="other-competencies">Otras competencias</label>
-      <textarea id="other-competencies" class="textarea-size">
-        {{user.otherCompetences}}
+      <textarea id="other-competencies" class="textarea-size" formControlName="otherCompetencies">
       </textarea>
     </div>
 
