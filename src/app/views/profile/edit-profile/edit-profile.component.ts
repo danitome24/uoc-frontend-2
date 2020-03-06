@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile.service';
 import { UserApiService } from '../../../shared/services/backend-api/user-api.service';
+import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,7 +16,8 @@ export class EditProfileComponent implements OnInit {
   public user: User;
   public editProfileForm: FormGroup;
   public newStudyForm: FormGroup;
-  public formNewCollegeStudy = false;
+  public showEditCollegeStudyForm = false;
+  public editCollegeStudyForm: FormGroup = null;
   public nieTypes = [
     { uid: 0, name: 'Otro' },
     { uid: 1, name: 'NIF' },
@@ -29,6 +31,11 @@ export class EditProfileComponent implements OnInit {
   public municipes = [
     { uid: 6, name: 'Chiclana de la Frontera' },
     { uid: 1, name: 'Sabadell' }
+  ];
+  public levels = [
+    { uid: 1, name: 'Ciclo Formativo' },
+    { uid: 2, name: 'Título universitario' },
+    { uid: 3, name: 'Otro título' }
   ];
   private nameValidators = [
     Validators.minLength(3),
@@ -85,6 +92,20 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  private createEditCollegeStudyForm(study: CollegeStudy) {
+
+    this.editCollegeStudyForm = this.fb.group({
+      uid: [study.uid],
+      level: [study.level],
+      title: [study.title],
+      certificate: [study.certificate],
+      date: [study.date],
+      bilingue: [study.bilingue],
+      name: [study.name],
+      institution: [study.institution]
+    });
+  }
+
   public isInvalidByRequired(formControlName: string): boolean {
     const control = this.editProfileForm.get(formControlName);
     return control.dirty && control.hasError('required');
@@ -125,11 +146,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   formNewItem(study: string) {
-    this.formNewCollegeStudy = true;
+    // this.editCollegeStudyForm = true;
   }
 
   cancelNewStudy() {
-    this.formNewCollegeStudy = false;
+    // this.editCollegeStudyForm = false;
   }
 
   public sameUuid(optOne, optTwo) {
@@ -141,5 +162,28 @@ export class EditProfileComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
       });
+  }
+
+  public editStudy(study) {
+    this.showEditCollegeStudyForm = true;
+    console.log(study);
+    if (study instanceof VocationalStudy) {
+      console.log('Vocational');
+    } else if (study instanceof CollegeStudy) {
+      console.log('College');
+    }
+
+    this.createEditCollegeStudyForm(study);
+  }
+
+  public submitEditCollege() {
+    if (this.editCollegeStudyForm.valid) {
+      console.log(this.editCollegeStudyForm.value);
+      this.showEditCollegeStudyForm = false;
+      this.userService.updateUser(this.user, this.editCollegeStudyForm.value);
+      console.log(this.user);
+    } else {
+      console.log('erroooorr');
+    }
   }
 }

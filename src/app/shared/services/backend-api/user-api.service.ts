@@ -34,4 +34,11 @@ export class UserApiService {
 
     return this.http.delete(AppSettings.API_ENDPOINT_USER + '/' + user.id);
   }
+
+  updateUser(user: User, study) {
+    const index = user.studies.findIndex(studyRow => studyRow.uid === study.uid);
+    user.studies.splice(index, 1, study);
+
+    return this.http.put(AppSettings.API_ENDPOINT_USER, user);
+  }
 }

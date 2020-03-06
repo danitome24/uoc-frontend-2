@@ -128,17 +128,58 @@
         <tbody>
         <tr *ngFor="let study of user.studies">
           <td>{{study.level.name}}</td>
-          <td>{{study.title.name}}</td>
+          <td>{{study.title}}</td>
           <td>{{study.institution.name}}</td>
           <td>{{study.date}}</td>
           <td>{{study.certificate}}</td>
           <td>
             <button (click)="removeStudy(study.uid)">Borrar</button>
-            <a href="#">Editar</a>
+            <button (click)="editStudy(study)">Editar</button>
           </td>
         </tbody>
       </table>
-      <button *ngIf="!formNewCollegeStudy" (click)="formNewItem('study')">Nueva</button>
+      <div *ngIf="showEditCollegeStudyForm">
+        <form [formGroup]="editCollegeStudyForm">
+          <!-- Level -->
+          <div>
+            <label>Nivel:
+              <select formControlName="level" [compareWith]="sameUuid">
+                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Title -->
+          <div>
+            <label>Título: <input type="text" formControlName="title"></label>
+          </div>
+          <!-- Certificate -->
+          <div>
+            <label>Certificado: <input type="checkbox" formControlName="certificate"></label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha:<input type="text" formControlName="date"></label>
+          </div>
+          <!-- Bilingue -->
+          <div>
+            <label>Bilingue: <input type="checkbox" formControlName="bilingue"></label>
+          </div>
+          <!-- Name -->
+          <div>
+            <label>Nombre: <input type="text" formControlName="name"></label>
+          </div>
+          <!-- Institution -->
+          <div>
+            <label>Institución: <input type="text" formControlName="institution"></label>
+          </div>
+          <!-- Buttons -->
+          <div>
+            <button (click)="submitEditCollege()">Guardar cambios</button>
+            <button (click)="this.showEditCollegeStudyForm = false;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <button (click)="formNewItem('study')">Nueva</button>
     </div>
 
     <button (click)="submitForm()">Guardar</button>

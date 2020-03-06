@@ -1,7 +1,7 @@
 export class Study {
   uid: number;
   level: LevelStudy;
-  title: TitleStudy;
+  title: string;
   certificate: boolean; // Sera un fichero
   date: string;
   bilingue: boolean;
@@ -9,7 +9,7 @@ export class Study {
 
 export class CollegeStudy extends Study {
   name: string;
-  institution: String;
+  institution: string;
 }
 
 export class VocationalStudy extends Study {

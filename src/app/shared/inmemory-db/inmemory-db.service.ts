@@ -35,10 +35,7 @@ export class FakeBackendService implements InMemoryDbService {
               uid: 2,
               name: 'IES Politécnico Jesús Marin'
             },
-            title: {
-              uid: 2,
-              name: 'Administracion de sistemas informaticos y redes'
-            },
+            title: 'Administracion de sistemas informaticos y redes',
             grade: {
               uid: 3,
               name: 'Ciclo Formativo de Grado Superior'
@@ -56,15 +53,22 @@ export class FakeBackendService implements InMemoryDbService {
             },
             category: { uid: 2, name: 'Informática y comunicaciones' },
             level: { uid: 1, name: 'Ciclo Formativo' },
-            title: {
-              uid: 1,
-              name: 'Técnico Superior en Desarrollo de Aplicaciones Web'
-            },
+            title: 'Técnico Superior en Desarrollo de Aplicaciones Web',
             grade: { uid: 3, name: 'Ciclo Formativo de Grado Superior' },
             date: '30/06/2007',
             dual: true,
             bilingue: false,
             certificate: false
+          },
+          {
+            uid: 3,
+            level: { uid: 1, name: 'Ciclo Formativo' },
+            title: 'Técnico Superior en Desarrollo de Aplicaciones Web',
+            certificate: false,
+            date: '30/06/2007',
+            bilingue: true,
+            name: 'Ciclo Formativo de Grado Superior',
+            institution: 'IES Politécnico Jesús Marin'
           }
         ],
         experiencies: [
