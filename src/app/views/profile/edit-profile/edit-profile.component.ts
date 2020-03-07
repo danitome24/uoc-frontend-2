@@ -31,13 +31,25 @@ export class EditProfileComponent implements OnInit {
     { uid: 2, name: 'León' }
   ];
   public municipes = [
-    { uid: 6, name: 'Chiclana de la Frontera' },
-    { uid: 1, name: 'Sabadell' }
+    { uid: 1, name: 'Sabadell' },
+    { uid: 6, name: 'Chiclana de la Frontera' }
   ];
   public levels = [
     { uid: 1, name: 'Ciclo Formativo' },
     { uid: 2, name: 'Título universitario' },
     { uid: 3, name: 'Otro título' }
+  ];
+  public allInstitutions = [
+    { uid: 1, name: 'Centro Laboral de Tarragona' },
+    { uid: 2, name: 'IES Politécnico Jesús Marin' }
+  ];
+  public allCategories = [
+    { uid: 1, name: 'Física y Química' },
+    { uid: 2, name: 'Informática y comunicaciones' }
+  ];
+  public allGrades = [
+    { uid: 1, name: 'Ciclo Formativo Grado Medio' },
+    { uid: 3, name: 'Ciclo Formativo Grado Superior' }
   ];
   private nameValidators = [
     Validators.minLength(3),
@@ -132,7 +144,7 @@ export class EditProfileComponent implements OnInit {
     return control.dirty && (control.hasError('pattern'));
   }
 
-  submitForm() {
+  public submitForm() {
     if (this.editProfileForm.valid) {
       const updatedProfile = {
         ...this.user,
@@ -146,7 +158,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  formNewItem(study: string) {
+  public formNewItem(study: string) {
     // this.editCollegeStudyForm = true;
   }
 
@@ -177,7 +189,6 @@ export class EditProfileComponent implements OnInit {
     if (this.editCollegeStudyForm.valid) {
       this.showEditCollegeStudyForm = false;
       this.userService.updateUser(this.user, this.editCollegeStudyForm.value);
-    } else {
     }
   }
 
@@ -187,11 +198,20 @@ export class EditProfileComponent implements OnInit {
       uid: [study.uid],
       level: [study.level],
       title: [study.title],
+      category: [study.category],
       certificate: [study.certificate],
       date: [study.date],
       bilingue: [study.bilingue],
+      dual: [study.dual],
       grade: [study.grade],
       institution: [study.institution]
     });
+  }
+
+  public submitEditVocational() {
+    if (this.editVocationalStudyForm.valid) {
+      this.showEditVocationalStudyForm = false;
+      this.userService.updateUser(this.user, this.editVocationalStudyForm.value);
+    }
   }
 }
