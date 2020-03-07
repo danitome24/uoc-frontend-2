@@ -62,13 +62,13 @@ export class FakeBackendService implements InMemoryDbService {
           },
           {
             uid: 3,
-            level: { uid: 1, name: 'Ciclo Formativo' },
-            title: 'Técnico Superior en Desarrollo de Aplicaciones Web',
-            certificate: false,
+            level: { uid: 2, name: 'Título universitario' },
+            title: 'Graduado en Ingenieria Informática',
+            certificate: true,
             date: '30/06/2007',
             bilingue: true,
-            name: 'Ciclo Formativo de Grado Superior',
-            institution: 'IES Politécnico Jesús Marin'
+            name: 'Grado en Ingeniería Informática',
+            institution: 'Universidad Rovira i Virgili'
           }
         ],
         experiencies: [

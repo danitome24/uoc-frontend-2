@@ -43,8 +43,8 @@
       <tbody>
       <tr *ngFor="let study of user.studies">
         <td>{{study.level.name}}</td>
-        <td>{{study.title.name}}</td>
-        <td>{{study.institution.name}}</td>
+        <td>{{study.title}}</td>
+        <td>{{study.institution.name || study.institution}}</td>
         <td>{{study.date}}</td>
         <td>{{study.certificate}}</td>
       </tr>

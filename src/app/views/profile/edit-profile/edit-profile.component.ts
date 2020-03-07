@@ -18,6 +18,8 @@ export class EditProfileComponent implements OnInit {
   public newStudyForm: FormGroup;
   public showEditCollegeStudyForm = false;
   public editCollegeStudyForm: FormGroup = null;
+  public showEditVocationalStudyForm = false;
+  public editVocationalStudyForm: FormGroup = null;
   public nieTypes = [
     { uid: 0, name: 'Otro' },
     { uid: 1, name: 'NIF' },
@@ -60,7 +62,6 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.activedRoute.data.subscribe(((user: { user: User }) => {
-      console.log(user);
       this.user = user.user;
     }));
     this.createForm();
@@ -93,7 +94,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   private createEditCollegeStudyForm(study: CollegeStudy) {
-
+    this.showEditCollegeStudyForm = true;
     this.editCollegeStudyForm = this.fb.group({
       uid: [study.uid],
       level: [study.level],
@@ -160,30 +161,37 @@ export class EditProfileComponent implements OnInit {
   public removeStudy(uid: number) {
     this.userService.removeStudyFromUser(this.user, uid)
       .subscribe(data => {
-        console.log(data);
       });
   }
 
   public editStudy(study) {
-    this.showEditCollegeStudyForm = true;
-    console.log(study);
-    if (study instanceof VocationalStudy) {
-      console.log('Vocational');
-    } else if (study instanceof CollegeStudy) {
-      console.log('College');
-    }
 
-    this.createEditCollegeStudyForm(study);
+    if (study.level.uid === 2) {
+      this.createEditCollegeStudyForm(study);
+    } else if (study.level.uid === 1) {
+      this.createEditVocationalStudyForm(study);
+    }
   }
 
   public submitEditCollege() {
     if (this.editCollegeStudyForm.valid) {
-      console.log(this.editCollegeStudyForm.value);
       this.showEditCollegeStudyForm = false;
       this.userService.updateUser(this.user, this.editCollegeStudyForm.value);
-      console.log(this.user);
     } else {
-      console.log('erroooorr');
     }
+  }
+
+  private createEditVocationalStudyForm(study: VocationalStudy) {
+    this.showEditVocationalStudyForm = true;
+    this.editVocationalStudyForm = this.fb.group({
+      uid: [study.uid],
+      level: [study.level],
+      title: [study.title],
+      certificate: [study.certificate],
+      date: [study.date],
+      bilingue: [study.bilingue],
+      grade: [study.grade],
+      institution: [study.institution]
+    });
   }
 }

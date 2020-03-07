@@ -129,7 +129,7 @@
         <tr *ngFor="let study of user.studies">
           <td>{{study.level.name}}</td>
           <td>{{study.title}}</td>
-          <td>{{study.institution.name}}</td>
+          <td>{{study.institution.name || study.institution}}</td>
           <td>{{study.date}}</td>
           <td>{{study.certificate}}</td>
           <td>
@@ -138,6 +138,7 @@
           </td>
         </tbody>
       </table>
+      <!-- Edit CollegeStudy Form -->
       <div *ngIf="showEditCollegeStudyForm">
         <form [formGroup]="editCollegeStudyForm">
           <!-- Level -->
@@ -176,6 +177,52 @@
           <div>
             <button (click)="submitEditCollege()">Guardar cambios</button>
             <button (click)="this.showEditCollegeStudyForm = false;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="showEditVocationalStudyForm">
+        <form [formGroup]="editVocationalStudyForm">
+          <!-- Institution -->
+          <div>
+            <label>
+              Institución
+              <select>
+                <option>Universitat Rovira i Virgili</option>
+                <option>Universitat de Barcelona</option>
+              </select>
+            </label>
+          </div>
+          <!-- Category -->
+          <div>
+            <label>
+              Categoría
+              <select>
+                <option>Informática y comunicaciones</option>
+                <option>Física y Matemáticas</option>
+              </select>
+            </label>
+          </div>
+          <!-- Grade -->
+          <div>
+            <label>
+              Grado
+              <select>
+                <option>Ciclo Formativo Grado Medio</option>
+                <option>Ciclo Formativo Grado Superior</option>
+              </select>
+            </label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha: <input type="text" formControlName="date"> </label>
+          </div>
+          <!-- Dual -->
+          <div>
+            <label>Dual <input type="checkbox" formControlName="dual"></label>
+          </div>
+          <!-- Bilingüe -->
+          <div>
+            <label>Bilingüe<input type="checkbox" formControlName="certificate"></label>
           </div>
         </form>
       </div>
