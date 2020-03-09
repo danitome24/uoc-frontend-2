@@ -15,9 +15,9 @@ import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.mode
 export class EditProfileComponent implements OnInit {
   public user: User;
   public editProfileForm: FormGroup;
-  public newStudyForm: FormGroup;
   public showEditCollegeStudyForm = false;
   public editCollegeStudyForm: FormGroup = null;
+  public newVocationalStudyForm: FormGroup = null;
   public showEditVocationalStudyForm = false;
   public editVocationalStudyForm: FormGroup = null;
   public nieTypes = [
@@ -63,6 +63,7 @@ export class EditProfileComponent implements OnInit {
     Validators.required,
     Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
   ];
+  private showNewVocationalStudyForm = false;
 
   constructor(private activedRoute: ActivatedRoute,
               private userService: UserApiService,
@@ -98,11 +99,6 @@ export class EditProfileComponent implements OnInit {
       aboutMe: [this.user.aboutMe],
       otherCompetencies: [this.user.otherCompetences]
     });
-
-    this.newStudyForm = this.fb.group({
-      level: [''],
-      title: ['']
-    });
   }
 
   private createEditCollegeStudyForm(study: CollegeStudy) {
@@ -114,7 +110,6 @@ export class EditProfileComponent implements OnInit {
       certificate: [study.certificate],
       date: [study.date],
       bilingue: [study.bilingue],
-      name: [study.name],
       institution: [study.institution]
     });
   }
@@ -158,12 +153,13 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  public formNewItem(study: string) {
-    // this.editCollegeStudyForm = true;
+  public showVocationalForm() {
+    this.showNewVocationalStudyForm = true;
+    this.createNewVocationalForm();
   }
 
-  cancelNewStudy() {
-    // this.editCollegeStudyForm = false;
+  public cancelNewStudy() {
+    this.showNewVocationalStudyForm = false;
   }
 
   public sameUuid(optOne, optTwo) {
@@ -188,7 +184,7 @@ export class EditProfileComponent implements OnInit {
   public submitEditCollege() {
     if (this.editCollegeStudyForm.valid) {
       this.showEditCollegeStudyForm = false;
-      this.userService.updateUser(this.user, this.editCollegeStudyForm.value);
+      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
     }
   }
 
@@ -197,21 +193,43 @@ export class EditProfileComponent implements OnInit {
     this.editVocationalStudyForm = this.fb.group({
       uid: [study.uid],
       level: [study.level],
+      institution: [study.institution],
       title: [study.title],
       category: [study.category],
-      certificate: [study.certificate],
-      date: [study.date],
-      bilingue: [study.bilingue],
-      dual: [study.dual],
       grade: [study.grade],
-      institution: [study.institution]
+      date: [study.date],
+      dual: [study.dual],
+      bilingue: [study.bilingue],
+      certificate: [study.certificate]
     });
   }
 
   public submitEditVocational() {
     if (this.editVocationalStudyForm.valid) {
       this.showEditVocationalStudyForm = false;
-      this.userService.updateUser(this.user, this.editVocationalStudyForm.value);
+      this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value);
+    }
+  }
+
+  private createNewVocationalForm() {
+    this.newVocationalStudyForm = this.fb.group({
+      level: [],
+      institution: [],
+      title: [],
+      category: [],
+      grade: [],
+      date: [],
+      dual: [],
+      bilingue: [false],
+      certificate: [false]
+    });
+  }
+
+  public submitNewVocationalStudy() {
+    if (this.newVocationalStudyForm.valid) {
+      this.showNewVocationalStudyForm = false;
+      this.user.studies.push(this.newVocationalStudyForm.value);
+      this.userService.updateUser(this.user);
     }
   }
 }

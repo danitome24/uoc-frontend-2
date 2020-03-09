@@ -165,10 +165,6 @@
           <div>
             <label>Bilingue: <input type="checkbox" formControlName="bilingue"></label>
           </div>
-          <!-- Name -->
-          <div>
-            <label>Nombre: <input type="text" formControlName="name"></label>
-          </div>
           <!-- Institution -->
           <div>
             <label>Institución: <input type="text" formControlName="institution"></label>
@@ -183,6 +179,14 @@
       <!-- Edit VocationalStudy Form -->
       <div *ngIf="showEditVocationalStudyForm">
         <form [formGroup]="editVocationalStudyForm">
+          <!-- Level -->
+          <div>
+            <label>Nivel:
+              <select formControlName="level" [compareWith]="sameUuid">
+                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
+              </select>
+            </label>
+          </div>
           <!-- Institution -->
           <div>
             <label>
@@ -192,6 +196,10 @@
                         [ngValue]="institution">{{institution.name}}</option>
               </select>
             </label>
+          </div>
+          <!-- Title -->
+          <div>
+            <label>Título: <input type="text" formControlName="title"></label>
           </div>
           <!-- Category -->
           <div>
@@ -234,7 +242,73 @@
           </div>
         </form>
       </div>
-      <button (click)="formNewItem('study')">Nueva</button>
+      <!-- New Vocational Study Form -->
+      <div *ngIf="showNewVocationalStudyForm">
+        <form [formGroup]="newVocationalStudyForm">
+          <!-- Level -->
+          <div>
+            <label>Nivel:
+              <select formControlName="level">
+                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Institution -->
+          <div>
+            <label>
+              Institución
+              <select formControlName="institution">
+                <option *ngFor="let institution of allInstitutions"
+                        [ngValue]="institution">{{institution.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Title -->
+          <div>
+            <label>Título: <input type="text" formControlName="title"></label>
+          </div>
+          <!-- Category -->
+          <div>
+            <label>
+              Categoría
+              <select formControlName="category">
+                <option *ngFor="let category of allCategories" [ngValue]="category">{{category.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Grade -->
+          <div>
+            <label>
+              Grado
+              <select formControlName="grade">
+                <option *ngFor="let grade of allGrades" [ngValue]="grade">{{grade.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha: <input type="text" formControlName="date"> </label>
+          </div>
+          <!-- Dual -->
+          <div>
+            <label>Dual <input type="checkbox" formControlName="dual"></label>
+          </div>
+          <!-- Bilingüe -->
+          <div>
+            <label>Bilingüe<input type="checkbox" formControlName="bilingue"></label>
+          </div>
+          <!-- Certificate -->
+          <div>
+            <label>Certificado<input type="checkbox" formControlName="certificate"></label>
+          </div>
+          <!-- Buttons -->
+          <div>
+            <button (click)="submitNewVocationalStudy()">Guardar nuevo</button>
+            <button (click)="cancelNewStudy()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <button (click)="showVocationalForm()">Nueva</button>
     </div>
 
     <button (click)="submitForm()">Guardar</button>
