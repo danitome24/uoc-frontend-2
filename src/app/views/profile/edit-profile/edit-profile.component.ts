@@ -201,18 +201,6 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  public showVocationalForm() {
-    this.showNewVocationalStudyForm = true;
-    this.createNewVocationalForm();
-  }
-
-  public submitEditCollege() {
-    if (this.editCollegeStudyForm.valid) {
-      this.showEditCollegeStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
-    }
-  }
-
   public submitEditVocational() {
     if (this.editVocationalStudyForm.valid) {
       this.showEditVocationalStudyForm = false;
@@ -236,16 +224,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  // Helper methods
-  public cancelNewStudy() {
-    this.showNewVocationalStudyForm = false;
-    this.showNewCollegeStudyForm = false;
-  }
-
-  public sameUuid(optOne, optTwo) {
-    return optOne.uid === optTwo.uid;
-  }
-
+  // Actions
   public removeStudy(uid: number) {
     this.userService.removeStudyFromUser(this.user, uid)
       .subscribe(data => {
@@ -261,9 +240,32 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  // "Form state"
+  public showVocationalForm() {
+    this.showNewVocationalStudyForm = true;
+    this.createNewVocationalForm();
+  }
+
+  public submitEditCollege() {
+    if (this.editCollegeStudyForm.valid) {
+      this.showEditCollegeStudyForm = false;
+      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
+    }
+  }
+
   public showCollegeForm() {
     this.showNewCollegeStudyForm = true;
     this.createNewCollegeForm();
+  }
+
+  // Helper methods
+  public cancelNewStudy() {
+    this.showNewVocationalStudyForm = false;
+    this.showNewCollegeStudyForm = false;
+  }
+
+  public sameUuid(optOne, optTwo) {
+    return optOne.uid === optTwo.uid;
   }
 
   private newStudyId(): number {
