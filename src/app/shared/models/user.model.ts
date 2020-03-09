@@ -1,8 +1,8 @@
-import { AppSettings } from '../app.settings';
-import { Study, VocationalStudy, CollegeStudy } from './study.model';
+import { CollegeStudy, VocationalStudy } from './study.model';
 import { Language } from './language.model';
 import { Offer } from './offer.model';
 import { Experience } from './experience.model';
+
 export interface Users {
   [id: number]: User;
 }
@@ -12,18 +12,22 @@ export interface UserAddress {
   province: Province;
   municipe: Municipe;
 }
+
 export interface DocumentType {
   uid: number;
   name: string;
 }
+
 export interface Municipe {
   uid: number;
   name: string;
 }
+
 export interface Province {
   uid: number;
   name: string;
 }
+
 export interface User {
   password: string; // Only for mock
   id: number;

@@ -308,7 +308,46 @@
           </div>
         </form>
       </div>
-      <button (click)="showVocationalForm()">Nueva</button>
+      <!-- New College Study Form -->
+      <div *ngIf="showNewCollegeStudyForm">
+        <form [formGroup]="newCollegeStudyForm">
+          <!-- Level -->
+          <div>
+            <label>Nivel:
+              <select formControlName="level">
+                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
+              </select>
+            </label>
+          </div>
+          <!-- Title -->
+          <div>
+            <label>Título: <input type="text" formControlName="title"></label>
+          </div>
+          <!-- Certificate -->
+          <div>
+            <label>Certificado: <input type="checkbox" formControlName="certificate"></label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha:<input type="text" formControlName="date"></label>
+          </div>
+          <!-- Bilingue -->
+          <div>
+            <label>Bilingue: <input type="checkbox" formControlName="bilingue"></label>
+          </div>
+          <!-- Institution -->
+          <div>
+            <label>Institución: <input type="text" formControlName="institution"></label>
+          </div>
+          <!-- Buttons -->
+          <div>
+            <button (click)="submitNewCollegeStudy()">Guardar nuevo</button>
+            <button (click)="cancelNewStudy()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <button (click)="showVocationalForm()">Nuevo Ciclo</button>
+      <button (click)="showCollegeForm()">Nuevo Grado</button>
     </div>
 
     <button (click)="submitForm()">Guardar</button>

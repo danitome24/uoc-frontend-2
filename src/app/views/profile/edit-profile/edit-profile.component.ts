@@ -18,6 +18,7 @@ export class EditProfileComponent implements OnInit {
   public showEditCollegeStudyForm = false;
   public editCollegeStudyForm: FormGroup = null;
   public newVocationalStudyForm: FormGroup = null;
+  public newCollegeStudyForm: FormGroup = null;
   public showEditVocationalStudyForm = false;
   public editVocationalStudyForm: FormGroup = null;
   public nieTypes = [
@@ -64,6 +65,7 @@ export class EditProfileComponent implements OnInit {
     Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
   ];
   private showNewVocationalStudyForm = false;
+  private showNewCollegeStudyForm = false;
 
   constructor(private activedRoute: ActivatedRoute,
               private userService: UserApiService,
@@ -160,6 +162,7 @@ export class EditProfileComponent implements OnInit {
 
   public cancelNewStudy() {
     this.showNewVocationalStudyForm = false;
+    this.showNewCollegeStudyForm = false;
   }
 
   public sameUuid(optOne, optTwo) {
@@ -213,6 +216,7 @@ export class EditProfileComponent implements OnInit {
 
   private createNewVocationalForm() {
     this.newVocationalStudyForm = this.fb.group({
+      uid: [this.newStudyId()],
       level: [],
       institution: [],
       title: [],
@@ -229,6 +233,37 @@ export class EditProfileComponent implements OnInit {
     if (this.newVocationalStudyForm.valid) {
       this.showNewVocationalStudyForm = false;
       this.user.studies.push(this.newVocationalStudyForm.value);
+      this.userService.updateUser(this.user);
+    }
+  }
+
+  public showCollegeForm() {
+    this.showNewCollegeStudyForm = true;
+    this.createNewCollegeForm();
+  }
+
+  private createNewCollegeForm() {
+    this.newCollegeStudyForm = this.fb.group({
+      uid: [this.newStudyId()],
+      level: [],
+      title: [],
+      certificate: [],
+      date: [],
+      bilingue: [],
+      institution: []
+    });
+  }
+
+  private newStudyId(): number {
+    const lastStudy = this.user.studies[this.user.studies.length - 1];
+
+    return lastStudy.uid + 1;
+  }
+
+  public submitNewCollegeStudy() {
+    if (this.newCollegeStudyForm.valid) {
+      this.showNewCollegeStudyForm = false;
+      this.user.studies.push(this.newCollegeStudyForm.value);
       this.userService.updateUser(this.user);
     }
   }
