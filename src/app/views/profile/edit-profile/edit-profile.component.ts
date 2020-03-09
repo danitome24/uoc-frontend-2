@@ -141,7 +141,7 @@ export class EditProfileComponent implements OnInit {
     return control.dirty && (control.hasError('pattern'));
   }
 
-  public submitForm() {
+  public submitEditUser() {
     if (this.editProfileForm.valid) {
       const updatedProfile = {
         ...this.user,
