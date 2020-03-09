@@ -201,7 +201,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  public submitEditVocational() {
+  public submitEditStudy() {
     if (this.editVocationalStudyForm.valid) {
       this.showEditVocationalStudyForm = false;
       this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value);
