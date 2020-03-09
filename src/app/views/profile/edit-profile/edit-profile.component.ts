@@ -79,10 +79,37 @@ export class EditProfileComponent implements OnInit {
     this.activedRoute.data.subscribe(((user: { user: User }) => {
       this.user = user.user;
     }));
-    this.createForm();
+    this.createEditUserForm();
   }
 
-  private createForm() {
+  // Validators
+  public isInvalidByRequired(formControlName: string): boolean {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && control.hasError('required');
+  }
+
+  public hasGoodLength(formControlName: string) {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && (control.hasError('minlength') || control.hasError('maxlength'));
+  }
+
+  public hasNoSpecialChars(formControlName: string) {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && (control.hasError('pattern'));
+  }
+
+  public onlyNumbers(formControlName: string) {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && (control.hasError('pattern'));
+  }
+
+  public isString(formControlName: string) {
+    const control = this.editProfileForm.get(formControlName);
+    return control.dirty && (control.hasError('pattern'));
+  }
+
+  // Forms creation
+  private createEditUserForm() {
     this.editProfileForm = this.fb.group({
       id: [this.user.id],
       name: [this.user.name, this.nameValidators],
@@ -116,31 +143,50 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  public isInvalidByRequired(formControlName: string): boolean {
-    const control = this.editProfileForm.get(formControlName);
-    return control.dirty && control.hasError('required');
+  private createEditVocationalStudyForm(study: VocationalStudy) {
+    this.showEditVocationalStudyForm = true;
+    this.editVocationalStudyForm = this.fb.group({
+      uid: [study.uid],
+      level: [study.level],
+      institution: [study.institution],
+      title: [study.title],
+      category: [study.category],
+      grade: [study.grade],
+      date: [study.date],
+      dual: [study.dual],
+      bilingue: [study.bilingue],
+      certificate: [study.certificate]
+    });
   }
 
-  public hasGoodLength(formControlName: string) {
-    const control = this.editProfileForm.get(formControlName);
-    return control.dirty && (control.hasError('minlength') || control.hasError('maxlength'));
+  private createNewVocationalForm() {
+    this.newVocationalStudyForm = this.fb.group({
+      uid: [this.newStudyId()],
+      level: [],
+      institution: [],
+      title: [],
+      category: [],
+      grade: [],
+      date: [],
+      dual: [],
+      bilingue: [false],
+      certificate: [false]
+    });
   }
 
-  public hasNoSpecialChars(formControlName: string) {
-    const control = this.editProfileForm.get(formControlName);
-    return control.dirty && (control.hasError('pattern'));
+  private createNewCollegeForm() {
+    this.newCollegeStudyForm = this.fb.group({
+      uid: [this.newStudyId()],
+      level: [],
+      title: [],
+      certificate: [],
+      date: [],
+      bilingue: [],
+      institution: []
+    });
   }
 
-  public onlyNumbers(formControlName: string) {
-    const control = this.editProfileForm.get(formControlName);
-    return control.dirty && (control.hasError('pattern'));
-  }
-
-  public isString(formControlName: string) {
-    const control = this.editProfileForm.get(formControlName);
-    return control.dirty && (control.hasError('pattern'));
-  }
-
+  // Submit forms
   public submitEditUser() {
     if (this.editProfileForm.valid) {
       const updatedProfile = {
@@ -160,6 +206,37 @@ export class EditProfileComponent implements OnInit {
     this.createNewVocationalForm();
   }
 
+  public submitEditCollege() {
+    if (this.editCollegeStudyForm.valid) {
+      this.showEditCollegeStudyForm = false;
+      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
+    }
+  }
+
+  public submitEditVocational() {
+    if (this.editVocationalStudyForm.valid) {
+      this.showEditVocationalStudyForm = false;
+      this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value);
+    }
+  }
+
+  public submitNewVocationalStudy() {
+    if (this.newVocationalStudyForm.valid) {
+      this.showNewVocationalStudyForm = false;
+      this.user.studies.push(this.newVocationalStudyForm.value);
+      this.userService.updateUser(this.user);
+    }
+  }
+
+  public submitNewCollegeStudy() {
+    if (this.newCollegeStudyForm.valid) {
+      this.showNewCollegeStudyForm = false;
+      this.user.studies.push(this.newCollegeStudyForm.value);
+      this.userService.updateUser(this.user);
+    }
+  }
+
+  // Helper methods
   public cancelNewStudy() {
     this.showNewVocationalStudyForm = false;
     this.showNewCollegeStudyForm = false;
@@ -184,87 +261,14 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  public submitEditCollege() {
-    if (this.editCollegeStudyForm.valid) {
-      this.showEditCollegeStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
-    }
-  }
-
-  private createEditVocationalStudyForm(study: VocationalStudy) {
-    this.showEditVocationalStudyForm = true;
-    this.editVocationalStudyForm = this.fb.group({
-      uid: [study.uid],
-      level: [study.level],
-      institution: [study.institution],
-      title: [study.title],
-      category: [study.category],
-      grade: [study.grade],
-      date: [study.date],
-      dual: [study.dual],
-      bilingue: [study.bilingue],
-      certificate: [study.certificate]
-    });
-  }
-
-  public submitEditVocational() {
-    if (this.editVocationalStudyForm.valid) {
-      this.showEditVocationalStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value);
-    }
-  }
-
-  private createNewVocationalForm() {
-    this.newVocationalStudyForm = this.fb.group({
-      uid: [this.newStudyId()],
-      level: [],
-      institution: [],
-      title: [],
-      category: [],
-      grade: [],
-      date: [],
-      dual: [],
-      bilingue: [false],
-      certificate: [false]
-    });
-  }
-
-  public submitNewVocationalStudy() {
-    if (this.newVocationalStudyForm.valid) {
-      this.showNewVocationalStudyForm = false;
-      this.user.studies.push(this.newVocationalStudyForm.value);
-      this.userService.updateUser(this.user);
-    }
-  }
-
   public showCollegeForm() {
     this.showNewCollegeStudyForm = true;
     this.createNewCollegeForm();
-  }
-
-  private createNewCollegeForm() {
-    this.newCollegeStudyForm = this.fb.group({
-      uid: [this.newStudyId()],
-      level: [],
-      title: [],
-      certificate: [],
-      date: [],
-      bilingue: [],
-      institution: []
-    });
   }
 
   private newStudyId(): number {
     const lastStudy = this.user.studies[this.user.studies.length - 1];
 
     return lastStudy.uid + 1;
-  }
-
-  public submitNewCollegeStudy() {
-    if (this.newCollegeStudyForm.valid) {
-      this.showNewCollegeStudyForm = false;
-      this.user.studies.push(this.newCollegeStudyForm.value);
-      this.userService.updateUser(this.user);
-    }
   }
 }
