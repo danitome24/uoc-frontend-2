@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../../shared/services/user-store';
-import { User } from '../../../shared/models/user.model';
+import { nextStudyId, User } from '../../../shared/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile.service';
@@ -64,8 +64,8 @@ export class EditProfileComponent implements OnInit {
     Validators.required,
     Validators.pattern('^[^\\s][\\s{1}a-zA-z]+[^\\s]$')
   ];
-  private showNewVocationalStudyForm = false;
-  private showNewCollegeStudyForm = false;
+  public showNewVocationalStudyForm = false;
+  public showNewCollegeStudyForm = false;
 
   constructor(private activedRoute: ActivatedRoute,
               private userService: UserApiService,
@@ -161,8 +161,11 @@ export class EditProfileComponent implements OnInit {
 
   private createNewVocationalForm() {
     this.newVocationalStudyForm = this.fb.group({
-      uid: [this.newStudyId()],
-      level: [],
+      uid: [nextStudyId(this.user)],
+      level: this.fb.group({
+        uid: [1],
+        name: ['Ciclo Formativo']
+      }),
       institution: [],
       title: [],
       category: [],
@@ -176,12 +179,15 @@ export class EditProfileComponent implements OnInit {
 
   private createNewCollegeForm() {
     this.newCollegeStudyForm = this.fb.group({
-      uid: [this.newStudyId()],
-      level: [],
+      uid: [nextStudyId(this.user)],
+      level: this.fb.group({
+        uid: [2],
+        name: ['Título universitario']
+      }),
       title: [],
-      certificate: [],
+      certificate: [false],
       date: [],
-      bilingue: [],
+      bilingue: [false],
       institution: []
     });
   }
@@ -266,11 +272,5 @@ export class EditProfileComponent implements OnInit {
 
   public sameUuid(optOne, optTwo) {
     return optOne.uid === optTwo.uid;
-  }
-
-  private newStudyId(): number {
-    const lastStudy = this.user.studies[this.user.studies.length - 1];
-
-    return lastStudy.uid + 1;
   }
 }

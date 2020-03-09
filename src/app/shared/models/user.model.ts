@@ -68,3 +68,9 @@ export function createNewUser(user?: User): User {
     offers: []
   };
 }
+
+export function nextStudyId(user: User): number {
+  const lastStudy = user.studies[user.studies.length - 1];
+
+  return lastStudy.uid + 1;
+}

@@ -246,11 +246,9 @@
       <div *ngIf="showNewVocationalStudyForm">
         <form [formGroup]="newVocationalStudyForm">
           <!-- Level -->
-          <div>
+          <div formGroupName="level">
             <label>Nivel:
-              <select formControlName="level">
-                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
-              </select>
+              <input type="text" formControlName="name" [readOnly]="true">
             </label>
           </div>
           <!-- Institution -->
@@ -312,11 +310,9 @@
       <div *ngIf="showNewCollegeStudyForm">
         <form [formGroup]="newCollegeStudyForm">
           <!-- Level -->
-          <div>
+          <div formGroupName="level">
             <label>Nivel:
-              <select formControlName="level">
-                <option *ngFor="let level2 of levels" [ngValue]="level2">{{level2.name}}</option>
-              </select>
+              <input type="text" formControlName="name" [readOnly]="true">
             </label>
           </div>
           <!-- Title -->
