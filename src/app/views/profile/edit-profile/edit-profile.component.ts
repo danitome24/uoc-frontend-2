@@ -248,6 +248,13 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  public submitEditLanguage() {
+    if (this.editLanguageForm.valid) {
+      this.showEditLanguageForm = false;
+      this.userService.updateLanguage(this.user, this.editLanguageForm.value);
+    }
+  }
+
   // Actions
   public removeStudy(uid: number) {
     this.userService.removeStudyFromUser(this.user, uid)

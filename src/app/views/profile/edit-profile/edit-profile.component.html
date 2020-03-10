@@ -384,6 +384,11 @@
           <div>
             <label>Fecha: <input formControlName="date" type="text"></label>
           </div>
+          <!-- Buttons -->
+          <div>
+            <button (click)="submitEditLanguage()">Guardar cambios</button>
+            <button (click)="this.showEditLanguageForm = false;">Cancelar</button>
+          </div>
         </form>
       </div>
     </div>

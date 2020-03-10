@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { filter, flatMap } from 'rxjs/operators';
 import { AppSettings } from '../../app.settings';
+import { Language } from '../../models/language.model';
 
 @Injectable()
 export class UserApiService {
@@ -43,6 +44,13 @@ export class UserApiService {
   }
 
   updateUser(user: User) {
+    return this.http.put(AppSettings.API_ENDPOINT_USER, user);
+  }
+
+  updateLanguage(user: User, language: Language) {
+    const index = user.languages.findIndex(langRow => langRow.uid === language.uid);
+    user.languages.splice(index, 1, language);
+
     return this.http.put(AppSettings.API_ENDPOINT_USER, user);
   }
 }
