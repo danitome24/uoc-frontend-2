@@ -62,6 +62,13 @@ export class EditProfileComponent implements OnInit {
     { uid: 5, name: 'C1' },
     { uid: 6, name: 'C2' }
   ];
+  public allLanguages = [
+    { uid: 1, name: 'Inglés' },
+    { uid: 2, name: 'Francés' },
+    { uid: 3, name: 'Alemán' },
+    { uid: 4, name: 'Italiano' },
+    { uid: 5, name: 'Español' }
+  ];
   private nameValidators = [
     Validators.minLength(3),
     Validators.maxLength(55),
@@ -207,14 +214,8 @@ export class EditProfileComponent implements OnInit {
   private createEditLanguageForm(language: Language) {
     this.editLanguageForm = this.fb.group({
       uid: [language.uid],
-      level: this.fb.group({
-        uid: [language.level.uid],
-        name: [language.level.name]
-      }),
-      name: this.fb.group({
-        uid: [language.name.uid],
-        name: [language.name.name]
-      }),
+      level: [language.level],
+      name: [language.name],
       date: [language.date]
     });
   }

@@ -384,8 +384,14 @@
             </label>
           </div>
           <!-- Name -->
-          <div formGroupName="name">
-            <label>Idioma: <input formControlName="name"></label>
+          <div>
+            <label>Idioma:
+              <select formControlName="name" [compareWith]="sameUuid">
+                <option *ngFor="let languageName of allLanguages" [ngValue]="languageName">
+                  {{languageName.name}}
+                </option>
+              </select>
+            </label>
           </div>
           <!-- Date -->
           <div>
