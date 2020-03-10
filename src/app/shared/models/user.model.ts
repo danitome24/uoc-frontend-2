@@ -74,3 +74,9 @@ export function nextStudyId(user: User): number {
 
   return lastStudy.uid + 1;
 }
+
+export function nextLanguageId(user: User): number {
+  const lastLanguage = user.languages[user.languages.length - 1];
+
+  return lastLanguage.uid + 1;
+}

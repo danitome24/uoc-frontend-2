@@ -54,6 +54,14 @@ export class EditProfileComponent implements OnInit {
     { uid: 1, name: 'Ciclo Formativo Grado Medio' },
     { uid: 3, name: 'Ciclo Formativo Grado Superior' }
   ];
+  public allLanguageLevels = [
+    { uid: 1, name: 'A1' },
+    { uid: 2, name: 'A2' },
+    { uid: 3, name: 'B1' },
+    { uid: 4, name: 'B2' },
+    { uid: 5, name: 'C1' },
+    { uid: 6, name: 'C2' }
+  ];
   private nameValidators = [
     Validators.minLength(3),
     Validators.maxLength(55),
@@ -69,6 +77,7 @@ export class EditProfileComponent implements OnInit {
   public showNewVocationalStudyForm = false;
   public showNewCollegeStudyForm = false;
   public showEditLanguageForm = false;
+  public showNewLanguageForm = false;
 
   constructor(private activedRoute: ActivatedRoute,
               private userService: UserApiService,

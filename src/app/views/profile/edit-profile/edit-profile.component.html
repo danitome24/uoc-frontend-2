@@ -370,11 +370,18 @@
         </tr>
         </tbody>
       </table>
+      <!-- Edit Language -->
       <div *ngIf="showEditLanguageForm">
         <form [formGroup]="editLanguageForm">
           <!-- Level -->
-          <div formGroupName="level">
-            <label>Nivel: <input formControlName="name"></label>
+          <div>
+            <label>Nivel:
+              <select formControlName="level" [compareWith]="sameUuid">
+                <option *ngFor="let languageLevel of allLanguageLevels" [ngValue]="languageLevel">
+                  {{languageLevel.name}}
+                </option>
+              </select>
+            </label>
           </div>
           <!-- Name -->
           <div formGroupName="name">
