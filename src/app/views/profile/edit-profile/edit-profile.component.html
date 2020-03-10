@@ -346,6 +346,48 @@
       <button (click)="showCollegeForm()">Nuevo Grado</button>
     </div>
 
+    <!-- Languages -->
+    <div class="row">
+      <table>
+        <caption>Idiomas</caption>
+        <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Idioma</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let language of user.languages">
+          <td>{{language.level.name}}</td>
+          <td>{{language.name.name}}</td>
+          <td>{{language.date}}</td>
+          <td>
+            <button (click)="removeLanguage(language.uid)">Borrar</button>
+            <button (click)="editLanguage(language)">Editar</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="showEditLanguageForm">
+        <form [formGroup]="editLanguageForm">
+          <!-- Level -->
+          <div formGroupName="level">
+            <label>Nivel: <input formControlName="name"></label>
+          </div>
+          <!-- Name -->
+          <div formGroupName="name">
+            <label>Idioma: <input formControlName="name"></label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha: <input formControlName="date" type="text"></label>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <button (click)="submitEditUser()">Guardar</button>
     <button routerLink="/admin/profile/{{this.user.id}}">Torna al perfil</button>
   </form>

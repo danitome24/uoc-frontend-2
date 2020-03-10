@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile.service';
 import { UserApiService } from '../../../shared/services/backend-api/user-api.service';
 import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.model';
+import { Language } from '../../../shared/models/language.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
   public newCollegeStudyForm: FormGroup = null;
   public showEditVocationalStudyForm = false;
   public editVocationalStudyForm: FormGroup = null;
+  public editLanguageForm: FormGroup = null;
   public nieTypes = [
     { uid: 0, name: 'Otro' },
     { uid: 1, name: 'NIF' },
@@ -66,6 +68,7 @@ export class EditProfileComponent implements OnInit {
   ];
   public showNewVocationalStudyForm = false;
   public showNewCollegeStudyForm = false;
+  public showEditLanguageForm = false;
 
   constructor(private activedRoute: ActivatedRoute,
               private userService: UserApiService,
@@ -192,6 +195,21 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  private createEditLanguageForm(language: Language) {
+    this.editLanguageForm = this.fb.group({
+      uid: [language.uid],
+      level: this.fb.group({
+        uid: [language.level.uid],
+        name: [language.level.name]
+      }),
+      name: this.fb.group({
+        uid: [language.name.uid],
+        name: [language.name.name]
+      }),
+      date: [language.date]
+    });
+  }
+
   // Submit forms
   public submitEditUser() {
     if (this.editProfileForm.valid) {
@@ -244,6 +262,16 @@ export class EditProfileComponent implements OnInit {
     } else if (study.level.uid === 1) {
       this.createEditVocationalStudyForm(study);
     }
+  }
+
+  public removeLanguage(uid: number) {
+    this.user.languages = this.user.languages.filter(language => language.uid !== uid);
+    this.userService.updateUser(this.user);
+  }
+
+  public editLanguage(language: Language) {
+    this.showEditLanguageForm = true;
+    this.createEditLanguageForm(language);
   }
 
   // "Form state"
