@@ -29,6 +29,7 @@ export class AppSettings {
   public static readonly API_ENDPOINT_AUTH = AppSettings.API_ENDPOINT + 'auth/';
   public static readonly API_ENDPOINT_AUTH_LOCAL =
     AppSettings.API_ENDPOINT + 'auth/local/';
+  public static readonly API_ENDPOINT_OFFERS = AppSettings.API_ENDPOINT + 'offers';
 
   public static readonly APP_QUILL_EDITOR_CONFIGURATION = {
     toolbar: [

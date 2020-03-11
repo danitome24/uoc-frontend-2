@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from './services/notifications.service';
 import { UserApiService } from './services/backend-api/user-api.service';
 import { UserResolver } from './resolvers/user.resolver';
+import { OffersApiService } from './services/backend-api/offers-api.service';
 /* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
 /* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
 
@@ -33,7 +34,8 @@ export const CORE_SERVICES: Provider[] = [
   ProfileService,
   NotificationsService,
   UserApiService,
-  UserResolver,
+  OffersApiService,
+  UserResolver
   /* {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,
@@ -83,7 +85,7 @@ export class CoreModule {
   constructor(
     @Optional()
     @SkipSelf()
-    parentModule: CoreModule
+      parentModule: CoreModule
   ) {
     if (parentModule) {
       throw new Error(

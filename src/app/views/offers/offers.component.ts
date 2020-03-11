@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OffersApiService } from '../../shared/services/backend-api/offers-api.service';
+import { Offer } from '../../shared/models/offer.model';
 
 @Component({
   selector: 'app-offers',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit {
+  public offers: Offer[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private offersApi: OffersApiService) {
   }
 
+  ngOnInit() {
+    this.offersApi.getOffers()
+      .subscribe(offers => {
+        this.offers = offers;
+      });
+  }
 }
