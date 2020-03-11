@@ -5,8 +5,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UserResolver } from '../../shared/resolvers/user.resolver';
 
 const routes: Routes = [
-  { path: ':id', component: ShowProfileComponent, resolve: { user: UserResolver } },
-  { path: ':id/edit', component: EditProfileComponent, resolve: { user: UserResolver } }
+  { path: '', component: ShowProfileComponent, resolve: { user: UserResolver } },
+  { path: 'edit', component: EditProfileComponent, resolve: { user: UserResolver } }
 ];
 
 @NgModule({

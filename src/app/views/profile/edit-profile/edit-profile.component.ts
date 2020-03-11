@@ -231,7 +231,7 @@ export class EditProfileComponent implements OnInit {
         .subscribe(data => {
           this.editProfileForm.patchValue(updatedProfile);
         });
-      this.router.navigate(['admin', 'profile', this.user.id]);
+      this.router.navigate(['admin', 'profile']);
     }
   }
 
@@ -265,6 +265,13 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  public submitEditCollege() {
+    if (this.editCollegeStudyForm.valid) {
+      this.showEditCollegeStudyForm = false;
+      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
+    }
+  }
+
   // Actions
   public removeStudy(uid: number) {
     this.userService.removeStudyFromUser(this.user, uid)
@@ -295,13 +302,6 @@ export class EditProfileComponent implements OnInit {
   public showVocationalForm() {
     this.showNewVocationalStudyForm = true;
     this.createNewVocationalForm();
-  }
-
-  public submitEditCollege() {
-    if (this.editCollegeStudyForm.valid) {
-      this.showEditCollegeStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
-    }
   }
 
   public showCollegeForm() {

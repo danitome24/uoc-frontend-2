@@ -3,17 +3,19 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserApiService } from '../services/backend-api/user-api.service';
+import { UserStoreService } from '../services/user-store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserResolver implements Resolve<User> {
 
-  constructor(private userApi: UserApiService) {
+  constructor(private userApi: UserApiService, private userStore: UserStoreService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Promise<User> | User {
-    const userId = +route.paramMap.get('id');
+    const userId: number = Number(this.userStore.token);
+console.log(userId);
     return this.userApi.getUserById(userId);
   }
 }

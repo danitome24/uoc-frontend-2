@@ -63,7 +63,7 @@ export class FakeBackendService implements InMemoryDbService {
           {
             uid: 3,
             level: { uid: 2, name: 'Título universitario' },
-            title: 'Graduado en Ingenieria Informática',
+            title: 'Informática y comunicaciones',
             certificate: true,
             date: '30/06/2007',
             bilingue: true,
@@ -142,7 +142,7 @@ export class FakeBackendService implements InMemoryDbService {
         province: { uid: 1, name: 'Málaga' },
         municipe: { uid: 7, name: 'Estepona' },
         date: '21/09/2006',
-        category: { uid: 2, name: 'Informática y Comunicaciones' },
+        category: { uid: 2, name: 'Informática y comunicaciones' },
         title: [
           { uid: 1, name: 'Desarrollo Aplicaciones Web' },
           { uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }
@@ -179,7 +179,7 @@ export class FakeBackendService implements InMemoryDbService {
         province: { uid: 5, name: 'Granada' },
         municipe: { uid: 9, name: 'Motril' },
         date: '11/07/2016',
-        category: { uid: 2, name: 'Informática y Comunicaciones' },
+        category: { uid: 2, name: 'Informática y comunicaciones' },
         title: [{ uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }]
       },
       {
