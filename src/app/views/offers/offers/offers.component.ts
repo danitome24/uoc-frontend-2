@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { OffersApiService } from '../../shared/services/backend-api/offers-api.service';
-import { Offer } from '../../shared/models/offer.model';
-import { UserStoreService } from '../../shared/services/user-store';
-import { User } from '../../shared/models/user.model';
+import { OffersApiService } from '../../../shared/services/backend-api/offers-api.service';
+import { Offer } from '../../../shared/models/offer.model';
+import { UserStoreService } from '../../../shared/services/user-store';
+import { User } from '../../../shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

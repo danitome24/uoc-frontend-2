@@ -19,6 +19,7 @@ import { NotificationsService } from './services/notifications.service';
 import { UserApiService } from './services/backend-api/user-api.service';
 import { UserResolver } from './resolvers/user.resolver';
 import { OffersApiService } from './services/backend-api/offers-api.service';
+import { OfferResolver } from './resolvers/offer.resolver';
 /* import { JWTInterceptor } from './interceptors/jwt.interceptor'; */
 /* import { JwtExpiredInterceptor } from './interceptors/jwt-expired.interceptor'; */
 
@@ -35,7 +36,8 @@ export const CORE_SERVICES: Provider[] = [
   NotificationsService,
   UserApiService,
   OffersApiService,
-  UserResolver
+  UserResolver,
+  OfferResolver
   /* {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,

@@ -10,7 +10,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let offer of offers">
+  <tr *ngFor="let offer of offers" [routerLink]="[offer.id, 'detail']">
     <td>{{offer.job.name}}</td>
     <td>{{offer.company.name}}</td>
     <td>{{offer.category.name}}</td>
