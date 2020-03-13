@@ -5,6 +5,7 @@ import { UserResolver } from '../../shared/resolvers/user.resolver';
 import { OffersDetailsComponent } from './offers-detail/offers-details.component';
 import { OfferResolver } from '../../shared/resolvers/offer.resolver';
 import { MyJobComponent } from './my-job/my-job.component';
+import { MyJobDetailComponent } from './my-job-detail/my-job-detail.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
     path: 'my-job',
     component: MyJobComponent,
     resolve: { user: UserResolver }
+  },
+  {
+    path: 'my-job/:id/detail',
+    component: MyJobDetailComponent,
+    resolve: { offer: OfferResolver, user: UserResolver }
   }
 ];
 

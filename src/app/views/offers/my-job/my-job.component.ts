@@ -16,8 +16,6 @@ export class MyJobComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(((user: { user: User }) => {
       this.user = user.user;
-      console.log(user);
     }));
   }
-
 }
