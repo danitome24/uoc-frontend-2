@@ -25,12 +25,7 @@ export class OffersDetailsComponent implements OnInit {
 
   public registerToOffer(offer: Offer): void {
     this.user.offers.push(offer);
-    this.user.phone = '888888';
     this.userApi.updateUser(this.user).subscribe(user => console.log(user));
-    this.userApi.getUserById(1).subscribe(user => {
-      console.log('asdasdasd');
-      console.log(user);
-    });
     this.route.navigate(['admin', 'offers']);
   }
 }
