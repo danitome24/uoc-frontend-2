@@ -8,11 +8,11 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeBackendService } from './shared/inmemory-db/inmemory-db.service';
 import { UserApiService } from './shared/services/backend-api/user-api.service';
 import { DashboardRoutingModule } from './views/dashboard/dashboard-routing.module';
-import { ProfileRoutingModule } from './views/profile/profile-routing.module';
 import { LogoutComponent } from './views/logout/logout.component';
 import { CommonModule } from '@angular/common';
 import { SigninModule } from './views/signin/signin.module';
-import { OffersRoutingModule } from './views/offers/offers-routing.module';
+import { OffersModule } from './views/offers/offers.module';
+import { ProfileModule } from './views/profile/profile.module';
 
 @NgModule({
   imports: [
@@ -22,8 +22,8 @@ import { OffersRoutingModule } from './views/offers/offers-routing.module';
     InMemoryWebApiModule.forRoot(FakeBackendService),
     SigninModule,
     DashboardRoutingModule,
-    ProfileRoutingModule,
-    OffersRoutingModule,
+    ProfileModule,
+    OffersModule,
     CommonModule
   ],
   declarations: [AppComponent, LogoutComponent],

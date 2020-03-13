@@ -15,11 +15,12 @@ const routes: Routes = [
   {
     path: 'detail',
     component: OffersDetailsComponent,
-    resolve: { offer: OfferResolver }
+    resolve: { offer: OfferResolver, user: UserResolver }
   },
   {
     path: 'my-job',
-    component: MyJobComponent
+    component: MyJobComponent,
+    resolve: { user: UserResolver }
   }
 ];
 

@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../models/user.model';
-import { Observable } from 'rxjs';
-import { filter, flatMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, filter, flatMap, map, tap } from 'rxjs/operators';
 import { AppSettings } from '../../app.settings';
 import { Language } from '../../models/language.model';
 
+
 @Injectable()
 export class UserApiService {
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
+  httpOptions = {
+    headers: this.headers
+  };
 
   constructor(private http: HttpClient) {
   }
@@ -24,9 +30,8 @@ export class UserApiService {
   }
 
   getUserById(userId: number): Observable<User> {
-    return this.http.get<User[]>(AppSettings.API_ENDPOINT_USER).pipe(
-      flatMap((response) => response),
-      filter(user => user.id === userId)
+    return this.http.get<User>(AppSettings.API_ENDPOINT_USER + '/' + userId).pipe(
+      tap(_ => console.log(`fetched user id=${userId}`))
     );
   }
 
@@ -43,8 +48,15 @@ export class UserApiService {
     return this.http.put(AppSettings.API_ENDPOINT_USER, user);
   }
 
-  updateUser(user: User) {
-    return this.http.put(AppSettings.API_ENDPOINT_USER, user);
+  public updateUser(user: User): Observable<any> {
+    return this.http.put(AppSettings.API_ENDPOINT_USER, user, this.httpOptions).pipe(
+      map(() => user),
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: any) {
+    return throwError(error);
   }
 
   updateLanguage(user: User, language: Language) {

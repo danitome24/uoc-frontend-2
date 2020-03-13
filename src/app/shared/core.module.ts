@@ -11,7 +11,7 @@ import { UserEffects } from './states/user/effects/user.effects';
 import { AppEffects } from './states/app/effects'; */
 /* import { UsersEffects } from './states/users/effects'; */
 /* import { UsersService } from '../views/users/shared/users.service'; */
-import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user.service';
 /* import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'; */
 } */
 
 export const CORE_SERVICES: Provider[] = [
-  ProfileService,
+  UserService,
   NotificationsService,
   UserApiService,
   OffersApiService,

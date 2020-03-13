@@ -10,7 +10,7 @@ import { MyJobComponent } from './my-job/my-job.component';
   declarations: [OffersComponent, OffersDetailsComponent, MyJobComponent],
   imports: [
     CommonModule,
-    OffersRoutingModule
+    OffersRoutingModule,
   ]
 })
 export class OffersModule { }

@@ -3,7 +3,7 @@ import { UserStoreService } from '../../../shared/services/user-store';
 import { nextStudyId, User } from '../../../shared/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfileService } from '../../../shared/services/profile.service';
+import { UserService } from '../../../shared/services/user.service';
 import { UserApiService } from '../../../shared/services/backend-api/user-api.service';
 import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.model';
 import { Language } from '../../../shared/models/language.model';
@@ -90,7 +90,7 @@ export class EditProfileComponent implements OnInit {
               private userService: UserApiService,
               private userStore: UserStoreService,
               private fb: FormBuilder,
-              private profileService: ProfileService,
+              private profileService: UserService,
               private router: Router) {
   }
 
@@ -227,7 +227,7 @@ export class EditProfileComponent implements OnInit {
         ...this.user,
         ...this.editProfileForm.value
       };
-      this.profileService.updateProfile(updatedProfile)
+      this.profileService.update(updatedProfile)
         .subscribe(data => {
           this.editProfileForm.patchValue(updatedProfile);
         });

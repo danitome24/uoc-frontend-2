@@ -1,1 +1,23 @@
-<p>my-job works!</p>
+<table>
+  <caption>Mis ofertas aplicadas</caption>
+  <thead>
+  <tr>
+    <th>Puesto</th>
+    <th>Empresa</th>
+    <th>Familia profesional</th>
+    <th>Fecha</th>
+    <th>Provincia</th>
+    <th>Estado</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let offer of user.offers">
+    <td>{{offer.job.name}}</td>
+    <td>{{offer.company.name}}</td>
+    <td>{{offer.category.name}}</td>
+    <td>{{offer.date}}</td>
+    <td>{{offer.province.name}}</td>
+    <td>En revisión</td>
+  </tr>
+  </tbody>
+</table>
