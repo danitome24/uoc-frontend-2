@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Offer } from '../../models/offer.model';
 import { AppSettings } from '../../app.settings';
 import { User } from '../../models/user.model';
-import { filter, map } from 'rxjs/operators';
+import { filter, flatMap, map } from 'rxjs/operators';
 import { VocationalStudy } from '../../models/study.model';
 
 @Injectable()
@@ -25,7 +25,8 @@ export class OffersApiService {
   }
 
   public getOffer(offerId: number): Observable<Offer> {
-    return this.http.get<Offer>(AppSettings.API_ENDPOINT_OFFERS).pipe(
+    return this.http.get<Offer[]>(AppSettings.API_ENDPOINT_OFFERS).pipe(
+      flatMap((response) => response),
       filter(offer => offer.id === offerId)
     );
   }

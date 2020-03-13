@@ -12,7 +12,7 @@ const routes: Routes = [
     resolve: { user: UserResolver }
   },
   {
-    path: ':offerid/detail',
+    path: 'detail',
     component: OffersDetailsComponent,
     resolve: { offer: OfferResolver }
   }

@@ -11,8 +11,8 @@ export class OfferResolver implements Resolve<Offer> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Offer> | Promise<Offer> | Offer {
-    const offerId = +route.paramMap.get('offerid');
+    const offerId = +route.paramMap.get('id');
 
-    return this.offersApi.getOffer(offerId);
+    return this.offersApi.getOffer(1);
   }
 }

@@ -1,4 +1,7 @@
 <div class="row">
+  <a [routerLink]="['..']">Volver al listado de ofertas</a>
+</div>
+<div class="row">
   <h2>Oferta de trabajo</h2>
   <div>
     Empresa: {{offer.company.name}}
@@ -7,7 +10,7 @@
     Puesto: {{offer.job.name}}
   </div>
   <div>
-    Descripción: {{offer.title}}
+    Descripción: {{offer.job.description}}
   </div>
   <div>
     Provincia: {{offer.province.name}}

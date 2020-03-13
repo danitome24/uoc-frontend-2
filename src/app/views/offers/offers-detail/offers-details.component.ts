@@ -15,7 +15,6 @@ export class OffersDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(((offer: { offer: Offer }) => {
-      console.log(offer.offer);
       this.offer = offer.offer;
     }));
   }

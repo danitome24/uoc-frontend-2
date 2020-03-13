@@ -12,7 +12,7 @@ import { ProfileRoutingModule } from './views/profile/profile-routing.module';
 import { LogoutComponent } from './views/logout/logout.component';
 import { CommonModule } from '@angular/common';
 import { SigninModule } from './views/signin/signin.module';
-import { OffersDetailsComponent } from './views/offers/offers-detail/offers-details.component';
+import { OffersRoutingModule } from './views/offers/offers-routing.module';
 
 @NgModule({
   imports: [
@@ -23,9 +23,10 @@ import { OffersDetailsComponent } from './views/offers/offers-detail/offers-deta
     SigninModule,
     DashboardRoutingModule,
     ProfileRoutingModule,
+    OffersRoutingModule,
     CommonModule
   ],
-  declarations: [AppComponent, LogoutComponent, OffersDetailsComponent],
+  declarations: [AppComponent, LogoutComponent],
   providers: [UserApiService],
   bootstrap: [AppComponent]
 })

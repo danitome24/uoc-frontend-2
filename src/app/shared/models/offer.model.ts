@@ -1,4 +1,4 @@
-import { Province, Municipe } from './user.model';
+import { Municipe, Province } from './user.model';
 import { Category, TitleStudy } from './study.model';
 
 export interface Offer {
@@ -13,10 +13,12 @@ export interface Offer {
 }
 
 export interface CompanyOffer {
-  uid: number;
+  // uid: number;
   name: string;
 }
+
 export interface JobOffer {
-  uid: number;
+  // uid: number;
   name: string;
+  description: string;
 }
