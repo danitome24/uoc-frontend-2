@@ -24,10 +24,8 @@ export class MyJobDetailComponent implements OnInit {
   }
 
   removeRegisteredToOffer(offer: Offer) {
-    console.log(offer);
     this.user.offers = this.user.offers.filter(offerRegistered => offer.id !== offerRegistered.id);
-    console.log(this.user);
-    this.userApi.updateUser(this.user);
+    this.userApi.updateUser(this.user).subscribe(user => console.log(user));
     this.router.navigate(['admin', 'offers', 'my-job']);
   }
 }
