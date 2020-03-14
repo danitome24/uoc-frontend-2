@@ -1,4 +1,8 @@
-<table>
+<div *ngIf="user.offers">
+  <p>No te has inscrito en ninguna oferta todavía :(</p>
+</div>
+
+<table *ngIf="!user.offers">
   <caption>Mis ofertas aplicadas</caption>
   <thead>
   <tr>
