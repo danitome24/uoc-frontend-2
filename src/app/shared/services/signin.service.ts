@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserApiService } from './backend-api/user-api.service';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from './user-store';
 
@@ -12,11 +12,19 @@ export class SigninService {
   constructor(private userApiService: UserApiService, private userStore: UserStoreService) {
   }
 
-  public signIn(email: string, password: string): Observable<User> {
+  public signIn(email: string, password: string): Observable<User | Observable<never>> {
     return this.userApiService.getUserByEmail(email)
-      .pipe(map((resp: any) => {
-        this.userStore.token = resp.id;
-        return resp;
-      }));
+      .pipe(
+        map((resp: User) => {
+            if (resp.password === password) {
+              this.userStore.token = resp.id.toString();
+              return resp;
+            } else {
+              console.log('DWP');
+              throw throwError(new Error('User password does not match'));
+            }
+          }
+        )
+      );
   }
 }

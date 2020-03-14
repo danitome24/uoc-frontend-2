@@ -30,7 +30,6 @@ export class SigninComponent implements OnInit {
     if (this.signInForm.valid) {
       this.signinService.signIn(this.signInForm.value.email, this.signInForm.value.password)
         .subscribe(user => {
-            console.log(user);
             this.router.navigateByUrl('/admin/dashboard');
           },
           error => {

@@ -56,6 +56,7 @@ export class UserApiService {
   }
 
   private handleError(error: any) {
+    console.log('errooorr');
     return throwError(error);
   }
 
