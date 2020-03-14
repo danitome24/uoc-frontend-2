@@ -249,7 +249,8 @@ export class EditProfileComponent implements OnInit {
   public submitEditStudy() {
     if (this.editVocationalStudyForm.valid) {
       this.showEditVocationalStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value);
+      this.userService.updateUserStudy(this.user, this.editVocationalStudyForm.value)
+        .subscribe(user => console.log('User updated'));
     }
   }
 
@@ -257,7 +258,7 @@ export class EditProfileComponent implements OnInit {
     if (this.newVocationalStudyForm.valid) {
       this.showNewVocationalStudyForm = false;
       this.user.studies.push(this.newVocationalStudyForm.value);
-      this.userService.updateUser(this.user);
+      this.userService.updateUser(this.user).subscribe(user => console.log('User updated'));
     }
   }
 
@@ -265,21 +266,24 @@ export class EditProfileComponent implements OnInit {
     if (this.newCollegeStudyForm.valid) {
       this.showNewCollegeStudyForm = false;
       this.user.studies.push(this.newCollegeStudyForm.value);
-      this.userService.updateUser(this.user);
+      this.userService.updateUser(this.user)
+        .subscribe(user => console.log('User updated'));
     }
   }
 
   public submitEditLanguage() {
     if (this.editLanguageForm.valid) {
       this.showEditLanguageForm = false;
-      this.userService.updateLanguage(this.user, this.editLanguageForm.value);
+      this.userService.updateLanguage(this.user, this.editLanguageForm.value)
+        .subscribe(user => console.log('User updated'));
     }
   }
 
   public submitEditCollege() {
     if (this.editCollegeStudyForm.valid) {
       this.showEditCollegeStudyForm = false;
-      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
+      this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value)
+        .subscribe(user => console.log('User updated'));
     }
   }
 
@@ -289,7 +293,8 @@ export class EditProfileComponent implements OnInit {
       this.user.languages.push(
         this.newLanguageForm.value
       );
-      this.userService.updateUser(this.user);
+      this.userService.updateUser(this.user)
+        .subscribe(user => console.log('User updated'));
     }
   }
 
