@@ -404,6 +404,43 @@
           </div>
         </form>
       </div>
+      <!-- New Language -->
+      <div *ngIf="showNewLanguageForm">
+        <form [formGroup]="newLanguageForm">
+          <!-- Level -->
+          <div>
+            <label>Nivel:
+              <select formControlName="level">
+                <option *ngFor="let languageLevel of allLanguageLevels" [ngValue]="languageLevel">
+                  {{languageLevel.name}}
+                </option>
+              </select>
+            </label>
+          </div>
+          <!-- Name -->
+          <div>
+            <label>Idioma:
+              <select formControlName="name">
+                <option *ngFor="let languageName of allLanguages" [ngValue]="languageName">
+                  {{languageName.name}}
+                </option>
+              </select>
+            </label>
+          </div>
+          <!-- Date -->
+          <div>
+            <label>Fecha: <input formControlName="date" type="text"></label>
+          </div>
+          <!-- Buttons -->
+          <div>
+            <button (click)="submitNewLanguage()">Guardar nuevo idioma</button>
+            <button (click)="this.showNewLanguageForm = false;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <button (click)="this.createNewLanguageForm()">Nuevo idioma</button>
+      </div>
     </div>
 
     <button (click)="submitEditUser()">Guardar</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../../shared/services/user-store';
-import { nextStudyId, User } from '../../../shared/models/user.model';
+import { nextLanguageId, nextStudyId, User } from '../../../shared/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
@@ -23,6 +23,7 @@ export class EditProfileComponent implements OnInit {
   public showEditVocationalStudyForm = false;
   public editVocationalStudyForm: FormGroup = null;
   public editLanguageForm: FormGroup = null;
+  public newLanguageForm: FormGroup = null;
   public nieTypes = [
     { uid: 0, name: 'Otro' },
     { uid: 1, name: 'NIF' },
@@ -220,6 +221,16 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  public createNewLanguageForm() {
+    this.showNewLanguageForm = true;
+    this.newLanguageForm = this.fb.group({
+      uid: [nextLanguageId(this.user)],
+      level: [],
+      name: [],
+      date: []
+    });
+  }
+
   // Submit forms
   public submitEditUser() {
     if (this.editProfileForm.valid) {
@@ -269,6 +280,16 @@ export class EditProfileComponent implements OnInit {
     if (this.editCollegeStudyForm.valid) {
       this.showEditCollegeStudyForm = false;
       this.userService.updateUserStudy(this.user, this.editCollegeStudyForm.value);
+    }
+  }
+
+  public submitNewLanguage() {
+    if (this.newLanguageForm.valid) {
+      this.showNewLanguageForm = false;
+      this.user.languages.push(
+        this.newLanguageForm.value
+      );
+      this.userService.updateUser(this.user);
     }
   }
 
