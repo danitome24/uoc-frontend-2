@@ -7,7 +7,6 @@ import { UserStoreService } from './user-store';
 
 @Injectable()
 export class SigninService {
-  private loggedIn = false;
 
   constructor(private userApiService: UserApiService, private userStore: UserStoreService) {
   }

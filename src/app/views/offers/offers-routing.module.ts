@@ -6,27 +6,32 @@ import { OffersDetailsComponent } from './offers-detail/offers-details.component
 import { OfferResolver } from '../../shared/resolvers/offer.resolver';
 import { MyJobComponent } from './my-job/my-job.component';
 import { MyJobDetailComponent } from './my-job-detail/my-job-detail.component';
+import { AuthGuard } from '../../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: OffersComponent,
-    resolve: { user: UserResolver }
+    resolve: { user: UserResolver },
+    canActivate: [AuthGuard]
   },
   {
     path: 'detail',
     component: OffersDetailsComponent,
-    resolve: { offer: OfferResolver, user: UserResolver }
+    resolve: { offer: OfferResolver, user: UserResolver },
+    canActivate: [AuthGuard]
   },
   {
     path: 'my-job',
     component: MyJobComponent,
-    resolve: { user: UserResolver }
+    resolve: { user: UserResolver },
+    canActivate: [AuthGuard]
   },
   {
     path: 'my-job/:id/detail',
     component: MyJobDetailComponent,
-    resolve: { offer: OfferResolver, user: UserResolver }
+    resolve: { offer: OfferResolver, user: UserResolver },
+    canActivate: [AuthGuard]
   }
 ];
 
