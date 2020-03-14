@@ -18,10 +18,6 @@ export class UserApiService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(AppSettings.API_ENDPOINT_USER);
-  }
-
   getUserByEmail(email: string): Observable<User> {
     return this.http.get<User[]>(AppSettings.API_ENDPOINT_USER).pipe(
       flatMap((response) => response),

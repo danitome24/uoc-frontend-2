@@ -5,7 +5,7 @@
   <div>
     <div class="profile-column">
       <img class="profile-image" src="assets/profile-user.png" alt="User profile picture">
-      Nombre y apellidos
+      {{user.name}}, {{user.surname}}
     </div>
     <div class="profile-column">
       <p>Email: {{user.email}}</p>
@@ -16,13 +16,13 @@
     </div>
     <div class="profile-column">
       <label for="about-me">Acerca de mi</label>
-      <textarea id="about-me">
+      <textarea id="about-me" readonly>
         {{user.aboutMe}}
       </textarea>
     </div>
     <div class="profile-column">
       <label for="other-competencies">Otras competencias</label>
-      <textarea id="other-competencies">
+      <textarea id="other-competencies" [readOnly]="true">
         {{user.otherCompetences}}
       </textarea>
     </div>
