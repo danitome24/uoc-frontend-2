@@ -1,8 +1,8 @@
-<div *ngIf="user.offers">
+<div *ngIf="user.offers.length == 0">
   <p>No te has inscrito en ninguna oferta todavía :(</p>
 </div>
 
-<table *ngIf="!user.offers">
+<table *ngIf="user.offers.length > 0">
   <caption>Mis ofertas aplicadas</caption>
   <thead>
   <tr>
