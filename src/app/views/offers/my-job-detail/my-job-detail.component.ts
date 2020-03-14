@@ -10,8 +10,8 @@ import { UserApiService } from '../../../shared/services/backend-api/user-api.se
   styleUrls: ['./my-job-detail.component.scss']
 })
 export class MyJobDetailComponent implements OnInit {
-  private user: User;
-  private offer: Offer;
+  public user: User;
+  public offer: Offer;
 
   constructor(private activatedRoute: ActivatedRoute, private userApi: UserApiService, private router: Router) {
   }
