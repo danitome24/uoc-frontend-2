@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../../shared/services/user-store';
-import { nextLanguageId, nextStudyId, User } from '../../../shared/models/user.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocumentType, nextLanguageId, nextStudyId, User } from '../../../shared/models/user.model';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserApiService } from '../../../shared/services/backend-api/user-api.service';
 import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.model';
 import { Language } from '../../../shared/models/language.model';
+import { nifValidator, passportValidator } from '../../../shared/validators/document/nif.validator';
 
 @Component({
   selector: 'app-edit-profile',
@@ -126,6 +127,11 @@ export class EditProfileComponent implements OnInit {
     return control.dirty && (control.hasError('pattern'));
   }
 
+  public isNifInvalid(): ValidationErrors {
+    const control = this.editProfileForm.get('documentNumber');
+    return control?.dirty && control.errors;
+  }
+
   // Forms creation
   private createEditUserForm() {
     this.editProfileForm = this.fb.group({
@@ -145,6 +151,14 @@ export class EditProfileComponent implements OnInit {
       license: [this.user.license],
       aboutMe: [this.user.aboutMe],
       otherCompetencies: [this.user.otherCompetences]
+    });
+    this.editProfileForm.get('documentType').valueChanges.subscribe((documentType: DocumentType) => {
+      if (documentType.uid === 1) {
+        this.editProfileForm.get('documentNumber').setValidators(nifValidator);
+      } else if (documentType.uid === 2) {
+        this.editProfileForm.get('documentNumber').setValidators(passportValidator);
+      }
+      this.editProfileForm.updateValueAndValidity();
     });
   }
 

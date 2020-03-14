@@ -60,6 +60,9 @@
         </div>
         <!-- Document number -->
         <label>Número de documento: <input type="text" formControlName="documentNumber"></label>
+        <div *ngIf="isNifInvalid()">
+          <p class="error">Nif Inválido</p>
+        </div>
         <!-- Address -->
         <div formGroupName="address">
           <!-- Address -->
