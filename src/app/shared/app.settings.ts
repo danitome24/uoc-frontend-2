@@ -65,7 +65,6 @@ export class AppSettings {
     { uid: 4, name: 'Italiano' },
     { uid: 5, name: 'Español' }
   ];
-  public static readonly APP_DEFAULT_MOMENT_LOCALE = 'es';
   public static readonly GUESS_ROL = {
     value: 'guess',
     text: 'settings.rol.GUESS'
@@ -88,10 +87,11 @@ export class AppSettings {
     AppSettings.COMPANY_ROL,
     AppSettings.ADMINISTRATOR_ROL
   ];
-  public static readonly APP_LANGUAGES = [
-    { id: 1, name: 'Castellano' },
-    { id: 2, name: 'Inglés' },
-    { id: 3, name: 'Francés' }
+  public static readonly APP_DEFAULT_MOMENT_LOCALE = 'es';
+  public static readonly APP_LOCALES = [
+    { id: 1, name: 'Castellano', locale: 'es' },
+    { id: 2, name: 'Inglés', locale: 'en' },
+    { id: 3, name: 'Francés', locale: 'fr' }
   ];
 
   public static readonly USER_STATUS_PENDING = {

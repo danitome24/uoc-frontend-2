@@ -7,8 +7,6 @@ import { UserStoreService } from '../services/user-store';
   providedIn: 'root'
 })
 export class StudentRoleGuard implements CanActivate {
-  private roleStudent: string = 'student';
-
   constructor(private userStore: UserStoreService, private router: Router) {
   }
 

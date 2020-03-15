@@ -1,6 +1,8 @@
+import { AppSettings } from '../app.settings';
+
 export class Token {
-  private static studentRole = 'student';
-  private static companyRole = 'company';
+  private static studentRole = AppSettings.STUDENT_ROL.value;
+  private static companyRole = AppSettings.COMPANY_ROL.value;
   public userId: number;
   public roles: string[];
 

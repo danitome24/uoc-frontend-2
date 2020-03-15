@@ -14,6 +14,6 @@ export class ConfigurationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.availableAppLanguages = AppSettings.APP_LANGUAGES;
+    this.availableAppLanguages = AppSettings.APP_LOCALES;
   }
 }
