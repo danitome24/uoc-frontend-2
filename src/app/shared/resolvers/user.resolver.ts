@@ -14,8 +14,8 @@ export class UserResolver implements Resolve<User> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Promise<User> | User {
-    const userId: number = Number(this.userStore.token);
+    const token = this.userStore.token;
 
-    return this.userApi.getUserById(userId);
+    return this.userApi.getUserById(token.userId);
   }
 }
