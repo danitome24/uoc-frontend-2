@@ -18,6 +18,15 @@
   <div>
     Municipio: {{offer.municipe.name}}
   </div>
+  <div>
+    Família profesional: {{offer.category.name}}
+  </div>
+  <div>
+    Títulos requeridos:
+    <ul>
+      <li *ngFor="let title of offer.title">{{title.name}}</li>
+    </ul>
+  </div>
 </div>
 <div class="row">
   <button (click)="registerToOffer(offer)">Inscribirse</button>
