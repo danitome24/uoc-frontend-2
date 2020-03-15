@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Token } from '../models/token.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStoreService {
+  private tokenObject: Token = null;
 
-  private tokenString: string = null;
-
-  set token(token: string) {
-    localStorage.setItem('uoc-alumni', token);
+  set token(token: Token | null) {
+    if (token === null) {
+      return;
+    }
+    localStorage.setItem('uoc-alumni', token.toString());
   }
 
-  get token() {
-    this.tokenString = localStorage.getItem('uoc-alumni');
-
-    return this.tokenString;
+  get token(): Token {
+    this.tokenObject = JSON.parse(localStorage.getItem('uoc-alumni')) as Token;
+    return this.tokenObject;
   }
 
   public logout() {
-    this.token = '';
+    this.token = null;
     localStorage.clear();
   }
 

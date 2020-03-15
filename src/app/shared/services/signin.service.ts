@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from './user-store';
+import { Token } from '../models/token.model';
 
 @Injectable()
 export class SigninService {
@@ -16,10 +17,9 @@ export class SigninService {
       .pipe(
         map((resp: User) => {
             if (resp.password === password) {
-              this.userStore.token = resp.id.toString();
+              this.userStore.token = new Token(resp);
               return resp;
             } else {
-              console.log('DWP');
               throw throwError(new Error('User password does not match'));
             }
           }
