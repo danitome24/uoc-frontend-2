@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSettings } from '../../shared/app.settings';
 
 @Component({
   selector: 'app-configuration',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationComponent implements OnInit {
 
-  constructor() { }
+  public availableAppLanguages;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
+  ngOnInit(): void {
+    this.availableAppLanguages = AppSettings.APP_LANGUAGES;
+  }
 }
