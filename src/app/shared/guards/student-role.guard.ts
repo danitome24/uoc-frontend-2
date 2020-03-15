@@ -6,21 +6,20 @@ import { UserStoreService } from '../services/user-store';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleGuard implements CanActivate {
+export class StudentRoleGuard implements CanActivate {
+  private roleStudent: string = 'student';
+
   constructor(private userStore: UserStoreService, private router: Router) {
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.userStore.isLoggedIn()) {
+    if (this.userStore.token().hasStudentRole()) {
       return true;
     }
-
-    console.log('RoleGuard#canActivate not permissions to access page');
-    this.router.navigate(['signin']);
+    this.router.navigate(['admin', 'dashboard']);
 
     return false;
   }
-
 }

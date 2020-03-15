@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppConfirmService } from './services/app-confirm/app-confirm.service';
 import { AppComfirmComponent } from './services/app-confirm/app-confirm.component';
 import { AuthGuard } from './guards/auth.guard';
+import { StudentRoleGuard } from './guards/student-role.guard';
 /*
 import { TranslateModule } from '@ngx-translate/core';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'; */
@@ -21,7 +22,7 @@ const classesToInclude = [AppComfirmComponent];
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule],
 
-  providers: [AppConfirmService, AuthGuard],
+  providers: [AppConfirmService, AuthGuard, StudentRoleGuard],
   entryComponents: [AppComfirmComponent],
   declarations: classesToInclude,
   exports: classesToInclude

@@ -17,7 +17,7 @@ export class SigninService {
       .pipe(
         map((resp: User) => {
             if (resp.password === password) {
-              this.userStore.token = new Token(resp);
+              this.userStore.setToken(new Token(resp.id, resp.roles));
               return resp;
             } else {
               throw throwError(new Error('User password does not match'));

@@ -7,20 +7,20 @@ import { Token } from '../models/token.model';
 export class UserStoreService {
   private tokenObject: Token = null;
 
-  set token(token: Token | null) {
+  public setToken(token: Token | null) {
     if (token === null) {
       return;
     }
     localStorage.setItem('uoc-alumni', token.toString());
   }
 
-  get token(): Token {
+  public token(): Token {
     this.tokenObject = JSON.parse(localStorage.getItem('uoc-alumni')) as Token;
-    return this.tokenObject;
+    return new Token(this.tokenObject.userId, this.tokenObject.roles);
   }
 
   public logout() {
-    this.token = null;
+    this.setToken(null);
     localStorage.clear();
   }
 
