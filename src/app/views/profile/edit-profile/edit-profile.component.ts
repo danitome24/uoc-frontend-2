@@ -7,6 +7,7 @@ import { UserApiService } from '../../../shared/services/backend-api/user-api.se
 import { CollegeStudy, VocationalStudy } from '../../../shared/models/study.model';
 import { Language } from '../../../shared/models/language.model';
 import { nifValidator, passportValidator } from '../../../shared/validators/document/nif.validator';
+import { AppSettings } from '../../../shared/app.settings';
 
 @Component({
   selector: 'app-edit-profile',
@@ -29,15 +30,8 @@ export class EditProfileComponent implements OnInit {
     { uid: 1, name: 'NIF' },
     { uid: 2, name: 'Pasaporte' }
   ];
-  public provinces = [
-    { uid: 4, name: 'Cádiz' },
-    { uid: 1, name: 'Barcelona' },
-    { uid: 2, name: 'León' }
-  ];
-  public municipes = [
-    { uid: 1, name: 'Sabadell' },
-    { uid: 6, name: 'Chiclana de la Frontera' }
-  ];
+  public provinces = AppSettings.PROVINCES;
+  public municipes = AppSettings.MUNICIPES;
   public levels = [
     { uid: 1, name: 'Ciclo Formativo' },
     { uid: 2, name: 'Título universitario' },
@@ -55,21 +49,8 @@ export class EditProfileComponent implements OnInit {
     { uid: 1, name: 'Ciclo Formativo Grado Medio' },
     { uid: 3, name: 'Ciclo Formativo Grado Superior' }
   ];
-  public allLanguageLevels = [
-    { uid: 1, name: 'A1' },
-    { uid: 2, name: 'A2' },
-    { uid: 3, name: 'B1' },
-    { uid: 4, name: 'B2' },
-    { uid: 5, name: 'C1' },
-    { uid: 6, name: 'C2' }
-  ];
-  public allLanguages = [
-    { uid: 1, name: 'Inglés' },
-    { uid: 2, name: 'Francés' },
-    { uid: 3, name: 'Alemán' },
-    { uid: 4, name: 'Italiano' },
-    { uid: 5, name: 'Español' }
-  ];
+  public allLanguageLevels = AppSettings.STUDENT_LANGUAGE_LEVELS;
+  public allLanguages = AppSettings.STUDENT_LANGUAGES;
   private nameValidators = [
     Validators.minLength(3),
     Validators.maxLength(55),

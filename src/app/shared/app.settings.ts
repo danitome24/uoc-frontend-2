@@ -41,6 +41,30 @@ export class AppSettings {
     ]
   };
 
+  public static readonly PROVINCES = [
+    { uid: 4, name: 'Cádiz' },
+    { uid: 1, name: 'Barcelona' },
+    { uid: 2, name: 'León' }
+  ];
+  public static readonly MUNICIPES = [
+    { uid: 1, name: 'Sabadell' },
+    { uid: 6, name: 'Chiclana de la Frontera' }
+  ];
+  public static readonly STUDENT_LANGUAGE_LEVELS = [
+    { uid: 1, name: 'A1' },
+    { uid: 2, name: 'A2' },
+    { uid: 3, name: 'B1' },
+    { uid: 4, name: 'B2' },
+    { uid: 5, name: 'C1' },
+    { uid: 6, name: 'C2' }
+  ];
+  public static readonly STUDENT_LANGUAGES = [
+    { uid: 1, name: 'Inglés' },
+    { uid: 2, name: 'Francés' },
+    { uid: 3, name: 'Alemán' },
+    { uid: 4, name: 'Italiano' },
+    { uid: 5, name: 'Español' }
+  ];
   public static readonly APP_DEFAULT_MOMENT_LOCALE = 'es';
   public static readonly GUESS_ROL = {
     value: 'guess',
