@@ -63,12 +63,15 @@ export const rootRouterConfig: Routes = [
           import('./views/profile/profile.module').then(m => m.ProfileModule),
         data: { title: 'Material', breadcrumb: 'MATERIAL' }
       },
-
       {
         path: 'offers',
         loadChildren: () =>
           import('./views/offers/offers.module').then(m => m.OffersModule),
-        //data: { title: 'Offers', breadcrumb: 'Offers' }
+      },
+      {
+        path: 'configuration',
+        loadChildren: () =>
+          import('./views/configuration/configuration.module').then(m => m.ConfigurationModule),
       }
     ]
   },

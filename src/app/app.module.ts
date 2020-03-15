@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { SigninModule } from './views/signin/signin.module';
 import { OffersModule } from './views/offers/offers.module';
 import { ProfileModule } from './views/profile/profile.module';
+import { ConfigurationComponent } from './views/configuration/configuration.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { ProfileModule } from './views/profile/profile.module';
     OffersModule,
     CommonModule
   ],
-  declarations: [AppComponent, LogoutComponent],
+  declarations: [AppComponent, LogoutComponent, ConfigurationComponent],
   providers: [UserApiService],
   bootstrap: [AppComponent]
 })
