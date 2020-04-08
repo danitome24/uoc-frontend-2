@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileService } from '../../../../shared/services/profile.service';
+import { ProfileService } from '../../../shared/services/profile.service';
 import { MockData } from 'src/app/shared/mock-data';
 import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
 import {

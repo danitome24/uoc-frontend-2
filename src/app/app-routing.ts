@@ -32,7 +32,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'profile',
         loadChildren: () =>
-          import('./views/profile/profile.module').then(m => m.ProfileModule),
+          import('./profile/profile.module').then(m => m.ProfileModule),
         data: { title: 'Profile', breadcrumb: 'PROFILE' }
       },
       {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProfileService } from '../../../../shared/services/profile.service';
+import { ProfileService } from '../../../shared/services/profile.service';
 import { MockData } from 'src/app/shared/mock-data';
 import {
   Language,
