@@ -8,6 +8,7 @@ import { VocationalFormComponent } from './profile-student/study/vocational-form
 import { UniversityDegreeComponent } from './profile-student/study/university-degree-form/university-degree-form.component';
 import { ProfileLanguageComponent } from './profile-student/language/profile-language.component';
 import { ProfileAccountComponent } from './profile-student/account/profile-account.component';
+import {ConfigurationRoutingModule} from './configuration/configuration-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,4 +22,5 @@ import { ProfileAccountComponent } from './profile-student/account/profile-accou
   ],
   imports: [SharedModule, ProfileRoutingModule]
 })
-export class ProfileModule {}
+export class ProfileModule {
+}

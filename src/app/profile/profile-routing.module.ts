@@ -29,6 +29,11 @@ const routes: Routes = [
   {
     path: 'profile-student/language/:uid',
     component: ProfileLanguageComponent
+  },
+  {
+    path: 'config',
+    loadChildren: () =>
+        import('./configuration/configuration.module').then(m => m.ConfigurationModule),
   }
 ];
 

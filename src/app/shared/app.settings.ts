@@ -67,7 +67,11 @@ export class AppSettings {
     AppSettings.COMPANY_ROL,
     AppSettings.ADMINISTRATOR_ROL
   ];
-
+  public static readonly APP_LOCALES = [
+    { id: 1, name: 'Castellano', locale: 'es' },
+    { id: 2, name: 'Inglés', locale: 'en' },
+    { id: 3, name: 'Francés', locale: 'fr' }
+  ];
   public static readonly USER_STATUS_PENDING = {
     value: 'pending',
     text: 'settings.status.PENDING'
