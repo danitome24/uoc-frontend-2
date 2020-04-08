@@ -12,13 +12,13 @@ export const rootRouterConfig: Routes = [
   {
     path: 'signin',
     loadChildren: () =>
-      import('./views/signin/signin.module').then(m => m.SigninModule),
+      import('./login/auth/signin/signin.module').then(m => m.SigninModule),
     data: { title: 'Signin' }
   },
   {
     path: 'forgot-password',
     loadChildren: () =>
-      import('./views/forgot-password/forgot-password.module').then(
+      import('./login/auth/forgot-password/forgot-password.module').then(
         m => m.ForgotPasswordModule
       ),
     data: { title: 'Forgot Password' }
@@ -26,7 +26,7 @@ export const rootRouterConfig: Routes = [
   {
     path: 'signup',
     loadChildren: () =>
-      import('./views/signup/signup.module').then(m => m.SignupModule),
+      import('./login/auth/signup/signup.module').then(m => m.SignupModule),
     data: { title: 'Signup' }
   },
   {

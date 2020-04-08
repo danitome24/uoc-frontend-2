@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfileService } from 'src/app/shared/services/profile.service';
-import { SigninService } from '../signin/signin.service';
+import { SigninService } from '../../login/auth/signin/signin.service';
 
 @Component({
   selector: 'app-dashboard',
