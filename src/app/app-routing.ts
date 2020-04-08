@@ -47,7 +47,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'offers',
         loadChildren: () =>
-          import('./views/offers/offers.module').then(m => m.OffersModule),
+          import('./offers/offers.module').then(m => m.OffersModule),
         data: { title: 'Offers', breadcrumb: 'Offers' }
       }
     ]
