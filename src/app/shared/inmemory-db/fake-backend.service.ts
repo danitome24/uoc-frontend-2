@@ -114,6 +114,106 @@ export class FakeBackendService implements InMemoryDbService {
           }
         ]
      */
+      },
+      {
+        id: 2,
+        username: 'dtome',
+        name: 'Daniel',
+        surname: 'Tomé Fernández',
+        birthdate: '27/09/1993',
+        phone: '666666666',
+        phone2: '677777666',
+        email: 'dtome24@uoc.edu',
+        password: '1234',
+        roles: ['company'],
+        documentType: { uid: 1, name: 'NIF' },
+        documentNumber: '26808956H',
+        license: 'B2',
+        aboutMe: 'LOREM IPSUM',
+        otherCompetences: 'LOREM IPSUM',
+        address: {
+          street: 'Avenida principal',
+          province: { uid: 4, name: 'Cádiz' },
+          municipe: { uid: 6, name: 'Chiclana de la Frontera' }
+        },
+        avatar_hash: 'assets/img/perfil.png',
+        studies: [
+          {
+            uid: 1,
+            level: { uid: 1, name: 'Ciclo Formativo' },
+            category: { uid: 2, name: 'Informática y comunicaciones' },
+            institution: {
+              uid: 2,
+              name: 'IES Politécnico Jesús Marin'
+            },
+            title: {
+              uid: 2,
+              name: 'Administracion de sistemas informaticos y redes'
+            },
+            grade: {
+              uid: 3,
+              name: 'Ciclo Formativo de Grado Superior'
+            },
+            date: '30/06/2005',
+            dual: false,
+            bilingue: true,
+            certificate: true
+          },
+          {
+            uid: 2,
+            institution: {
+              uid: 2,
+              name: 'IES Politécnico Jesús Marin'
+            },
+            category: { uid: 2, name: 'Informática y comunicaciones' },
+            level: { uid: 1, name: 'Ciclo Formativo' },
+            title: {
+              uid: 2,
+              name: 'Administracion de sistemas informaticos y redes'
+            },
+            grade: { uid: 3, name: 'Ciclo Formativo de Grado Superior' },
+            date: '30/06/2007',
+            dual: true,
+            bilingue: false,
+            certificate: false
+          },
+          {
+            uid: 3,
+            level: { uid: 2, name: 'Título universitario' },
+            title: {
+              uid: 2,
+              name: 'Administracion de sistemas informaticos y redes'
+            },
+            certificate: true,
+            date: '30/06/2007',
+            bilingue: true,
+            name: 'Grado en Ingeniería Informática',
+            institution: 'Universidad Rovira i Virgili'
+          }
+        ],
+        experiencies: [
+          {
+            uid: 1,
+            company: 'Suma',
+            position: 'Junior Software Developer',
+            date: '30/12/2016-20/01/2019'
+          }
+        ],
+        languages: [
+          {
+            uid: 1,
+            level: { uid: 5, name: 'C1' },
+            name: { uid: 1, name: 'Inglés' },
+            date: '30/06/2005'
+          },
+          {
+            uid: 2,
+            level: { uid: 4, name: 'B2' },
+            name: { uid: 2, name: 'Francés' },
+            date: '30/06/1998'
+          }
+        ],
+        offers: []
       }
     ];
 
