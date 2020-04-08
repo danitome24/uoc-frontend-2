@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
-import { SigninService } from 'src/app/login/auth/signin/signin.service';
+import { SigninService } from 'src/app/auth/signin/signin.service';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../app.settings';
 import { OffersService } from '../../services/offers.service';

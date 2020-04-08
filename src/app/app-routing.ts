@@ -6,28 +6,14 @@ import { AuthGuard } from './shared/services/auth/auth.guard'; */
 export const rootRouterConfig: Routes = [
   {
     path: '',
-    redirectTo: 'signin',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
   {
-    path: 'signin',
+    path: 'auth',
     loadChildren: () =>
-      import('./login/auth/signin/signin.module').then(m => m.SigninModule),
-    data: { title: 'Signin' }
-  },
-  {
-    path: 'forgot-password',
-    loadChildren: () =>
-      import('./login/auth/forgot-password/forgot-password.module').then(
-        m => m.ForgotPasswordModule
-      ),
-    data: { title: 'Forgot Password' }
-  },
-  {
-    path: 'signup',
-    loadChildren: () =>
-      import('./login/auth/signup/signup.module').then(m => m.SignupModule),
-    data: { title: 'Signup' }
+      import('./auth/auth.module').then(m => m.AuthModule),
+    data: { title: 'Auth' }
   },
   {
     path: 'admin',
