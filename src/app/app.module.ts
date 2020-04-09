@@ -8,10 +8,12 @@ import {RouterModule} from '@angular/router';
 import {SharedModule} from './shared/shared.module';
 import {rootRouterConfig} from './app-routing';
 import {StoreModule} from '@ngrx/store';
-import {reducers, metaReducers} from './reducers';
+import * as fromRoot from './reducers/index';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {environment} from '../environments/environment';
+import {EffectsModule} from '@ngrx/effects';
+import {SigninModule} from './auth/signin/signin.module';
 
 @NgModule({
     imports: [
@@ -19,18 +21,19 @@ import {environment} from '../environments/environment';
         CoreModule,
         RouterModule.forRoot(rootRouterConfig, {useHash: false}),
         HttpClientModule,
+        SigninModule,
         HttpClientInMemoryWebApiModule.forRoot(FakeBackendService, {
             dataEncapsulation: false
         }),
-        StoreModule.forRoot(reducers, {
-            metaReducers,
+        StoreModule.forRoot(fromRoot.reducers, {
             runtimeChecks: {
                 strictStateImmutability: true,
                 strictActionImmutability: true,
             }
         }),
+        EffectsModule.forRoot(fromRoot.effects),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
-        StoreRouterConnectingModule.forRoot({stateKey: 'router'})
+        StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     ],
     declarations: [AppComponent],
     providers: [],
