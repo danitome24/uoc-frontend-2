@@ -1,7 +1,6 @@
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { Routes } from '@angular/router';
-/*import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
-import { AuthGuard } from './shared/services/auth/auth.guard'; */
+import {AuthGuard} from './shared/guards/auth.guard';
 
 export const rootRouterConfig: Routes = [
   {
@@ -18,7 +17,7 @@ export const rootRouterConfig: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    /* canActivate: [AuthGuard], */
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
