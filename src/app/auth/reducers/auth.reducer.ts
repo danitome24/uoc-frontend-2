@@ -10,7 +10,10 @@ export interface State {
 
 export const initialState: State = {
     user: null,
-    auth: {errorOnLogin: false},
+    auth: {
+        errorOnLogin: false,
+        loggedIn: false
+    },
 };
 
 export function reducer(state = initialState, action) {
@@ -24,7 +27,8 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 auth: {
-                    errorOnLogin: true
+                    errorOnLogin: true,
+                    loggedIn: false
                 }
             };
 
@@ -33,7 +37,8 @@ export function reducer(state = initialState, action) {
                 ...state,
                 user: action.user,
                 auth: {
-                    errorOnLogin: false
+                    errorOnLogin: false,
+                    loggedIn: true,
                 }
             };
         case LOGOUT:
@@ -52,4 +57,8 @@ export const selectAuthFeature = createFeatureSelector('auth');
 export const selectAuthErrorOnLogin = createSelector(
     selectAuthFeature,
     (state: State) => state.auth.errorOnLogin
+);
+export const selectAuthIsLoggedIn = createSelector(
+    selectAuthFeature,
+    (state: State) => state.auth.loggedIn
 );
