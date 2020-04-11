@@ -6,5 +6,6 @@
   </label>
 </div>
 <div class="row">
-  <label>Recibir notificaciones:<input type="checkbox"></label>
+  <label>Recibir notificaciones:
+    <input type="checkbox" (change)="updateNotifications($event)" [checked]="sendNotifications$ | async"></label>
 </div>
