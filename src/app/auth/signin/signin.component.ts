@@ -39,9 +39,8 @@ export class SigninComponent implements OnInit {
             email: this.loginForm.value.email,
             password: this.loginForm.value.password
         }));
-
-        if (this.store.select(fromAuth.selectAuthErrorOnLogin)) {
-            this.errorLogin = true;
-        }
+        this.store.select(fromAuth.selectAuthErrorOnLogin).subscribe((hasError) => {
+            this.errorLogin = hasError;
+        });
     }
 }
