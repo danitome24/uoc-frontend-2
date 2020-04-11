@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
-import { SigninService } from 'src/app/auth/signin/signin.service';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../app.settings';
 import { OffersService } from '../../services/offers.service';
+import {Store} from '@ngrx/store';
+import {actions as SignInActions} from '../../../auth/actions/auth.actions';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.template.html'
 })
 export class AdminLayoutComponent {
-  /*   constructor() {} */
-
   /* MOCK PURPOSES */
   constructor(
     private profileService: ProfileService,
     private offersService: OffersService,
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store
   ) {
     this.login({ email: 'carlos.caballero@gmail.com', password: '1234' }).then(
       user => {
@@ -38,5 +38,9 @@ export class AdminLayoutComponent {
     return users.find(
       (user: any) => user.email === email && user.password === password
     );
+  }
+
+  logout() {
+    this.store.dispatch(SignInActions.logout({}));
   }
 }

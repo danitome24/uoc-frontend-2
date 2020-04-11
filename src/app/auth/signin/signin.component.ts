@@ -43,15 +43,5 @@ export class SigninComponent implements OnInit {
         if (this.store.select(fromAuth.selectAuthErrorOnLogin)) {
             this.errorLogin = true;
         }
-
-        //this.router.navigate(['admin/dashboard']);
-        /*this.signinService.login({ ...this.loginForm.value }).then(user => {
-          if (!user) {
-            this.errorLogin = true;
-            return;
-          }
-          this.profileService.user = user;
-          this.router.navigate(['admin/dashboard']);
-        });*/
     }
 }

@@ -4,6 +4,7 @@ import {User} from '../../shared/models/user.model';
 export const SIGN_IN = '[SignIn Page] SignIn';
 export const SIGN_IN_FAILED = '[SignIn Page] SignInFailed';
 export const SIGN_IN_SUCCESS = '[SignIn Page] SignInSuccess';
+export const LOGOUT = '[Logout Page] Logout';
 
 export const actions = {
         signIn: createAction(
@@ -16,6 +17,10 @@ export const actions = {
         ),
         signInFailed: createAction(
             SIGN_IN_FAILED,
+            props<{}>()
+        ),
+        logout: createAction(
+            LOGOUT,
             props<{}>()
         )
     }
