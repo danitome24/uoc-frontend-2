@@ -14,6 +14,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {SigninModule} from './auth/signin/signin.module';
+import {metaReducers} from './reducers';
 
 @NgModule({
     imports: [
@@ -25,12 +26,16 @@ import {SigninModule} from './auth/signin/signin.module';
         HttpClientInMemoryWebApiModule.forRoot(FakeBackendService, {
             dataEncapsulation: false
         }),
-        StoreModule.forRoot(fromRoot.reducers, {
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
+        StoreModule.forRoot(
+            fromRoot.reducers,
+            {
+                metaReducers,
+                runtimeChecks: {
+                    strictStateImmutability: true,
+                    strictActionImmutability: true,
+                }
             }
-        }),
+        ),
         EffectsModule.forRoot(fromRoot.effects),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         StoreRouterConnectingModule.forRoot({stateKey: 'router'}),

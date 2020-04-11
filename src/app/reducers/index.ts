@@ -1,25 +1,22 @@
 import {
-    ActionReducer,
-    ActionReducerMap, combineReducers, compose,
-    createFeatureSelector,
-    createSelector,
+    ActionReducerMap,
     MetaReducer
 } from '@ngrx/store';
 import {environment} from '../../environments/environment';
-import {routerReducer, RouterState} from '@ngrx/router-store';
+import {routerReducer} from '@ngrx/router-store';
 import {storeFreeze} from 'ngrx-store-freeze';
 import * as fromAuth from '../auth/reducers/auth.reducer';
 import {AuthEffects} from '../auth/effects/auth.effects';
 
 
 export interface State {
-    router: RouterState;
+    router;
     auth: fromAuth.State;
 }
 
-export const reducers = {
+export const reducers: ActionReducerMap<State> = {
     router: routerReducer,
-    auth: fromAuth.reducer,
+    auth: fromAuth.reducer
 };
 
 export const effects = [AuthEffects];
