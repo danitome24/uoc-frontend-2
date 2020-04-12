@@ -13,6 +13,7 @@ export class ConfigurationComponent implements OnInit {
 
     public availableAppLanguages;
     public sendNotifications$;
+    public localeSelected$;
 
     constructor(private store: Store) {
     }
@@ -22,10 +23,20 @@ export class ConfigurationComponent implements OnInit {
         this.sendNotifications$ = this.store.pipe(
             select(fromConfig.selectConfigurationSendNotifications),
         );
+        this.localeSelected$ = this.store.pipe(
+            select(fromConfig.selectConfigurationAppLocale),
+        );
     }
 
     updateNotifications(event) {
         const sendNotifications = event.target.checked;
         this.store.dispatch(fromConfigActions.actions.notificationsUpdate({sendNotifications}));
+    }
+
+    updateAppLocale(event: Event) {
+        const selectedLocale = AppSettings.APP_LOCALES.find((locale) => {
+            return locale.id == event.target.value;
+        });
+        this.store.dispatch(fromConfigActions.actions.localeUpdate({locale: selectedLocale}));
     }
 }

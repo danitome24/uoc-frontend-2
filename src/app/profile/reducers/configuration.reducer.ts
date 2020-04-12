@@ -20,6 +20,11 @@ export function reducer(state = initialState, action) {
                 ...state,
                 notifications: action.sendNotifications
             };
+        case fromConfig.PREFERENCES_LOCALE_UPDATE:
+            return {
+                ...state,
+                app_locale: action.locale
+            };
         default:
             return state;
     }
