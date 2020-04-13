@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { Offer } from 'src/app/shared/models/offer.model';
 import { ProfileService } from 'src/app/shared/services/profile.service';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as fromOffer from '../actions/offer.actions';
+import * as fromAuth from '../../auth/reducers/auth.reducer';
+import * as fromOfferSelects from '../reducers/offer.reducer';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-offers-list',
@@ -12,6 +15,7 @@ import * as fromOffer from '../actions/offer.actions';
 export class OffersListComponent implements OnInit {
   offersStudy: Offer[] = [];
   offersOther: Offer[] = [];
+  private offers$;
   constructor(
     private profileService: ProfileService,
     private offersService: OffersService,
@@ -22,22 +26,20 @@ export class OffersListComponent implements OnInit {
 
   private selectOffers() {
     this.store.dispatch(fromOffer.actions.listOffers({}));
-    const studiesOfUser = this.profileService.user.studies;
-    const offersOfUser = this.profileService.user.offers;
-    this.offersStudy = this.offersService.offers
-      .filter(offer =>
-        studiesOfUser.some(study => study.uid === offer.category.uid)
-      )
-      .map(offer => {
-        const offerUser = !!offersOfUser.find(
-          _offerUser => _offerUser.id === offer.id
-        );
-        return { ...offer, subscribe: offerUser };
-      });
 
-    this.offersOther = this.offersService.offers.filter(offer =>
-      studiesOfUser.every(study => study.uid !== offer.category.uid)
+    /*const studiesOfUser$ = this.store.pipe(
+        select(fromAuth.selectUserStudies),
+    );*/
+    // const offersOfUser = this.profileService.user.offers;
+
+    this.offers$ = this.store.pipe(
+        select(fromOfferSelects.selectOffersByUserStudies),
     );
+    this.offersOther = [];
+    this.offersStudy = [];
+    /*this.offersOther = this.offersService.offers.filter(offer =>
+      studiesOfUser.every(study => study.uid !== offer.category.uid)
+    );*/
   }
 
   ngOnInit() {}

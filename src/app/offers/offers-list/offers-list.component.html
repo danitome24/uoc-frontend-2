@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let offer of offersStudy">
+    <tr *ngFor="let offer of ( offers$ | async )">
       <td>{{ offer.job.name }}</td>
       <td>{{ offer.company.name }}</td>
       <td>{{ offer.category.name }}</td>

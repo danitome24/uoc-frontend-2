@@ -6,6 +6,7 @@ import { OffersComponent } from './offers.component';
 import { OffersDetailComponent } from './offers-detail/offers-detail.component';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { OffersProfileComponent } from './offers-profile/offers-profile.component';
+import {AuthModule} from "../auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,6 @@ import { OffersProfileComponent } from './offers-profile/offers-profile.componen
     OffersListComponent,
     OffersDetailComponent
   ],
-  imports: [CommonModule, OffersRoutingModule]
+  imports: [CommonModule, OffersRoutingModule, AuthModule]
 })
 export class OffersModule {}
