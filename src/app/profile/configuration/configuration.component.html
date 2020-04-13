@@ -1,7 +1,8 @@
 <div class="row">
   <label>Idioma de la aplicación:
-    <select (change)="updateAppLocale($event)">
-      <option *ngFor="let lang of availableAppLanguages" [value]="lang.id" [selected]="lang.id === (localeSelected$ | async).id">{{lang.name}}</option>
+    <select (change)="updateAppLocale($event)" *ngIf="localeSelected$ | async; let localeSelId">
+      <option *ngFor="let lang of availableAppLanguages" [value]="lang.id"
+              [selected]="lang.id === localeSelId.id">{{lang.name}}</option>
     </select>
   </label>
 </div>

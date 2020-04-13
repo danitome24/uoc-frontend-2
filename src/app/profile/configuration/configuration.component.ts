@@ -33,7 +33,7 @@ export class ConfigurationComponent implements OnInit {
         this.store.dispatch(fromConfigActions.actions.notificationsUpdate({sendNotifications}));
     }
 
-    updateAppLocale(event: Event) {
+    updateAppLocale(event) {
         const selectedLocale = AppSettings.APP_LOCALES.find((locale) => {
             return locale.id == event.target.value;
         });
