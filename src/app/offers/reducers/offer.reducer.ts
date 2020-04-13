@@ -34,3 +34,12 @@ export const selectOffersByUserStudies = createSelector(
         });
     }
 );
+export const selectOffersNotMatchingUserStudies = createSelector(
+    selectOfferFeature,
+    selectUserFeature,
+    (offerState: State, userState: State) => {
+        return  offerState.entities.filter((offer) => {
+            return userState.user.studies.every(study => study.uid !== offer.category.uid);
+        });
+    }
+);
