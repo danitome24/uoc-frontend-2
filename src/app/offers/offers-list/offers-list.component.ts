@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { Offer } from 'src/app/shared/models/offer.model';
 import { ProfileService } from 'src/app/shared/services/profile.service';
+import {Store} from '@ngrx/store';
+import * as fromOffer from '../actions/offer.actions';
 
 @Component({
   selector: 'app-offers-list',
@@ -12,12 +14,14 @@ export class OffersListComponent implements OnInit {
   offersOther: Offer[] = [];
   constructor(
     private profileService: ProfileService,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private store: Store
   ) {
     this.selectOffers();
   }
 
   private selectOffers() {
+    this.store.dispatch(fromOffer.actions.listOffers({}));
     const studiesOfUser = this.profileService.user.studies;
     const offersOfUser = this.profileService.user.offers;
     this.offersStudy = this.offersService.offers
