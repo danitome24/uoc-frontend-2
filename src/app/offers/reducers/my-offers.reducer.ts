@@ -1,7 +1,7 @@
 import * as fromMyOffers from '../actions/my-offers.actions';
 
 export interface State {
-    entities: [] | [number];
+    entities: [] | number[];
 }
 
 export const initialState: State = {
@@ -12,7 +12,9 @@ export function reducer(state: State = initialState, action) {
     switch (action.type) {
         case fromMyOffers.SUBSCRIBE_TO_OFFER:
             return {
-                ...state
+                entities: [...state.entities, action.offerId]
             };
+        default:
+            return state;
     }
 }

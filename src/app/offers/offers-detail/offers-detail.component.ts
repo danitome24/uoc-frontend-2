@@ -4,6 +4,8 @@ import { Offer } from 'src/app/shared/models/offer.model';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
+import {Store} from '@ngrx/store';
+import * as fromMyOffers from '../actions/my-offers.actions';
 
 @Component({
   selector: 'app-offers-detail',
@@ -17,7 +19,8 @@ export class OffersDetailComponent implements OnInit {
     private profileService: ProfileService,
     private offersService: OffersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store,
   ) {
     this.user = this.profileService.user;
     this.route.params.subscribe(params => {
@@ -29,7 +32,7 @@ export class OffersDetailComponent implements OnInit {
   }
 
   subscribeOffer() {
-    this.user.offers = [...this.user.offers, this.offer];
+    this.store.dispatch(fromMyOffers.actions.subscribeToOffer({offerId: this.offer.id}));
     this.router.navigate(['/admin/profile']);
   }
   unsubscribeOffer() {
