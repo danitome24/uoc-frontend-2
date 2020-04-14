@@ -10,8 +10,8 @@ import * as fromOfferSelects from '../reducers/offer.reducer';
     templateUrl: './offers-list.component.html'
 })
 export class OffersListComponent implements OnInit {
-    private offersStudy$;
-    private offersOther$;
+    public offersStudy$;
+    public offersOther$;
 
     constructor(
         private profileService: ProfileService,
