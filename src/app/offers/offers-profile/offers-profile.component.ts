@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Offer} from 'src/app/shared/models/offer.model';
 import {select, Store} from '@ngrx/store';
 import * as fromMyOffers from '../reducers/my-offers.reducer';
 import * as fromOffer from '../actions/offer.actions';
@@ -9,8 +8,7 @@ import * as fromOffer from '../actions/offer.actions';
     templateUrl: './offers-profile.component.html'
 })
 export class OffersProfileComponent implements OnInit {
-    offers: Offer[] = [];
-    private offers$;
+    public offers$;
 
     constructor(private store: Store) {
         this.selectOffers();
