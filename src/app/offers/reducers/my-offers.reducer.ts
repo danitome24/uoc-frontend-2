@@ -17,6 +17,12 @@ export function reducer(state: State = initialState, action) {
             return {
                 entities: [...state.entities, action.offerId]
             };
+
+        case fromMyOffers.UNSUBSCRIBE_TO_OFFER:
+            const entities = state.entities.filter(offerId => offerId !== action.offerId);
+            return {
+                entities
+            };
         default:
             return state;
     }

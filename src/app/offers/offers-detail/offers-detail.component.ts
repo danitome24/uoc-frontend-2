@@ -43,9 +43,7 @@ export class OffersDetailComponent implements OnInit {
     }
 
     unsubscribeOffer() {
-        this.user.offers = this.user.offers.filter(
-            _offer => _offer.id !== this.offer.id
-        );
+        this.store.dispatch(fromMyOffers.actions.unsubscribeToOffer({offerId: this.offer.id}));
         this.router.navigate(['/admin/profile']);
     }
 
