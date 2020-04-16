@@ -34,3 +34,9 @@ export const selectMyOffers = createSelector(
         });
     }
 );
+export const selectIsUserSubscribedTo = createSelector(
+    selectMyOffersFeature,
+    (myOffers: State, props: { offerId: number }) => {
+        return myOffers.entities.some(myOfferId => myOfferId === props.offerId);
+    }
+);

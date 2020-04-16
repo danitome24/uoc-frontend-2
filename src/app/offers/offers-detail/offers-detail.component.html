@@ -5,14 +5,14 @@
 <pre>{{ offer | json }} </pre>
 
 <button
-  *ngIf="!isSubscribe()"
+  *ngIf="!(isSubscribed$ | async )"
   class="btn btn-primary"
   (click)="subscribeOffer()"
 >
   Inscribirse
 </button>
 <button
-  *ngIf="isSubscribe()"
+  *ngIf="(isSubscribed$ | async )"
   class="btn btn-danger"
   (click)="unsubscribeOffer()"
 >
