@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DocumentType, Municipe, Province, User} from '../../../../shared/models/user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {dateValidator} from '../../../../shared/directives/date-validator.directive';
@@ -13,6 +13,7 @@ import {MockData} from '../../../../shared/mock-data';
 export class ProfileAccountFormComponent implements OnInit {
     public rForm: FormGroup;
     @Input() userProfile: User;
+    @Output() updateUser: EventEmitter<User> = new EventEmitter<User>();
     public documentsType: DocumentType[];
     public municipes: Municipe[];
     public provinces: Province[];
@@ -84,5 +85,15 @@ export class ProfileAccountFormComponent implements OnInit {
             },
             documentNumberValidator()
         );
+    }
+
+    public update() {
+        if (this.rForm.valid) {
+            const userUpdated = {
+                ...this.userProfile,
+                ...this.rForm.value
+            };
+            this.updateUser.emit(userUpdated);
+        }
     }
 }
