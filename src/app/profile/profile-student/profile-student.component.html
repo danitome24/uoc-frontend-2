@@ -77,24 +77,24 @@
         <th>Acciones</th>
       </thead>
       <tbody>
-        <tr *ngFor="let study of user.studies; let i = index">
-          <td>{{ study.level.name }}</td>
-          <td>{{ study.grade?.name }}</td>
+        <tr *ngFor="let study$ of ( user$ | async ).studies; let i = index">
+          <td>{{ study$.level.name }}</td>
+          <td>{{ study$.grade?.name }}</td>
 
-          <td>{{ study.title.name || study.title }}</td>
-          <td>{{ study.institution.name || study.institution }}</td>
-          <td>{{ study.date }}</td>
-          <td>{{ study.certificate ? 'Sí' : 'No' }}</td>
-          <td>{{ study.bilingue ? 'Sí' : 'No' }}</td>
-          <td>{{ study.dual ? 'Sí' : 'No' }}</td>
+          <td>{{ study$.title.name || ( study$ | async ).title }}</td>
+          <td>{{ study$.institution.name || ( study$ | async ).institution }}</td>
+          <td>{{ study$.date }}</td>
+          <td>{{ study$.certificate ? 'Sí' : 'No' }}</td>
+          <td>{{ study$.bilingue ? 'Sí' : 'No' }}</td>
+          <td>{{ study$.dual ? 'Sí' : 'No' }}</td>
 
           <td>
             <a
-              [routerLink]="['/admin/profile/profile-student/study', study.uid]"
+              [routerLink]="['/admin/profile/profile-student/study', study$.uid]"
               >Editar</a
             >
             |
-            <a style="cursor:pointer" (click)="deleteStudy(study.uid)"
+            <a style="cursor:pointer" (click)="deleteStudy(study$.uid)"
               >Borrar</a
             >
           </td>
@@ -116,20 +116,20 @@
         <th>Acciones</th>
       </thead>
       <tbody>
-        <tr *ngFor="let language of user.languages">
-          <td>{{ language.level.name }}</td>
-          <td>{{ language.name.name }}</td>
-          <td>{{ language.date }}</td>
+        <tr *ngFor="let language$ of ( user$ | async ).languages">
+          <td>{{ language$.level.name }}</td>
+          <td>{{ language$.name.name }}</td>
+          <td>{{ language$.date }}</td>
           <td>
             <a
               [routerLink]="[
                 '/admin/profile/profile-student/language',
-                language.uid
+                language$.uid
               ]"
               >Editar</a
             >
             |
-            <a style="cursor:pointer" (click)="deleteLanguage(language.uid)"
+            <a style="cursor:pointer" (click)="deleteLanguage(language$.uid)"
               >Borrar</a
             >
           </td>
