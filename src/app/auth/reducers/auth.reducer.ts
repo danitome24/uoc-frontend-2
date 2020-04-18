@@ -53,7 +53,6 @@ export function reducer(state = initialState, action) {
 // Selectors
 
 export const selectAuthFeature = createFeatureSelector('auth');
-
 export const selectAuthErrorOnLogin = createSelector(
     selectAuthFeature,
     (state: State) => state.auth.errorOnLogin

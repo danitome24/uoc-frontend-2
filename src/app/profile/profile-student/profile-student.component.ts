@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '../../shared/services/profile.service';
 import { User } from 'src/app/shared/models/user.model';
+import {select, Store} from '@ngrx/store';
+import * as fromProfile from '../reducers/profile.reducer';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile-student',
@@ -9,8 +12,12 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class ProfileStudentComponent {
   user: User;
-  constructor(private profileService: ProfileService) {
+  public user$: Observable<User>;
+  constructor(private profileService: ProfileService, private store: Store) {
     this.user = this.profileService.user;
+    this.user$ = this.store.pipe(
+      select(fromProfile.selectShowUserProfile)
+    );
   }
 
   deleteStudy(studyID: number) {
