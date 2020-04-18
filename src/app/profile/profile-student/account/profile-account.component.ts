@@ -4,7 +4,7 @@ import {User} from 'src/app/shared/models/user.model';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import * as fromProfile from '../../reducers/profile.reducer';
-import * as fromProfileActions from '../../actions/profile.actions';
+import * as fromUser from '../../../auth/actions/auth.actions';
 
 @Component({
     selector: 'app-profile-account',
@@ -29,6 +29,6 @@ export class ProfileAccountComponent implements OnInit {
 
     updateUser($event: User) {
         console.log($event);
-        this.store.dispatch(fromProfileActions.actions.updateUserProfile({user: $event}));
+        this.store.dispatch(fromUser.actions.updateUserProfile({user: $event}));
     }
 }
