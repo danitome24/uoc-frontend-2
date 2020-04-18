@@ -11,6 +11,8 @@ import {
   Province
 } from 'src/app/shared/models/user.model';
 import { documentNumberValidator } from 'src/app/shared/directives/document-number-validator.directive';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile-account',
@@ -20,11 +22,12 @@ import { documentNumberValidator } from 'src/app/shared/directives/document-numb
 export class ProfileAccountComponent implements OnInit {
   rForm: FormGroup;
   user: User;
+  public user$: Observable<User>;
   documentsType: DocumentType[];
   municipes: Municipe[];
   provinces: Province[];
 
-  constructor(private router: Router, private profileService: ProfileService) {
+  constructor(private router: Router, private profileService: ProfileService, private store: Store) {
     this.user = this.profileService.user;
   }
   ngOnInit() {
