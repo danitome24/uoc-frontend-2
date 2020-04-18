@@ -5,6 +5,9 @@ export const SIGN_IN = '[SignIn Page] SignIn';
 export const SIGN_IN_FAILED = '[SignIn Page] SignInFailed';
 export const SIGN_IN_SUCCESS = '[SignIn Page] SignInSuccess';
 export const LOGOUT = '[Logout Page] Logout';
+export const FORGOT_PASSWORD_REQUEST = '[Forgotten Page] ForgotPasswordRequest';
+export const FORGOT_PASSWORD_FAILED = '[Forgotten Page] ForgotPasswordFailed';
+export const FORGOT_PASSWORD_SUCCESS = '[Forgotten Page] ForgotPasswordSuccess';
 
 // Profile. TODO move this to profile module.
 export const SHOW_USER_PROFILE = '[Profile Page] ShowUserProfile';
@@ -26,6 +29,11 @@ export const actions = {
         logout: createAction(
             LOGOUT,
             props<{}>()
+        ),
+        // ForgotPassword
+        forgotPasswordRequest: createAction(
+            FORGOT_PASSWORD_REQUEST,
+            props<{ email: string }>()
         ),
         // Profile. TODO move this to profile module.
         showUserProfile: createAction(

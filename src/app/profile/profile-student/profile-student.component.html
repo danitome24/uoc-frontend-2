@@ -81,8 +81,8 @@
           <td>{{ study$.level.name }}</td>
           <td>{{ study$.grade?.name }}</td>
 
-          <td>{{ study$.title.name || ( study$ | async ).title }}</td>
-          <td>{{ study$.institution.name || ( study$ | async ).institution }}</td>
+          <td>{{ study$.title.name || study$.title }}</td>
+          <td>{{ study$.institution.name || study$.institution }}</td>
           <td>{{ study$.date }}</td>
           <td>{{ study$.certificate ? 'Sí' : 'No' }}</td>
           <td>{{ study$.bilingue ? 'Sí' : 'No' }}</td>
