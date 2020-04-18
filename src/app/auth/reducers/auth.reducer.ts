@@ -12,7 +12,8 @@ export const initialState: State = {
     user: null,
     auth: {
         errorOnLogin: false,
-        loggedIn: false
+        loggedIn: false,
+        forgottenPassword: false,
     },
 };
 
