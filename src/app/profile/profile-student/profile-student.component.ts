@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ProfileService} from '../../shared/services/profile.service';
 import {User} from 'src/app/shared/models/user.model';
 import {select, Store} from '@ngrx/store';
-import * as fromProfile from '../reducers/profile.reducer';
+import * as fromUser from '../../auth/reducers/auth.reducer';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class ProfileStudentComponent {
     constructor(private profileService: ProfileService, private store: Store) {
         // this.user = this.profileService.user;
         this.user$ = this.store.pipe(
-            select(fromProfile.selectShowUserProfile)
+            select(fromUser.selectShowUserProfile)
         );
     }
 

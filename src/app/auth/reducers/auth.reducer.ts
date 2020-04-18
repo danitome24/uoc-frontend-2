@@ -61,3 +61,11 @@ export const selectAuthIsLoggedIn = createSelector(
     selectAuthFeature,
     (state: State) => state.auth.loggedIn
 );
+
+// Selectors
+// TODO move this to profile module
+export const selectUserProfile = createFeatureSelector('auth');
+export const selectShowUserProfile = createSelector(
+    selectUserProfile,
+    (state: State) => state.user
+);

@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {User} from 'src/app/shared/models/user.model';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import * as fromProfile from '../../reducers/profile.reducer';
+import * as fromUserState from '../../../auth/reducers/auth.reducer';
 import * as fromUser from '../../../auth/actions/auth.actions';
 
 @Component({
@@ -23,7 +23,7 @@ export class ProfileAccountComponent implements OnInit {
 
     private loadUserProfile() {
         this.user$ = this.store.pipe(
-            select(fromProfile.selectShowUserProfile)
+            select(fromUserState.selectShowUserProfile)
         );
     }
 
