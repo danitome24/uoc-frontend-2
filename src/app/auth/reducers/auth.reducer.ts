@@ -1,5 +1,5 @@
 import {User} from '../../shared/models/user.model';
-import {LOGOUT, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS} from '../actions/auth.actions';
+import {LOGOUT, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS, UPDATE_USER_PROFILE} from '../actions/auth.actions';
 import {Auth} from '../../shared/models/auth.model';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
@@ -40,6 +40,15 @@ export function reducer(state = initialState, action) {
                     errorOnLogin: false,
                     loggedIn: true,
                 }
+            };
+        case UPDATE_USER_PROFILE:
+            const updatedUserProfile = {
+                ...state.user,
+                ...action.user
+            };
+            return {
+                ...state,
+                user: updatedUserProfile
             };
         case LOGOUT:
             return {
