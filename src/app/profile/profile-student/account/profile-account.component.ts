@@ -28,7 +28,7 @@ export class ProfileAccountComponent implements OnInit {
     }
 
     updateUser($event: User) {
-        console.log($event);
         this.store.dispatch(fromUser.actions.updateUserProfile({user: $event}));
+        this.router.navigate(['/admin/profile']);
     }
 }
