@@ -6,6 +6,7 @@ import {
     SIGN_IN,
     SIGN_IN_FAILED,
     SIGN_IN_SUCCESS,
+    UPDATE_LANGUAGE,
     UPDATE_USER_PROFILE
 } from '../actions/auth.actions';
 import {Auth} from '../../shared/models/auth.model';
@@ -85,6 +86,22 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 user: updatedUser
+            };
+        case UPDATE_LANGUAGE:
+            const updatedUserLang = {
+                ...state.user
+            };
+            const languages = state.user.languages.filter(lang => lang.uid !== action.language.uid);
+            const newLang = [
+                ...languages,
+                action.language
+            ].sort((a, b) => {
+                return a.uid - b.uid;
+            });
+            updatedUserLang.languages = newLang;
+            return {
+                ...state,
+                user: updatedUserLang
             };
         default:
             return state;

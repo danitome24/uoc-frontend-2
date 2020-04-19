@@ -14,6 +14,7 @@ export const FORGOT_PASSWORD_SUCCESS = '[Forgotten Page] ForgotPasswordSuccess';
 export const SHOW_USER_PROFILE = '[Profile Page] ShowUserProfile';
 export const UPDATE_USER_PROFILE = '[Profile Page] UpdateUserProfile';
 export const ADD_LANGUAGE = '[Profile Language Page] AddLanguage';
+export const UPDATE_LANGUAGE = '[Profile Language Page] UpdateLanguage';
 
 export const actions = {
         signIn: createAction(
@@ -47,6 +48,10 @@ export const actions = {
         ),
         addLanguage: createAction(
             ADD_LANGUAGE,
+            props<{ language: Language }>()
+        ),
+        updateLanguage: createAction(
+            UPDATE_LANGUAGE,
             props<{ language: Language }>()
         )
     }

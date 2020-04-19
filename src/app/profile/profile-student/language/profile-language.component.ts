@@ -53,14 +53,7 @@ export class ProfileLanguageComponent implements OnInit {
     }
 
     private update(language: Language) {
-        console.log('TODO update');
-        /*const user = this.profileService.user;
-        const languages = user.languages;
-        const foundIndex = languages.findIndex(
-            _language => _language.uid === language.uid
-        );
-        languages[foundIndex] = language;
-        this.profileService.updateProfile(user);
-        this.router.navigate(['/admin/profile']);*/
+        this.store.dispatch(fromUser.actions.updateLanguage({language}));
+        this.router.navigate(['/admin/profile']);
     }
 }
