@@ -47,7 +47,6 @@ export class ProfileLanguageComponent implements OnInit {
             ...language,
             uid: this.nextLangUid,
         };
-        console.log(newLang);
         this.store.dispatch(fromUser.actions.addLanguage({language: newLang}));
         this.router.navigate(['/admin/profile']);
     }

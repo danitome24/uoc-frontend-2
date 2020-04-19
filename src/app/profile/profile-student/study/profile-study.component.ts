@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../../../shared/services/profile.service';
@@ -14,11 +14,13 @@ import {Observable} from 'rxjs';
     templateUrl: './profile-study.component.html',
     styleUrls: ['./profile-study.component.scss']
 })
-export class ProfileStudyComponent {
+export class ProfileStudyComponent implements OnInit {
     studiesForm: FormGroup;
     options = MockData.TYPE_STUDIES;
     study: Study = {} as (VocationalStudy | CollegeStudy);
     public selectedStudy$: Observable<VocationalStudy | CollegeStudy>;
+    public nextStudyId: number;
+    public nextStudyId$: Observable<number>;
 
     constructor(
         private route: ActivatedRoute,
@@ -41,21 +43,30 @@ export class ProfileStudyComponent {
         });
     }
 
+    ngOnInit(): void {
+        this.nextStudyId$ = this.store.pipe(
+            select(fromUserReducer.selectNextUidStudy),
+        );
+        this.nextStudyId$.subscribe(nextUid => {
+            this.nextStudyId = nextUid;
+        });
+    }
+
     compareOption(option1, option2) {
         return option1.uid === (option2 && option2.uid);
     }
 
     private update(study: VocationalStudy | CollegeStudy) {
-        const user = this.profileService.user;
-        const studies = user.studies;
-        const foundIndex = studies.findIndex(_study => _study.uid === study.uid);
-        studies[foundIndex] = study;
-        this.profileService.updateProfile(user);
+        this.store.dispatch(fromUser.actions.updateStudy({study}));
         this.router.navigate(['/admin/profile']);
     }
 
     private save(study: VocationalStudy | CollegeStudy) {
-        this.store.dispatch(fromUser.actions.addStudy({study}));
+        const newStudy = {
+            ...study,
+            uid: this.nextStudyId,
+        };
+        this.store.dispatch(fromUser.actions.addStudy({study: newStudy}));
         this.router.navigate(['/admin/profile']);
     }
 

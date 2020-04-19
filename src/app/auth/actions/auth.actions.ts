@@ -17,6 +17,7 @@ export const UPDATE_USER_PROFILE = '[Profile Page] UpdateUserProfile';
 export const ADD_LANGUAGE = '[Profile Language Page] AddLanguage';
 export const UPDATE_LANGUAGE = '[Profile Language Page] UpdateLanguage';
 export const ADD_STUDY = '[Profile Study Page] AddStudy';
+export const UPDATE_STUDY = '[Profile Study Page] UpdateStudy';
 
 export const actions = {
         signIn: createAction(
@@ -58,6 +59,10 @@ export const actions = {
         ),
         addStudy: createAction(
             ADD_STUDY,
+            props<{study: VocationalStudy | CollegeStudy}>()
+        ),
+        updateStudy: createAction(
+            UPDATE_STUDY,
             props<{study: VocationalStudy | CollegeStudy}>()
         )
     }

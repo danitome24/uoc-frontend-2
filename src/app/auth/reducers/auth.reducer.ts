@@ -7,7 +7,7 @@ import {
     SIGN_IN,
     SIGN_IN_FAILED,
     SIGN_IN_SUCCESS,
-    UPDATE_LANGUAGE,
+    UPDATE_LANGUAGE, UPDATE_STUDY,
     UPDATE_USER_PROFILE
 } from '../actions/auth.actions';
 import {Auth} from '../../shared/models/auth.model';
@@ -116,6 +116,22 @@ export function reducer(state = initialState, action) {
                 ...state,
                 user: updatedUserStudy
             };
+        case UPDATE_STUDY:
+            const updateUserStudy = {
+                ...state.user
+            };
+            const studies = state.user.studies.filter(study => study.uid !== action.study.uid);
+            const newStudy = [
+                ...studies,
+                action.study
+            ].sort((a, b) => {
+                return a.uid - b.uid;
+            });
+            updateUserStudy.studies = newStudy;
+            return {
+                ...state,
+                user: updateUserStudy
+            };
         default:
             return state;
     }
@@ -159,4 +175,10 @@ export const selectNextUidLanguage = createSelector(
 export const selectSelectedStudy = createSelector(
     selectUserProfile,
     (state: State, props: {studyId: number}) => state.user.studies.find(study => study.uid === props.studyId)
+);
+export const selectNextUidStudy = createSelector(
+    selectUserProfile,
+    (state: State) => {
+        return state.user.studies.length + 1;
+    }
 );
