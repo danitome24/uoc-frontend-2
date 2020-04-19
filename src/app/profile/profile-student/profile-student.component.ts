@@ -27,13 +27,6 @@ export class ProfileStudentComponent {
     }
 
     deleteLanguage(languageID: any) {
-        //const languages = this.user.languages;
-        //const index = languages.findIndex(language => language.uid === languageID);
-        /*if (index === -1) {
-          alert('Error: Language not found');
-          return;
-        }
-        languages.splice(index, 1);*/
-        //this.profileService.updateProfile(this.user);
+        this.store.dispatch(fromUserActions.actions.deleteLanguage({languageId: languageID}));
     }
 }

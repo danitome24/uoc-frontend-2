@@ -1,7 +1,7 @@
 import {User} from '../../shared/models/user.model';
 import {
     ADD_LANGUAGE,
-    ADD_STUDY,
+    ADD_STUDY, DELETE_LANGUAGE,
     DELETE_STUDY,
     FORGOT_PASSWORD_REQUEST,
     LOGOUT,
@@ -142,10 +142,22 @@ export function reducer(state = initialState, action) {
             newUser.studies = [
                 ...newStudies
             ];
-            console.log(newUser);
             return {
                 ...state,
                 user: newUser
+            };
+        case DELETE_LANGUAGE:
+            const newerUser = {
+                ...state.user
+            };
+            const newLanguages = newerUser.languages.filter(lang => lang.uid !== action.languageId);
+            newerUser.languages = [
+                ...newLanguages
+            ];
+            console.log(newLanguages);
+            return {
+                ...state,
+                user: newerUser
             };
         default:
             return state;

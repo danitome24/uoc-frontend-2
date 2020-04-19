@@ -16,6 +16,7 @@ export const SHOW_USER_PROFILE = '[Profile Page] ShowUserProfile';
 export const UPDATE_USER_PROFILE = '[Profile Page] UpdateUserProfile';
 export const ADD_LANGUAGE = '[Profile Language Page] AddLanguage';
 export const UPDATE_LANGUAGE = '[Profile Language Page] UpdateLanguage';
+export const DELETE_LANGUAGE = '[Profile Language Page] DeleteLanguage';
 export const ADD_STUDY = '[Profile Study Page] AddStudy';
 export const UPDATE_STUDY = '[Profile Study Page] UpdateStudy';
 export const DELETE_STUDY = '[Profile Study Page] DeleteStudy';
@@ -57,6 +58,10 @@ export const actions = {
         updateLanguage: createAction(
             UPDATE_LANGUAGE,
             props<{ language: Language }>()
+        ),
+        deleteLanguage: createAction(
+            DELETE_LANGUAGE,
+            props<{languageId: number}>()
         ),
         addStudy: createAction(
             ADD_STUDY,
