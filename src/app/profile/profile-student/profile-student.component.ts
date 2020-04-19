@@ -3,6 +3,7 @@ import {ProfileService} from '../../shared/services/profile.service';
 import {User} from 'src/app/shared/models/user.model';
 import {select, Store} from '@ngrx/store';
 import * as fromUser from '../../auth/reducers/auth.reducer';
+import * as fromUserActions from '../../auth/actions/auth.actions';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -22,14 +23,7 @@ export class ProfileStudentComponent {
     }
 
     deleteStudy(studyID: number) {
-        /*const studies = this.user.studies;
-        const index = studies.findIndex(study => study.uid === studyID);
-        if (index === -1) {
-          alert('Error: Study not found');
-          return;
-        }
-        studies.splice(index, 1);
-        this.profileService.updateProfile(this.user);*/
+        this.store.dispatch(fromUserActions.actions.deleteStudy({studyId: studyID}));
     }
 
     deleteLanguage(languageID: any) {
