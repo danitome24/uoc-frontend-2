@@ -8,6 +8,8 @@ import {
   CollegeStudy
 } from 'src/app/shared/models/study.model';
 import { MockData } from 'src/app/shared/mock-data';
+import {Store} from '@ngrx/store';
+import * as fromUser from '../../../auth/actions/auth.actions';
 
 @Component({
   selector: 'app-profile-study',
@@ -22,14 +24,15 @@ export class ProfileStudyComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private store: Store
   ) {
     this.route.params.subscribe(params => {
-      const user = this.profileService.user;
+      /*const user = this.profileService.user;
       const uid = +params.uid;
       this.study = (user.studies.find(study => study.uid === uid) || {}) as
         | VocationalStudy
-        | CollegeStudy;
+        | CollegeStudy;*/
     });
     this.studiesForm = new FormGroup({
       option: new FormControl(this.study.level, [Validators.required])
@@ -48,13 +51,7 @@ export class ProfileStudyComponent {
     this.router.navigate(['/admin/profile']);
   }
   private save(study: VocationalStudy | CollegeStudy) {
-    const user = this.profileService.user;
-    const _study = MockData.fakeIncreaseID<VocationalStudy | CollegeStudy>(
-      user.studies,
-      study
-    );
-    user.studies = [...user.studies, _study];
-    this.profileService.updateProfile(user);
+    this.store.dispatch(fromUser.actions.addStudy({study}));
     this.router.navigate(['/admin/profile']);
   }
 

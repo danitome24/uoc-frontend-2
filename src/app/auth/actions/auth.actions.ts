@@ -1,6 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {User} from '../../shared/models/user.model';
 import {Language} from '../../shared/models/language.model';
+import {CollegeStudy, VocationalStudy} from '../../shared/models/study.model';
 
 export const SIGN_IN = '[SignIn Page] SignIn';
 export const SIGN_IN_FAILED = '[SignIn Page] SignInFailed';
@@ -15,6 +16,7 @@ export const SHOW_USER_PROFILE = '[Profile Page] ShowUserProfile';
 export const UPDATE_USER_PROFILE = '[Profile Page] UpdateUserProfile';
 export const ADD_LANGUAGE = '[Profile Language Page] AddLanguage';
 export const UPDATE_LANGUAGE = '[Profile Language Page] UpdateLanguage';
+export const ADD_STUDY = '[Profile Study Page] AddStudy';
 
 export const actions = {
         signIn: createAction(
@@ -53,6 +55,10 @@ export const actions = {
         updateLanguage: createAction(
             UPDATE_LANGUAGE,
             props<{ language: Language }>()
+        ),
+        addStudy: createAction(
+            ADD_STUDY,
+            props<{study: VocationalStudy | CollegeStudy}>()
         )
     }
 ;

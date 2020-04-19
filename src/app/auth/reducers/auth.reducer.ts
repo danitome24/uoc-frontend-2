@@ -1,6 +1,7 @@
 import {User} from '../../shared/models/user.model';
 import {
     ADD_LANGUAGE,
+    ADD_STUDY,
     FORGOT_PASSWORD_REQUEST,
     LOGOUT,
     SIGN_IN,
@@ -102,6 +103,18 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 user: updatedUserLang
+            };
+        case ADD_STUDY:
+            const updatedUserStudy = {
+                ...state.user
+            };
+            updatedUserStudy.studies = [
+                ...state.user.studies,
+                action.study
+            ];
+            return {
+                ...state,
+                user: updatedUserStudy
             };
         default:
             return state;
