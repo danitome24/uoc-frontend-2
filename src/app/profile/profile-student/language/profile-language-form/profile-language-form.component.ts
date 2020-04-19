@@ -27,6 +27,7 @@ export class ProfileLanguageFormComponent implements OnInit {
 
     public loadFormInstance(): void {
         this.langForm = new FormGroup({
+            uid: new FormControl(this.language.uid),
             level: new FormControl(this.language.level, [Validators.required]),
             name: new FormControl(this.language.name, [Validators.required]),
             date: new FormControl(this.language.date, [

@@ -39,11 +39,7 @@ export class ProfileLanguageComponent implements OnInit {
     }
 
     public saveOrUpdate(language: Language) {
-        this.isNew() ? this.save(language) : this.update(language);
-    }
-
-    private isNew(): boolean {
-        return !!!this.language.uid;
+        language.uid ? this.update(language) : this.save(language);
     }
 
     private save(language: Language) {
