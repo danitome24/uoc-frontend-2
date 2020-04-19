@@ -120,7 +120,9 @@ export const selectSelectedLanguage = createSelector(
         return state.user.languages.find(language => language.uid === props.langUid);
     }
 );
-export const selectAllLanguages = createSelector(
+export const selectNextUidLanguage = createSelector(
     selectUserProfile,
-    (state: State) => state.user.languages
+    (state: State) => {
+        return state.user.languages.length + 1;
+    }
 );

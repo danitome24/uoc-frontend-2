@@ -5,7 +5,6 @@ import * as fromUserReducer from '../../../auth/reducers/auth.reducer';
 import * as fromUser from '../../../auth/actions/auth.actions';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {MockData} from '../../../shared/mock-data';
 
 @Component({
     selector: 'app-profile-language',
@@ -15,32 +14,23 @@ import {MockData} from '../../../shared/mock-data';
 export class ProfileLanguageComponent implements OnInit {
     language: Language = {} as Language;
     public selectedLanguage$: Observable<Language>;
-    public allLanguagesFromUser$: Observable<Language[]>;
+    public nextLangUid$: Observable<number>;
+    public nextLangUid: number;
 
     constructor(
         private route: ActivatedRoute,
         private store: Store,
         private router: Router
     ) {
-        this.route.params.subscribe(params => {
-            /*const user = this.profileService.user;
-            const uid = +params.uid;
-            this.language = (user.languages.find(language => language.uid === uid) ||
-              {}) as Language;*/
-        });
     }
 
     ngOnInit(): void {
-        /*this.allLanguagesFromUser$ = this.store.pipe(
-            select(fromUserReducer.selectAllLanguages)
+        this.nextLangUid$ = this.store.pipe(
+            select(fromUserReducer.selectNextUidLanguage),
         );
-        this.allLanguagesFromUser$.subscribe(allLanguages => {
-            const newLang = MockData.fakeIncreaseID<Language>(
-                allLanguages,
-                language
-            );
-
-        });*/
+        this.nextLangUid$.subscribe(nextUid => {
+            this.nextLangUid = nextUid;
+        });
     }
 
     public saveOrUpdate(language: Language) {
@@ -52,11 +42,12 @@ export class ProfileLanguageComponent implements OnInit {
     }
 
     private save(language: Language) {
-        /*const newLang = MockData.fakeIncreaseIdObservable<Language>(
-            this.allLanguagesFromUser$,
-            language
-        );*/
-        this.store.dispatch(fromUser.actions.addLanguage({language}));
+        const newLang = {
+            ...language,
+            uid: this.nextLangUid,
+        };
+        console.log(newLang);
+        this.store.dispatch(fromUser.actions.addLanguage({language: newLang}));
         this.router.navigate(['/admin/profile']);
     }
 
