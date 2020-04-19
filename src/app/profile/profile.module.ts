@@ -9,6 +9,7 @@ import { UniversityDegreeComponent } from './profile-student/study/university-de
 import { ProfileLanguageComponent } from './profile-student/language/profile-language.component';
 import { ProfileAccountComponent } from './profile-student/account/profile-account.component';
 import { ProfileAccountFormComponent } from './profile-student/account/profile-account-form/profile-account-form.component';
+import { ProfileLanguageFormComponent } from './profile-student/language/profile-language-form/profile-language-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProfileAccountFormComponent } from './profile-student/account/profile-a
     UniversityDegreeComponent,
     ProfileLanguageComponent,
     ProfileAccountComponent,
-    ProfileAccountFormComponent
+    ProfileAccountFormComponent,
+    ProfileLanguageFormComponent
   ],
   imports: [SharedModule, ProfileRoutingModule]
 })

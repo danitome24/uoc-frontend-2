@@ -1,89 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ProfileService } from '../../../shared/services/profile.service';
-import { MockData } from 'src/app/shared/mock-data';
-import {
-  Language,
-  LanguageLevel,
-  LanguageName
-} from 'src/app/shared/models/language.model';
-import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
-import {Store} from '@ngrx/store';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Language} from '../../../shared/models/language.model';
 import * as fromUser from '../../../auth/actions/auth.actions';
+import {Store} from '@ngrx/store';
 
 @Component({
-  selector: 'app-profile-language',
-  templateUrl: './profile-language.component.html',
-  styleUrls: ['./profile-language.component.scss']
+    selector: 'app-profile-language',
+    templateUrl: './profile-language.component.html',
+    styleUrls: ['./profile-language.component.scss']
 })
-export class ProfileLanguageComponent implements OnInit {
-  rForm: FormGroup;
-  language: Language = {} as Language;
-  languageLevels: LanguageLevel[];
-  languageNames: LanguageName[];
+export class ProfileLanguageComponent {
+    language: Language = {} as Language;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private profileService: ProfileService,
-    private store: Store
-  ) {
-    this.route.params.subscribe(params => {
-      const user = this.profileService.user;
-      const uid = +params.uid;
-      this.language = (user.languages.find(language => language.uid === uid) ||
-        {}) as Language;
-    });
-  }
-  ngOnInit() {
-    this.loadSelectProperties();
-    this.loadFormInstance();
-  }
-  public loadSelectProperties(): void {
-    this.languageLevels = MockData.LANGUAGES_LEVEL;
-    this.languageNames = MockData.LANGUAGES_NAME;
-  }
 
-  public loadFormInstance(): void {
-    this.rForm = new FormGroup({
-      level: new FormControl(this.language.level, [Validators.required]),
-      name: new FormControl(this.language.name, [Validators.required]),
-      date: new FormControl(this.language.date, [
-        Validators.required,
-        dateValidator()
-      ])
-    });
-  }
-  public submit() {
-    this.saveOrUpdate({ ...this.language, ...this.rForm.value });
-  }
+    constructor(
+        private route: ActivatedRoute,
+        private store: Store,
+        private router: Router
+    ) {
+        this.route.params.subscribe(params => {
+            /*const user = this.profileService.user;
+            const uid = +params.uid;
+            this.language = (user.languages.find(language => language.uid === uid) ||
+              {}) as Language;*/
+        });
+    }
 
-  compareLevel(option1, option2) {
-    return option1.uid === (option2 && option2.uid);
-  }
-  compareName(option1, option2) {
-    return option1.uid === (option2 && option2.uid);
-  }
-  private update(language: Language) {
-    const user = this.profileService.user;
-    const languages = user.languages;
-    const foundIndex = languages.findIndex(
-      _language => _language.uid === language.uid
-    );
-    languages[foundIndex] = language;
-    this.profileService.updateProfile(user);
-    this.router.navigate(['/admin/profile']);
-  }
-  private save(language: Language) {
-    this.store.dispatch(fromUser.actions.addLanguage({language}));
-    this.router.navigate(['/admin/profile']);
-  }
+    private saveOrUpdate(language: Language) {
+        this.isNew() ? this.save(language) : this.update(language);
+    }
 
-  saveOrUpdate(language: Language) {
-    this.isNew() ? this.save(language) : this.update(language);
-  }
-  public isNew(): boolean {
-    return !!!this.language.uid;
-  }
+    private isNew(): boolean {
+        return !!!this.language.uid;
+    }
+
+    private save(language: Language) {
+        this.store.dispatch(fromUser.actions.addLanguage({language}));
+        this.router.navigate(['/admin/profile']);
+    }
+
+    private update(language: Language) {
+        console.log('TODO update');
+        /*const user = this.profileService.user;
+        const languages = user.languages;
+        const foundIndex = languages.findIndex(
+            _language => _language.uid === language.uid
+        );
+        languages[foundIndex] = language;
+        this.profileService.updateProfile(user);
+        this.router.navigate(['/admin/profile']);*/
+    }
 }
