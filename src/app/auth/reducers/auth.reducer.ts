@@ -114,3 +114,13 @@ export const selectShowUserProfile = createSelector(
     selectUserProfile,
     (state: State) => state.user
 );
+export const selectSelectedLanguage = createSelector(
+    selectUserProfile,
+    (state: State, props: { langUid: number }) => {
+        return state.user.languages.find(language => language.uid === props.langUid);
+    }
+);
+export const selectAllLanguages = createSelector(
+    selectUserProfile,
+    (state: State) => state.user.languages
+);

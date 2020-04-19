@@ -1,17 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Language} from '../../../shared/models/language.model';
+import * as fromUserReducer from '../../../auth/reducers/auth.reducer';
 import * as fromUser from '../../../auth/actions/auth.actions';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {MockData} from '../../../shared/mock-data';
 
 @Component({
     selector: 'app-profile-language',
     templateUrl: './profile-language.component.html',
     styleUrls: ['./profile-language.component.scss']
 })
-export class ProfileLanguageComponent {
+export class ProfileLanguageComponent implements OnInit {
     language: Language = {} as Language;
-
+    public selectedLanguage$: Observable<Language>;
+    public allLanguagesFromUser$: Observable<Language[]>;
 
     constructor(
         private route: ActivatedRoute,
@@ -26,7 +30,20 @@ export class ProfileLanguageComponent {
         });
     }
 
-    private saveOrUpdate(language: Language) {
+    ngOnInit(): void {
+        /*this.allLanguagesFromUser$ = this.store.pipe(
+            select(fromUserReducer.selectAllLanguages)
+        );
+        this.allLanguagesFromUser$.subscribe(allLanguages => {
+            const newLang = MockData.fakeIncreaseID<Language>(
+                allLanguages,
+                language
+            );
+
+        });*/
+    }
+
+    public saveOrUpdate(language: Language) {
         this.isNew() ? this.save(language) : this.update(language);
     }
 
@@ -35,6 +52,10 @@ export class ProfileLanguageComponent {
     }
 
     private save(language: Language) {
+        /*const newLang = MockData.fakeIncreaseIdObservable<Language>(
+            this.allLanguagesFromUser$,
+            language
+        );*/
         this.store.dispatch(fromUser.actions.addLanguage({language}));
         this.router.navigate(['/admin/profile']);
     }
