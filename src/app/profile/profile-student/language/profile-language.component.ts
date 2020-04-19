@@ -9,6 +9,8 @@ import {
   LanguageName
 } from 'src/app/shared/models/language.model';
 import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
+import {Store} from '@ngrx/store';
+import * as fromUser from '../../../auth/actions/auth.actions';
 
 @Component({
   selector: 'app-profile-language',
@@ -24,7 +26,8 @@ export class ProfileLanguageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private store: Store
   ) {
     this.route.params.subscribe(params => {
       const user = this.profileService.user;
@@ -73,13 +76,7 @@ export class ProfileLanguageComponent implements OnInit {
     this.router.navigate(['/admin/profile']);
   }
   private save(language: Language) {
-    const user = this.profileService.user;
-    const _language = MockData.fakeIncreaseID<Language>(
-      user.languages,
-      language
-    );
-    user.languages = [...user.languages, _language];
-    this.profileService.updateProfile(user);
+    this.store.dispatch(fromUser.actions.addLanguage({language}));
     this.router.navigate(['/admin/profile']);
   }
 
