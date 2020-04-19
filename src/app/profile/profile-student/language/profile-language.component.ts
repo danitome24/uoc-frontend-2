@@ -22,6 +22,11 @@ export class ProfileLanguageComponent implements OnInit {
         private store: Store,
         private router: Router
     ) {
+        this.route.params.subscribe(params => {
+            this.selectedLanguage$ = this.store.pipe(
+                select(fromUserReducer.selectSelectedLanguage, {langUid: +params.uid})
+            );
+        });
     }
 
     ngOnInit(): void {
