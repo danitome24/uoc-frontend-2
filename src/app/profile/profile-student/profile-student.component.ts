@@ -29,4 +29,7 @@ export class ProfileStudentComponent {
     deleteLanguage(languageID: any) {
         this.store.dispatch(fromUserActions.actions.deleteLanguage({languageId: languageID}));
     }
+
+    deleteExperience(uid: number) {
+    }
 }

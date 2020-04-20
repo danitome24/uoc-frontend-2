@@ -140,4 +140,35 @@
       >Nuevo idioma</a
     >
   </section>
+
+  <h2>Experiencia laboral</h2>
+  <section id="work-experience">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-light">
+      <th>Empresa</th>
+      <th>Posición</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let experience of ( user$ | async ).experiencies">
+        <td>{{ experience.company }}</td>
+        <td>{{ experience.position }}</td>
+        <td>{{ experience.date }}</td>
+        <td>
+          <a [routerLink]="['/admin/profile/profile-student/experience',experience.uid]"
+          >Editar</a
+          >
+          |
+          <a style="cursor:pointer" (click)="deleteExperience(experience.uid)"
+          >Borrar</a
+          >
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <a [routerLink]="['/admin/profile/profile-student/experience']"
+    >Nueva experiencia</a
+    >
+  </section>
 </div>

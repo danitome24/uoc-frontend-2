@@ -10,6 +10,7 @@ import { ProfileLanguageComponent } from './profile-student/language/profile-lan
 import { ProfileAccountComponent } from './profile-student/account/profile-account.component';
 import { ProfileAccountFormComponent } from './profile-student/account/profile-account-form/profile-account-form.component';
 import { ProfileLanguageFormComponent } from './profile-student/language/profile-language-form/profile-language-form.component';
+import { WorkExperienceComponent } from './profile-student/work-experience/work-experience.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfileLanguageFormComponent } from './profile-student/language/profile
     ProfileLanguageComponent,
     ProfileAccountComponent,
     ProfileAccountFormComponent,
-    ProfileLanguageFormComponent
+    ProfileLanguageFormComponent,
+    WorkExperienceComponent
   ],
   imports: [SharedModule, ProfileRoutingModule]
 })
