@@ -211,6 +211,12 @@ export const selectNextUidLanguage = createSelector(
         return state.user.languages.length + 1;
     }
 );
+export const selectNextUidExperience = createSelector(
+    selectUserProfile,
+    (state: State) => {
+        return state.user.experiencies.length + 1;
+    }
+);
 export const selectSelectedStudy = createSelector(
     selectUserProfile,
     (state: State, props: { studyId: number }) => state.user.studies.find(study => study.uid === props.studyId)

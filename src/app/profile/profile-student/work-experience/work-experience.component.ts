@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Experience} from '../../../shared/models/experience.model';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as fromUser from '../../../auth/actions/auth.actions';
+import * as fromUserReducer from '../../../auth/reducers/auth.reducer';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-work-experience',
@@ -11,13 +14,19 @@ import * as fromUser from '../../../auth/actions/auth.actions';
 export class WorkExperienceComponent implements OnInit {
 
     public experience: Experience = {} as Experience;
-    private nextWorkExperience: number;
+    public nextWorkUid$: Observable<number>;
+    public nextWorkUid: number;
 
-    constructor(private store: Store) {
-        this.nextWorkExperience = 2;
+    constructor(private store: Store, private router: Router) {
     }
 
     ngOnInit(): void {
+        this.nextWorkUid$ = this.store.pipe(
+            select(fromUserReducer.selectNextUidExperience)
+        );
+        this.nextWorkUid$.subscribe(nextUid => {
+            this.nextWorkUid = nextUid;
+        });
     }
 
     addOrUpdateExperience(experience: Experience) {
@@ -30,8 +39,9 @@ export class WorkExperienceComponent implements OnInit {
     private save(experience: Experience) {
         const newWorkExperience = {
             ...experience,
-            uid: this.nextWorkExperience,
+            uid: this.nextWorkUid,
         };
         this.store.dispatch(fromUser.actions.addWorkExperience({experience: newWorkExperience}));
+        this.router.navigate(['/admin/profile']);
     }
 }

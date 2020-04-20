@@ -26,7 +26,7 @@ export class WorkExperienceFormComponent implements OnInit {
             uid: [],
             company: [this.workExperience.company, [Validators.required]],
             position: [this.workExperience.position, [Validators.required]],
-            date: [this.workExperience.date, [Validators.required, dateValidator()]]
+            date: [this.workExperience.date, [Validators.required]]
         });
     }
 
