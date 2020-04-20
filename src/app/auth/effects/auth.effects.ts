@@ -1,15 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, withLatestFrom} from 'rxjs/operators';
 import * as fromAuth from '../actions/auth.actions';
 import {SigninService} from '../signin/signin.service';
 import {from} from 'rxjs';
 import {User} from '../../shared/models/user.model';
 import {Router} from '@angular/router';
+import {ProfileService} from '../../shared/services/profile.service';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
-    constructor(private actions$: Actions, private signinService: SigninService, private router: Router) {
+    constructor(private actions$: Actions, private signinService: SigninService, private router: Router,
+                private profileService: ProfileService, private store$: Store) {
     }
 
     // @ts-ignore
@@ -25,6 +28,21 @@ export class AuthEffects {
             return fromAuth.actions.signInSuccess({user});
         }),
     ));
+
+    crudStudy$ = createEffect(() => this.actions$.pipe(
+        ofType(fromAuth.DELETE_STUDY, fromAuth.ADD_STUDY, fromAuth.UPDATE_STUDY, fromAuth.DELETE_LANGUAGE, fromAuth.ADD_LANGUAGE, fromAuth.UPDATE_LANGUAGE),
+        withLatestFrom(this.store$),
+        switchMap(([payload, state]) => {
+            return from(this.profileService.updateProfile(state.auth.user));
+        }),
+    ), {dispatch: false});
+
+    updateProfile$ = createEffect(() => this.actions$.pipe(
+        ofType(fromAuth.UPDATE_USER_PROFILE),
+        switchMap(payload => {
+            return from(this.profileService.updateProfile(payload.user));
+        }),
+    ), {dispatch: false});
 
     // @ts-ignore
 
