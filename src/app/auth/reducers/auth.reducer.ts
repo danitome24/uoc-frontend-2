@@ -2,7 +2,7 @@ import {User} from '../../shared/models/user.model';
 import {
     ADD_LANGUAGE,
     ADD_STUDY, ADD_WORK_EXPERIENCE, DELETE_LANGUAGE,
-    DELETE_STUDY,
+    DELETE_STUDY, DELETE_WORK_EXPERIENCE,
     FORGOT_PASSWORD_REQUEST,
     LOGOUT,
     SIGN_IN,
@@ -186,6 +186,18 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 user: userWork
+            };
+        case DELETE_WORK_EXPERIENCE:
+            const userD = {
+                ...state.user
+            };
+            const newExperiences = userD.experiencies.filter(experience => experience.uid !== action.experienceId);
+            userD.experiencies = [
+                ...newExperiences
+            ];
+            return {
+                ...state,
+                user: userD
             };
         default:
             return state;

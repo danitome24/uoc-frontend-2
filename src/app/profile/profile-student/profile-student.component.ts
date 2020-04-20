@@ -31,5 +31,6 @@ export class ProfileStudentComponent {
     }
 
     deleteExperience(uid: number) {
+        this.store.dispatch(fromUserActions.actions.deleteExperience({experienceId: uid}));
     }
 }

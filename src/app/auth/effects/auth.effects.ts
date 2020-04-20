@@ -8,11 +8,12 @@ import {User} from '../../shared/models/user.model';
 import {Router} from '@angular/router';
 import {ProfileService} from '../../shared/services/profile.service';
 import {Store} from '@ngrx/store';
+import {State} from '../../reducers/index';
 
 @Injectable()
 export class AuthEffects {
     constructor(private actions$: Actions, private signinService: SigninService, private router: Router,
-                private profileService: ProfileService, private store$: Store) {
+                private profileService: ProfileService, private store$: Store<State>) {
     }
 
     // @ts-ignore
@@ -39,7 +40,7 @@ export class AuthEffects {
 
     updateProfile$ = createEffect(() => this.actions$.pipe(
         ofType(fromAuth.UPDATE_USER_PROFILE),
-        switchMap(payload => {
+        switchMap((payload: { user: User }) => {
             return from(this.profileService.updateProfile(payload.user));
         }),
     ), {dispatch: false});
