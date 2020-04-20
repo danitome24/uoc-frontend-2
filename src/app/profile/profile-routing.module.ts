@@ -16,6 +16,10 @@ const routes: Routes = [
     component: WorkExperienceComponent
   },
   {
+    path: 'profile-student/work-experience/:uid',
+    component: WorkExperienceComponent
+  },
+  {
     path: 'profile-student/account',
     component: ProfileAccountComponent
   },

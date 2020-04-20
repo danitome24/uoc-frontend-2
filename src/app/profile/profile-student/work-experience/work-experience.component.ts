@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromUser from '../../../auth/actions/auth.actions';
 import * as fromUserReducer from '../../../auth/reducers/auth.reducer';
 import {Observable} from 'rxjs';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-work-experience',
@@ -15,9 +15,15 @@ export class WorkExperienceComponent implements OnInit {
 
     public experience: Experience = {} as Experience;
     public nextWorkUid$: Observable<number>;
+    public selectedExperience$: Observable<Experience>;
     public nextWorkUid: number;
 
-    constructor(private store: Store, private router: Router) {
+    constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
+        this.route.params.subscribe(params => {
+            this.selectedExperience$ = this.store.pipe(
+                select(fromUserReducer.selectSelectedExperience, {experienceUid: +params.uid})
+            );
+        });
     }
 
     ngOnInit(): void {
@@ -34,6 +40,8 @@ export class WorkExperienceComponent implements OnInit {
     }
 
     private update(experience: Experience) {
+        this.store.dispatch(fromUser.actions.updateWorkExperience({experience}));
+        this.router.navigate(['/admin/profile']);
     }
 
     private save(experience: Experience) {

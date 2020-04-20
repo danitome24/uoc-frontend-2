@@ -10,7 +10,7 @@ import {
     SIGN_IN_SUCCESS,
     UPDATE_LANGUAGE,
     UPDATE_STUDY,
-    UPDATE_USER_PROFILE
+    UPDATE_USER_PROFILE, UPDATE_WORK_EXPERIENCE
 } from '../actions/auth.actions';
 import {Auth} from '../../shared/models/auth.model';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
@@ -171,6 +171,22 @@ export function reducer(state = initialState, action) {
                 ...state,
                 user
             };
+        case UPDATE_WORK_EXPERIENCE:
+            const userWork = {
+                ...state.user
+            };
+            const works = state.user.experiencies.filter(work => work.uid !== action.experience.uid);
+            const newWork = [
+                ...works,
+                action.experience
+            ].sort((a, b) => {
+                return a.uid - b.uid;
+            });
+            userWork.experiencies = newWork;
+            return {
+                ...state,
+                user: userWork
+            };
         default:
             return state;
     }
@@ -220,6 +236,10 @@ export const selectNextUidExperience = createSelector(
 export const selectSelectedStudy = createSelector(
     selectUserProfile,
     (state: State, props: { studyId: number }) => state.user.studies.find(study => study.uid === props.studyId)
+);
+export const selectSelectedExperience = createSelector(
+    selectUserProfile,
+    (state: State, props: { experienceUid: number }) => state.user.experiencies.find(study => study.uid === props.experienceUid)
 );
 export const selectNextUidStudy = createSelector(
     selectUserProfile,

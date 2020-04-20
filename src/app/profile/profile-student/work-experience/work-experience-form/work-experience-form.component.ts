@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Experience} from '../../../../shared/models/experience.model';
-import {dateValidator} from '../../../../shared/directives/date-validator.directive';
 
 @Component({
     selector: 'app-work-experience-form',
@@ -23,7 +22,7 @@ export class WorkExperienceFormComponent implements OnInit {
 
     loadFormInstance() {
         this.workForm = this.fb.group({
-            uid: [],
+            uid: [this.workExperience.uid],
             company: [this.workExperience.company, [Validators.required]],
             position: [this.workExperience.position, [Validators.required]],
             date: [this.workExperience.date, [Validators.required]]

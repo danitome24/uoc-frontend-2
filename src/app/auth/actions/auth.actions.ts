@@ -22,6 +22,7 @@ export const ADD_STUDY = '[Profile Study Page] AddStudy';
 export const UPDATE_STUDY = '[Profile Study Page] UpdateStudy';
 export const DELETE_STUDY = '[Profile Study Page] DeleteStudy';
 export const ADD_WORK_EXPERIENCE = '[Profile Study Page] AddWorkExperience';
+export const UPDATE_WORK_EXPERIENCE = '[Profile Study Page] UpdateWorkExperience';
 
 export const actions = {
         signIn: createAction(
@@ -79,6 +80,10 @@ export const actions = {
         ),
         addWorkExperience: createAction(
             ADD_WORK_EXPERIENCE,
+            props<{experience: Experience}>()
+        ),
+        updateWorkExperience: createAction(
+            UPDATE_WORK_EXPERIENCE,
             props<{experience: Experience}>()
         )
     }
