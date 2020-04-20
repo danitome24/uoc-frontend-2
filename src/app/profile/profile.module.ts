@@ -11,6 +11,7 @@ import { ProfileAccountComponent } from './profile-student/account/profile-accou
 import { ProfileAccountFormComponent } from './profile-student/account/profile-account-form/profile-account-form.component';
 import { ProfileLanguageFormComponent } from './profile-student/language/profile-language-form/profile-language-form.component';
 import { WorkExperienceComponent } from './profile-student/work-experience/work-experience.component';
+import { WorkExperienceFormComponent } from './profile-student/work-experience/work-experience-form/work-experience-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WorkExperienceComponent } from './profile-student/work-experience/work-
     ProfileAccountComponent,
     ProfileAccountFormComponent,
     ProfileLanguageFormComponent,
-    WorkExperienceComponent
+    WorkExperienceComponent,
+    WorkExperienceFormComponent
   ],
   imports: [SharedModule, ProfileRoutingModule]
 })

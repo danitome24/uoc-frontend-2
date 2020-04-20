@@ -4,11 +4,16 @@ import { ProfileComponent } from './profile.component';
 import { ProfileStudyComponent } from './profile-student/study/profile-study.component';
 import { ProfileLanguageComponent } from './profile-student/language/profile-language.component';
 import { ProfileAccountComponent } from './profile-student/account/profile-account.component';
+import {WorkExperienceComponent} from './profile-student/work-experience/work-experience.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ProfileComponent
+  },
+  {
+    path: 'profile-student/work-experience',
+    component: WorkExperienceComponent
   },
   {
     path: 'profile-student/account',

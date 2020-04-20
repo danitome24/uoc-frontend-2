@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Experience} from '../../../shared/models/experience.model';
 
 @Component({
   selector: 'app-work-experience',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./work-experience.component.scss']
 })
 export class WorkExperienceComponent implements OnInit {
+
+  public experience: Experience = {} as Experience;
 
   constructor() { }
 

@@ -156,7 +156,7 @@
         <td>{{ experience.position }}</td>
         <td>{{ experience.date }}</td>
         <td>
-          <a [routerLink]="['/admin/profile/profile-student/experience',experience.uid]"
+          <a [routerLink]="['/admin/profile/profile-student/work-experience',experience.uid]"
           >Editar</a
           >
           |
@@ -167,8 +167,6 @@
       </tr>
       </tbody>
     </table>
-    <a [routerLink]="['/admin/profile/profile-student/experience']"
-    >Nueva experiencia</a
-    >
+    <a [routerLink]="['/admin/profile/profile-student/work-experience']">Nueva experiencia</a>
   </section>
 </div>
