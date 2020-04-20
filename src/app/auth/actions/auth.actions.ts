@@ -2,6 +2,7 @@ import {createAction, props} from '@ngrx/store';
 import {User} from '../../shared/models/user.model';
 import {Language} from '../../shared/models/language.model';
 import {CollegeStudy, VocationalStudy} from '../../shared/models/study.model';
+import {Experience} from '../../shared/models/experience.model';
 
 export const SIGN_IN = '[SignIn Page] SignIn';
 export const SIGN_IN_FAILED = '[SignIn Page] SignInFailed';
@@ -20,6 +21,7 @@ export const DELETE_LANGUAGE = '[Profile Language Page] DeleteLanguage';
 export const ADD_STUDY = '[Profile Study Page] AddStudy';
 export const UPDATE_STUDY = '[Profile Study Page] UpdateStudy';
 export const DELETE_STUDY = '[Profile Study Page] DeleteStudy';
+export const ADD_WORK_EXPERIENCE = '[Profile Study Page] AddWorkExperience';
 
 export const actions = {
         signIn: createAction(
@@ -74,6 +76,10 @@ export const actions = {
         deleteStudy: createAction(
             DELETE_STUDY,
             props<{studyId: number}>()
+        ),
+        addWorkExperience: createAction(
+            ADD_WORK_EXPERIENCE,
+            props<{experience: Experience}>()
         )
     }
 ;

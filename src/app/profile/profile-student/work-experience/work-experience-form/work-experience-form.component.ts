@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Experience} from '../../../../shared/models/experience.model';
 import {dateValidator} from '../../../../shared/directives/date-validator.directive';
@@ -12,6 +12,7 @@ export class WorkExperienceFormComponent implements OnInit {
 
     public workForm: FormGroup;
     @Input() workExperience: Experience;
+    @Output() submitForm: EventEmitter<Experience> = new EventEmitter<Experience>();
 
     constructor(private fb: FormBuilder) {
     }
@@ -30,6 +31,9 @@ export class WorkExperienceFormComponent implements OnInit {
     }
 
     submit() {
-        console.log(this.workForm.value);
+        const newWorkExperience = {
+            ...this.workForm.value
+        };
+        this.submitForm.emit(newWorkExperience);
     }
 }
