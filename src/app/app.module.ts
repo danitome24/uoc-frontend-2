@@ -15,6 +15,8 @@ import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {SigninModule} from './auth/signin/signin.module';
 import {metaReducers} from './reducers';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
     imports: [
@@ -39,6 +41,7 @@ import {metaReducers} from './reducers';
         EffectsModule.forRoot(fromRoot.effects),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
+        NoopAnimationsModule
     ],
     declarations: [AppComponent],
     providers: [],
