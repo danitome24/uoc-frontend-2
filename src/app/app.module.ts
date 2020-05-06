@@ -16,7 +16,6 @@ import {EffectsModule} from '@ngrx/effects';
 import {SigninModule} from './auth/signin/signin.module';
 import {metaReducers} from './reducers';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
     imports: [

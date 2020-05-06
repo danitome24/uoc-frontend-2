@@ -1,23 +1,11 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
-/*
-import { FlexLayoutModule } from '@angular/flex-layout';
- import {
-  MatSidenavModule,
-  MatListModule,
-  MatTooltipModule,
-  MatOptionModule,
-  MatSelectModule,
-  MatMenuModule,
-  MatSnackBarModule,
-  MatGridListModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatButtonModule,
-  MatRadioModule,
-  MatCheckboxModule,
-  MatCardModule,
-  MatProgressSpinnerModule,
-  MatRippleModule,
-  MatDialogModule
-} from '@angular/material'; */
+@NgModule({
+    imports: [
+
+        MatFormFieldModule
+    ]
+})
+export class MaterialModule {
+}
