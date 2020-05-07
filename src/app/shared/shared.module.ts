@@ -17,6 +17,7 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
 // SERVICES
 import { AppConfirmService } from './services/app-confirm/app-confirm.service';
 import {AuthGuard} from './guards/auth.guard';
+import {MaterialModule} from './material.module';
 
 const declarations = [AppComfirmComponent, AdminLayoutComponent];
 const exports = [
@@ -30,7 +31,7 @@ const exports = [
 const providers = [AppConfirmService, AuthGuard];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
   entryComponents: [AppComfirmComponent],
   providers,
   declarations,

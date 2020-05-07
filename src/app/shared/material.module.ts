@@ -12,6 +12,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 import {NgModule} from '@angular/core';
 
@@ -30,7 +33,9 @@ import {NgModule} from '@angular/core';
         MatProgressSpinnerModule,
         MatTooltipModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSidenavModule,
+        MatToolbarModule
     ],
     exports: [
         MatButtonModule,
@@ -46,7 +51,9 @@ import {NgModule} from '@angular/core';
         MatProgressSpinnerModule,
         MatTooltipModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSidenavModule,
+        MatToolbarModule
     ],
 })
 

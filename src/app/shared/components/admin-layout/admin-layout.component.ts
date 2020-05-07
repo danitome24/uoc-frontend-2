@@ -8,9 +8,29 @@ import {actions as SignInActions} from '../../../auth/actions/auth.actions';
 
 @Component({
   selector: 'app-admin-layout',
+  styleUrls: ['./admin-layout.component.scss'],
   templateUrl: './admin-layout.template.html'
 })
 export class AdminLayoutComponent {
+  public menus: [
+    {
+      'name': 'Dashboard',
+      'icon': 'dashboard',
+      'link': false,
+      'open': false,
+      'chip': { 'value': 1, 'color': 'accent' },
+      'sub': [
+        {
+          'name': 'Dashboard',
+          'link': '/auth/dashboard',
+          'icon': 'dashboard',
+          'chip': false,
+          'open': true,
+        }
+      ]
+    },
+  ];
+
   /* MOCK PURPOSES */
   constructor(
     private profileService: ProfileService,
