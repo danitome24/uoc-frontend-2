@@ -14,7 +14,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {NgModule} from '@angular/core';
 
@@ -35,7 +36,9 @@ import {NgModule} from '@angular/core';
         MatListModule,
         MatDialogModule,
         MatSidenavModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatSelectModule,
+        MatCheckboxModule
     ],
     exports: [
         MatButtonModule,
@@ -53,7 +56,9 @@ import {NgModule} from '@angular/core';
         MatListModule,
         MatDialogModule,
         MatSidenavModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatSelectModule,
+        MatCheckboxModule
     ],
 })
 

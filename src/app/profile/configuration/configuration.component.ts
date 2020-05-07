@@ -29,13 +29,14 @@ export class ConfigurationComponent implements OnInit {
     }
 
     updateNotifications(event) {
-        const sendNotifications = event.target.checked;
+        console.log(event);
+        const sendNotifications = event.checked;
         this.store.dispatch(fromConfigActions.actions.notificationsUpdate({sendNotifications}));
     }
 
     updateAppLocale(event) {
         const selectedLocale = AppSettings.APP_LOCALES.find((locale) => {
-            return locale.id == event.target.value;
+            return locale.id == event.value;
         });
         this.store.dispatch(fromConfigActions.actions.localeUpdate({locale: selectedLocale}));
     }
