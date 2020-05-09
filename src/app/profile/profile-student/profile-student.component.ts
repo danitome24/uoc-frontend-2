@@ -8,6 +8,7 @@ import {Observable, from} from 'rxjs';
 import {SigninService} from '../../auth/signin/signin.service';
 import {StudyDatasource} from '../datasource/study-datasource';
 import {LanguagesDatasource} from '../datasource/languages-datasource';
+import {ExperienceDatasource} from '../datasource/experience-datasource';
 
 @Component({
     selector: 'app-profile-student',
@@ -19,8 +20,10 @@ export class ProfileStudentComponent implements OnInit {
     public user$: Observable<User>;
     public studyDatasource: StudyDatasource;
     public languagesDatasource: LanguagesDatasource;
+    public experienceDatasource: ExperienceDatasource;
     displayedColumnsStudies: string[] = ['type', 'level', 'title', 'center', 'date', 'cert', 'bilingue', 'dual', 'actions'];
     displayedColumnsLanguages: string[] = ['level', 'language', 'date', 'actions'];
+    displayedColumnsExperience: string[] = ['company', 'position', 'date', 'actions'];
 
     constructor(private profileService: ProfileService, private store: Store, private signinService: SigninService) {
         // this.user = this.profileService.user;
@@ -34,6 +37,8 @@ export class ProfileStudentComponent implements OnInit {
         this.studyDatasource.loadStudies();
         this.languagesDatasource = new LanguagesDatasource(this.store);
         this.languagesDatasource.loadLanguages();
+        this.experienceDatasource = new ExperienceDatasource(this.store);
+        this.experienceDatasource.loadExperiences();
     }
 
     deleteStudy(studyID: number) {
