@@ -1,15 +1,14 @@
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {User} from '../../shared/models/user.model';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { finalize } from 'rxjs/internal/operators/finalize';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import * as fromUser from '../../auth/reducers/auth.reducer';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/internal/Observable';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs/internal/Observable';
 import {Study} from '../../shared/models/study.model';
+import {Language} from '../../shared/models/language.model';
 
-export class UserDatasource implements DataSource<Study> {
+export class LanguagesDatasource implements DataSource<Language> {
 
-    private userSubject = new BehaviorSubject<Study[]>([]);
+    private userSubject = new BehaviorSubject<Language[]>([]);
     private loadingUser = new BehaviorSubject<boolean>(false);
 
     public loading$ = this.loadingUser.asObservable();
@@ -18,7 +17,7 @@ export class UserDatasource implements DataSource<Study> {
     }
 
 
-    connect(collectionViewer: CollectionViewer): Observable<Study[]> {
+    connect(collectionViewer: CollectionViewer): Observable<Language[]> {
         return this.userSubject.asObservable();
     }
 
@@ -27,12 +26,12 @@ export class UserDatasource implements DataSource<Study> {
         this.loadingUser.complete();
     }
 
-    loadStudies() {
+    loadLanguages() {
 
         this.loadingUser.next(true);
 
         this.store.pipe(
             select(fromUser.selectShowUserProfile)
-        ).subscribe(user => this.userSubject.next(user.studies));
+        ).subscribe(user => this.userSubject.next(user.languages));
     }
 }

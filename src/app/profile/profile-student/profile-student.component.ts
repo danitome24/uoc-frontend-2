@@ -6,7 +6,8 @@ import * as fromUser from '../../auth/reducers/auth.reducer';
 import * as fromUserActions from '../../auth/actions/auth.actions';
 import {Observable, from} from 'rxjs';
 import {SigninService} from '../../auth/signin/signin.service';
-import {UserDatasource} from '../datasource/user-datasource';
+import {StudyDatasource} from '../datasource/study-datasource';
+import {LanguagesDatasource} from '../datasource/languages-datasource';
 
 @Component({
     selector: 'app-profile-student',
@@ -16,8 +17,10 @@ import {UserDatasource} from '../datasource/user-datasource';
 export class ProfileStudentComponent implements OnInit {
 
     public user$: Observable<User>;
-    public datasource: UserDatasource;
-    displayedColumns: string[] = ['type', 'level', 'title', 'center', 'date', 'cert', 'bilingue', 'dual', 'actions'];
+    public studyDatasource: StudyDatasource;
+    public languagesDatasource: LanguagesDatasource;
+    displayedColumnsStudies: string[] = ['type', 'level', 'title', 'center', 'date', 'cert', 'bilingue', 'dual', 'actions'];
+    displayedColumnsLanguages: string[] = ['level', 'language', 'date', 'actions'];
 
     constructor(private profileService: ProfileService, private store: Store, private signinService: SigninService) {
         // this.user = this.profileService.user;
@@ -27,8 +30,10 @@ export class ProfileStudentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.datasource = new UserDatasource(this.store);
-        this.datasource.loadStudies();
+        this.studyDatasource = new StudyDatasource(this.store);
+        this.studyDatasource.loadStudies();
+        this.languagesDatasource = new LanguagesDatasource(this.store);
+        this.languagesDatasource.loadLanguages();
     }
 
     deleteStudy(studyID: number) {

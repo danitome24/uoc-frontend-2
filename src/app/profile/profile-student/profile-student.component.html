@@ -30,7 +30,7 @@
     <section>
         <h2>Formaci&oacute;n acad&eacute;mica</h2>
 
-        <table mat-table [dataSource]="datasource">
+        <table mat-table [dataSource]="studyDatasource">
             <ng-container matColumnDef="type">
                 <mat-header-cell *matHeaderCellDef> Tipo</mat-header-cell>
                 <mat-cell *matCellDef="let study"> {{study.level.name}} </mat-cell>
@@ -72,46 +72,42 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-header-row *matHeaderRowDef="displayedColumnsStudies"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnsStudies;"></mat-row>
         </table>
 
         <a mat-button color="primary" [routerLink]="['/admin/profile/profile-student/study']">Nueva formación</a>
     </section>
 
-    <h2>Idiomas</h2>
-    <section id="languages">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-light">
-            <th>Nivel</th>
-            <th>Idioma</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-            </thead>
-            <tbody>
-            <tr *ngFor="let language$ of ( user$ | async ).languages">
-                <td>{{ language$.level.name }}</td>
-                <td>{{ language$.name.name }}</td>
-                <td>{{ language$.date }}</td>
-                <td>
-                    <a
-                            [routerLink]="[
-                '/admin/profile/profile-student/language',
-                language$.uid
-              ]"
-                    >Editar</a
-                    >
+    <section id="language-table">
+        <h2>Idiomas</h2>
+        <table mat-table [dataSource]="languagesDatasource">
+            <ng-container matColumnDef="level">
+                <mat-header-cell *matHeaderCellDef> Nivel</mat-header-cell>
+                <mat-cell *matCellDef="let lang">{{lang.level.name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="language">
+                <mat-header-cell *matHeaderCellDef> Idioma</mat-header-cell>
+                <mat-cell *matCellDef="let lang"> {{lang.name.name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Fecha</mat-header-cell>
+                <mat-cell *matCellDef="let lang"> {{lang.date}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let lang">
+                    <a mat-button color="primary" [routerLink]="['/admin/profile/profile-student/language',lang.uid]">Editar</a>
                     |
-                    <a style="cursor:pointer" (click)="deleteLanguage(language$.uid)"
-                    >Borrar</a
-                    >
-                </td>
-            </tr>
-            </tbody>
+                    <a mat-button color="primary" style="cursor:pointer" (click)="deleteLanguage(lang.uid)">Borrar</a>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsLanguages"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnsLanguages;"></mat-row>
         </table>
-        <a [routerLink]="['/admin/profile/profile-student/language']"
-        >Nuevo idioma</a
-        >
+
+        <a mat-button color="primary" [routerLink]="['/admin/profile/profile-student/language']">Nuevo idioma</a>
     </section>
 
     <h2>Experiencia laboral</h2>
