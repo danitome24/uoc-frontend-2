@@ -1,56 +1,41 @@
 <h3>Cumple con la Titulación (Familia)</h3>
 
-<table class="table table-bordered table-striped">
-    <thead class="thead-light">
-    <tr>
-        <th>Puesto</th>
-        <th>Empresa</th>
-        <th>Familia</th>
-        <th>Fecha</th>
-        <th>Provincia</th>
-        <th>Municipio</th>
-        <th>Inscrito</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let offer of (offersStudy$ | async)">
-        <td>{{ offer.job.name }}</td>
-        <td>{{ offer.company.name }}</td>
-        <td>{{ offer.category.name }}</td>
-        <td>{{ offer.date }}</td>
-        <td>{{ offer.province.name }}</td>
-        <td>{{ offer.municipe.name }}</td>
-        <td>{{ offer.subscribe ? 'Sí' : 'No' }}</td>
-        <td>
-            <a style="cursor:pointer" [routerLink]="[offer.id]">Ver Detalle</a>
+<table mat-table [dataSource]="offersStudy$">
+    <ng-container matColumnDef="job">
+        <th mat-header-cell *matHeaderCellDef> Puesto</th>
+        <td mat-cell *matCellDef="let offer"> {{offer.job.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Empresa</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.company.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Familia</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.category.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Fecha</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.date }} </td>
+    </ng-container>
+    <ng-container matColumnDef="province">
+        <th mat-header-cell *matHeaderCellDef> Provincia</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.province.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="municipe">
+        <th mat-header-cell *matHeaderCellDef> Municipio</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.municipe.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="subscribed">
+        <th mat-header-cell *matHeaderCellDef> Inscrito</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.subscribe ? 'Sí' : 'No' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones</th>
+        <td mat-cell *matCellDef="let offer">
+            <a mat-button color="primary" style="cursor:pointer" [routerLink]="[offer.id]">Ver Detalle</a>
         </td>
-    </tr>
-    </tbody>
-</table>
+    </ng-container>
 
-<h3>Otras Ofertas</h3>
-
-<table class="table table-bordered table-striped">
-    <thead class="thead-light">
-    <tr>
-        <th>Puesto</th>
-        <th>Empresa</th>
-        <th>Familia</th>
-        <th>Fecha</th>
-        <th>Provincia</th>
-        <th>Municipio</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let offer of (offersOther$ | async)">
-        <td>{{ offer.job.name }}</td>
-        <td>{{ offer.company.name }}</td>
-        <td>{{ offer.category.name }}</td>
-        <td>{{ offer.date }}</td>
-        <td>{{ offer.province.name }}</td>
-        <td>{{ offer.municipe.name }}</td>
-        <td></td>
-    </tr>
-    </tbody>
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
 </table>

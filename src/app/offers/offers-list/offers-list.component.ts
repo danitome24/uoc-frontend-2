@@ -12,6 +12,7 @@ import * as fromOfferSelects from '../reducers/offer.reducer';
 export class OffersListComponent implements OnInit {
     public offersStudy$;
     public offersOther$;
+    public displayColumns = ['job', 'company', 'category', 'date', 'province', 'municipe', 'subscribed', 'actions']
 
     constructor(
         private profileService: ProfileService,
