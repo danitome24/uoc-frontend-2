@@ -1,172 +1,137 @@
-<div id="contenido">
-  <div class="float-left" id="foto-perfil">
-    <div>
-      <img
-        class="img-fluid img-profile rounded-circle mx-auto mb-2"
-        src="{{ ( user$ | async ).avatar_hash }}"
-      />
+<mat-card>
+    <div id="foto-perfil">
+        <div>
+            <img
+                    class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                    src="{{ ( user$ | async ).avatar_hash }}"
+            />
+        </div>
+        <div class="text-center pr-5">
+            {{ (user$ | async).name + ' ' + (user$ | async).surname }}
+        </div>
     </div>
-    <div class="text-center pr-5">
-      {{ ( user$ | async ).name + ' ' + ( user$ | async ).surname }}
-    </div>
-  </div>
 
-  <section id="datosPersonales" class="float-left">
-    <table>
-      <tbody>
-        <tr>
-          <th>Email</th>
-          <td>{{ ( user$ | async ).email }}</td>
-        </tr>
-        <tr>
-          <th>Fecha de nacimiento</th>
-          <td>{{ ( user$ | async ).birthdate }}</td>
-        </tr>
-        <tr>
-          <th>Tel&eacute;fono</th>
-          <td>{{ ( user$ | async ).phone }}</td>
-        </tr>
-        <tr>
-          <th>NIF/NIE</th>
-          <td>{{ ( user$ | async ).documentNumber }}</td>
-        </tr>
-        <tr>
-          <th>Permisos de conducir</th>
-          <td>{{ ( user$ | async ).license }}</td>
-        </tr>
-        <tr>
-          <th>Direccion</th>
-          <td>{{ ( user$ | async ).address | json }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <a [routerLink]="['/admin/profile/profile-student/account']">Modificar</a>
-  </section>
-  <div id="otra_info" class="float-left">
-    <form>
-      <div class="float-left">
-        <label for="about-me">Acerca de mi...</label><br />
-        <textarea readonly="true" id="about-me" name="about-me">{{
-            ( user$ | async ).aboutMe
-        }}</textarea>
-      </div>
-      <div class="float-left">
-        <label for="other">Otras competencias</label> <br />
+    <section id="datosPersonales">
+        <mat-list>
+            <mat-list-item>Email:  {{ (user$ | async).email }}</mat-list-item>
+            <mat-list-item>Fecha de nacimiento: {{ (user$ | async).birthdate }}</mat-list-item>
+            <mat-list-item>Tel&eacute;fono: {{ (user$ | async).phone }}</mat-list-item>
+            <mat-list-item>NIF/NIE: {{ (user$ | async).documentNumber }}</mat-list-item>
+            <mat-list-item>Permisos de conducir: {{ (user$ | async).license }}</mat-list-item>
+            <mat-list-item>Direccion: {{ (user$ | async).address | json }}</mat-list-item>
+            <mat-list-item>Acerca de mi...: {{(user$ | async).aboutMe}}</mat-list-item>
+            <mat-list-item>Otras competencias...: {{(user$ | async).otherCompetences}}</mat-list-item>
+        </mat-list>
+        <a mat-stroked-button color="primary" [routerLink]="['/admin/profile/profile-student/account']">Modificar</a>
+    </section>
 
-        <textarea readonly="true" id="other" name="other">{{
-            ( user$ | async ).otherCompetences
-        }}</textarea>
-      </div>
-    </form>
-  </div>
+    <mat-divider></mat-divider>
 
-  <section style="clear:both;padding-bottom:4em;"></section>
+    <h2>Formaci&oacute;n acad&eacute;mica</h2>
+    <section id="formacion_academica">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+            <th>Tipo</th>
+            <th>Nivel</th>
+            <th>T&iacute;tulo</th>
+            <th>Centro</th>
+            <th>Fecha</th>
+            <th>Certificado</th>
+            <th>Bilingüe</th>
+            <th>Dual</th>
+            <th>Acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let study$ of ( user$ | async ).studies; let i = index">
+                <td>{{ study$.level.name }}</td>
+                <td>{{ study$.grade?.name }}</td>
 
-  <h2>Formaci&oacute;n acad&eacute;mica</h2>
-  <section id="formacion_academica">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-light">
-        <th>Tipo</th>
-        <th>Nivel</th>
-        <th>T&iacute;tulo</th>
-        <th>Centro</th>
-        <th>Fecha</th>
-        <th>Certificado</th>
-        <th>Bilingüe</th>
-        <th>Dual</th>
-        <th>Acciones</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let study$ of ( user$ | async ).studies; let i = index">
-          <td>{{ study$.level.name }}</td>
-          <td>{{ study$.grade?.name }}</td>
+                <td>{{ study$.title.name || study$.title }}</td>
+                <td>{{ study$.institution.name || study$.institution }}</td>
+                <td>{{ study$.date }}</td>
+                <td>{{ study$.certificate ? 'Sí' : 'No' }}</td>
+                <td>{{ study$.bilingue ? 'Sí' : 'No' }}</td>
+                <td>{{ study$.dual ? 'Sí' : 'No' }}</td>
 
-          <td>{{ study$.title.name || study$.title }}</td>
-          <td>{{ study$.institution.name || study$.institution }}</td>
-          <td>{{ study$.date }}</td>
-          <td>{{ study$.certificate ? 'Sí' : 'No' }}</td>
-          <td>{{ study$.bilingue ? 'Sí' : 'No' }}</td>
-          <td>{{ study$.dual ? 'Sí' : 'No' }}</td>
+                <td>
+                    <a
+                            [routerLink]="['/admin/profile/profile-student/study', study$.uid]"
+                    >Editar</a
+                    >
+                    |
+                    <a style="cursor:pointer" (click)="deleteStudy(study$.uid)"
+                    >Borrar</a
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a [routerLink]="['/admin/profile/profile-student/study']"
+        >Nueva formación</a
+        >
+    </section>
 
-          <td>
-            <a
-              [routerLink]="['/admin/profile/profile-student/study', study$.uid]"
-              >Editar</a
-            >
-            |
-            <a style="cursor:pointer" (click)="deleteStudy(study$.uid)"
-              >Borrar</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a [routerLink]="['/admin/profile/profile-student/study']"
-      >Nueva formación</a
-    >
-  </section>
-
-  <h2>Idiomas</h2>
-  <section id="languages">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-light">
-        <th>Nivel</th>
-        <th>Idioma</th>
-        <th>Fecha</th>
-        <th>Acciones</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let language$ of ( user$ | async ).languages">
-          <td>{{ language$.level.name }}</td>
-          <td>{{ language$.name.name }}</td>
-          <td>{{ language$.date }}</td>
-          <td>
-            <a
-              [routerLink]="[
+    <h2>Idiomas</h2>
+    <section id="languages">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+            <th>Nivel</th>
+            <th>Idioma</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let language$ of ( user$ | async ).languages">
+                <td>{{ language$.level.name }}</td>
+                <td>{{ language$.name.name }}</td>
+                <td>{{ language$.date }}</td>
+                <td>
+                    <a
+                            [routerLink]="[
                 '/admin/profile/profile-student/language',
                 language$.uid
               ]"
-              >Editar</a
-            >
-            |
-            <a style="cursor:pointer" (click)="deleteLanguage(language$.uid)"
-              >Borrar</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a [routerLink]="['/admin/profile/profile-student/language']"
-      >Nuevo idioma</a
-    >
-  </section>
+                    >Editar</a
+                    >
+                    |
+                    <a style="cursor:pointer" (click)="deleteLanguage(language$.uid)"
+                    >Borrar</a
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a [routerLink]="['/admin/profile/profile-student/language']"
+        >Nuevo idioma</a
+        >
+    </section>
 
-  <h2>Experiencia laboral</h2>
-  <section id="work-experience">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-light">
-      <th>Empresa</th>
-      <th>Posición</th>
-      <th>Fecha</th>
-      <th>Acciones</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let experience of ( user$ | async ).experiencies">
-        <td>{{ experience.company }}</td>
-        <td>{{ experience.position }}</td>
-        <td>{{ experience.date }}</td>
-        <td>
-          <a [routerLink]="['/admin/profile/profile-student/work-experience',experience.uid]"
-          >Editar</a
-          >
-          |
-          <a style="cursor:pointer" (click)="deleteExperience(experience.uid)"
-          >Borrar</a
-          >
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <a [routerLink]="['/admin/profile/profile-student/work-experience']">Nueva experiencia</a>
-  </section>
-</div>
+    <h2>Experiencia laboral</h2>
+    <section id="work-experience">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+            <th>Empresa</th>
+            <th>Posición</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let experience of ( user$ | async ).experiencies">
+                <td>{{ experience.company }}</td>
+                <td>{{ experience.position }}</td>
+                <td>{{ experience.date }}</td>
+                <td>
+                    <a [routerLink]="['/admin/profile/profile-student/work-experience',experience.uid]"
+                    >Editar</a
+                    >
+                    |
+                    <a style="cursor:pointer" (click)="deleteExperience(experience.uid)"
+                    >Borrar</a
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a [routerLink]="['/admin/profile/profile-student/work-experience']">Nueva experiencia</a>
+    </section>
+</mat-card>
