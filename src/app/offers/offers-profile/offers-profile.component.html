@@ -1,30 +1,36 @@
-<h3>Mis Ofertas</h3>
+<table mat-table [dataSource]="offers$">
+    <ng-container matColumnDef="job">
+        <th mat-header-cell *matHeaderCellDef> Puesto</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.job.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Puesto</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.company.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Familia</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.category.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Fecha</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.date }} </td>
+    </ng-container>
+    <ng-container matColumnDef="province">
+        <th mat-header-cell *matHeaderCellDef> Provincia</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.province.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="municipe">
+        <th mat-header-cell *matHeaderCellDef> Municipio</th>
+        <td mat-cell *matCellDef="let offer"> {{ offer.municipe.name }} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones</th>
+        <td mat-cell *matCellDef="let offer">
+            <a mat-button color="primary" style="cursor:pointer" [routerLink]="['/admin/offers/', offer.id]">Ver
+                Detalle</a>
+        </td>
+    </ng-container>
 
-<table class="table table-bordered table-striped">
-  <thead class="thead-light">
-    <tr>
-      <th>Puesto</th>
-      <th>Empresa</th>
-      <th>Familia</th>
-      <th>Fecha</th>
-      <th>Provincia</th>
-      <th>Municipio</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let offer of ( offers$ | async )">
-      <td>{{ offer.job.name }}</td>
-      <td>{{ offer.company.name }}</td>
-      <td>{{ offer.category.name }}</td>
-      <td>{{ offer.date }}</td>
-      <td>{{ offer.province.name }}</td>
-      <td>{{ offer.municipe.name }}</td>
-      <td>
-        <a style="cursor:pointer" [routerLink]="['/admin/offers/', offer.id]"
-          >Ver Detalle</a
-        >
-      </td>
-    </tr>
-  </tbody>
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
 </table>

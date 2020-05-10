@@ -9,6 +9,7 @@ import * as fromOffer from '../actions/offer.actions';
 })
 export class OffersProfileComponent implements OnInit {
     public offers$;
+    public displayColumns = ['job', 'company', 'category', 'date', 'province', 'municipe', 'actions'];
 
     constructor(private store: Store) {
         this.selectOffers();
