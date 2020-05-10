@@ -49,4 +49,8 @@ export class OffersDetailComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    tagsFromOffer() {
+        return this.offer.title.map(tags => tags.name).toString();
+    }
 }
