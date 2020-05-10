@@ -1,20 +1,23 @@
-<h2>
-  Offers Detail
-</h2>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Detalles de la oferta</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <pre>{{ offer | json }} </pre>
 
-<pre>{{ offer | json }} </pre>
+        <button mat-button color="primary" *ngIf="!(isSubscribed$ | async )"
+                class="btn btn-primary"
+                (click)="subscribeOffer()">
+            Inscribirse
+        </button>
+        <button mat-button color="primary"
+                *ngIf="(isSubscribed$ | async )"
+                class="btn btn-danger"
+                (click)="unsubscribeOffer()">
+            Eliminar oferta
+        </button>
+    </mat-card-content>
+</mat-card>
 
-<button
-  *ngIf="!(isSubscribed$ | async )"
-  class="btn btn-primary"
-  (click)="subscribeOffer()"
->
-  Inscribirse
-</button>
-<button
-  *ngIf="(isSubscribed$ | async )"
-  class="btn btn-danger"
-  (click)="unsubscribeOffer()"
->
-  Eliminar oferta
-</button>
+
+
