@@ -17,12 +17,14 @@ import {SigninModule} from './auth/signin/signin.module';
 import {metaReducers} from './reducers';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
     imports: [
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         SharedModule,
         CoreModule,
-        RouterModule.forRoot(rootRouterConfig, {useHash: false}),
+        RouterModule.forRoot(rootRouterConfig, { useHash: false, initialNavigation: 'enabled' }),
         HttpClientModule,
         SigninModule,
         HttpClientInMemoryWebApiModule.forRoot(FakeBackendService, {

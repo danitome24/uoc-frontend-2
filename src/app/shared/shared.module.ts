@@ -20,7 +20,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {MaterialModule} from './material.module';
 
 const declarations = [AppComfirmComponent, AdminLayoutComponent];
-const exports = [
+const sharedExports = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
@@ -35,6 +35,6 @@ const providers = [AppConfirmService, AuthGuard];
   entryComponents: [AppComfirmComponent],
   providers,
   declarations,
-  exports
+  exports: sharedExports
 })
 export class SharedModule {}
