@@ -16,6 +16,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {SigninModule} from './auth/signin/signin.module';
 import {metaReducers} from './reducers';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         EffectsModule.forRoot(fromRoot.effects),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     declarations: [AppComponent],
     providers: [],
